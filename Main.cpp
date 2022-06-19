@@ -6,7 +6,7 @@ using namespace std;
 struct street
 {
  int B,E,L;df
- char *str1;
+ char *str1;d
 };
 int main()
 {
