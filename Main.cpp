@@ -12,7 +12,7 @@ int main()
 {
     long long int D,I,S,V,F;
     cin>>D>>I>>S>>V>>F;
-    struct street st[5];
+    struct street st[5];dscsdc
     for(int i=0;i<5;i++)
     {
         cin>>st[i].B;
