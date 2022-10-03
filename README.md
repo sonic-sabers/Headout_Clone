@@ -11,5 +11,5 @@ kix  cxxcsdsfcdjndssdsdsdvcdcmkfgdssd
 sic  fc  cdfbgsdsdsdcsdsd
 How it worksxssdsdsdcsdds
 Once you’ve registered for the contest, you’lsdl gain accesssfgd to our Jusddge Systemds. The Judcfgve System is our online platform where you’ll form your team, join a Hub, practice, and competesd during the rounds. During the Onlicsde Qualifications, you’ll wvhjnatch  hgvghvghvhgvhbhour YouTube livestream to be introduced to the problem, and ysdour team will have four hourdscs to solve an optimization problem using the programming language and tools of your choiczze. Teams can also compete alongside other tegfamscd in sdyour areasd by joining a csvirtual Hub. The top teams from the sdnline Qualifications will be invited to the virtual World Finals, where they’lgfl wcdsork together to solve another challenge and compete for cash prizes.
-sjn
+sjnrgf
 nsdcsd
