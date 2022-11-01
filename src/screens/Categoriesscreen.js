@@ -72,8 +72,20 @@ const Categoriesdata = ([
 
 
 const Datacomponent = ({ data }) => {
+
+  const navigation = useNavigation();
+
   return (
     <TouchableOpacity
+
+      onPress={() =>
+        navigation.navigate('Explorestack', {
+          screen: 'Exploredetails',
+          initial: false,
+        })
+        // navigation.navigate('Exploredetails')
+      }
+
       key={data.key}
       style={{
         backgroundColor: colors.white,
@@ -138,7 +150,7 @@ export default function Categoriesscreen() {
 
           <ScrollView
             horizontal
-            // showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
               // backgroundColor: colors.black2,
               // flex: 1,
@@ -162,6 +174,25 @@ export default function Categoriesscreen() {
 
         }}>
           <Customheader title='Categories in New York' />
+          <View style={{
+            // backgroundColor: "green",
+            flex: 1,
+            flexDirection: 'row',
+            flexWrap: "wrap",
+            justifyContent: 'space-between',
+            marginHorizontal: 10,
+            marginTop: 10,
+
+          }}>
+            {Categoriesdata.map((data, index) => {
+              return (
+                <View key={data.key}>
+                  <Datacomponent data={data} />
+                </View>
+              )
+            })}
+          </View>
+          <Customheader category title='Categories Worldwide' />
           <View style={{
             // backgroundColor: "green",
             flex: 1,

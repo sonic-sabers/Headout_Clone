@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { View, Text, Dimensions, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 // import StackN from './src/navigator/Navigation';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Explorescreen, Exploredetails } from '../screens';
+import { Explorescreen, Exploredetails, Alertscreen } from '../screens';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -42,16 +42,20 @@ export const Myheaderleft = () => {
   )
 }
 export const MyheaderRight = () => {
+
+  const navigation = useNavigation();
   return (
-    <Ionicons name='help-circle-outline' style={{
-      marginRight: 15,
-    }} size={20} color={colors.black1} />
+    <Ionicons
+      onPress={() => navigation.navigate('Alertscreen')}
+      name='help-circle-outline' style={{
+        marginRight: 15,
+      }} size={20} color={colors.black1} />
   )
 }
 
 export default function Explorestack({ navigation }) {
   return (
-    <Stack.Navigator screenOptions={{}}>  
+    <Stack.Navigator screenOptions={{}}>
       <Stack.Screen name="Explorescreen"
         options={{
           headerTitle: (props) => '',
@@ -98,7 +102,7 @@ export default function Explorestack({ navigation }) {
           },
           headerLeft: () => (
             <Entypo
-              onPress={() => navigation.navigate('Explorescreen')}
+              onPress={() => navigation.goBack()}
               name='chevron-left' size={28} color={colors.lightblack} style={{
                 // marginHorizontal: 2, Exploredetails
                 marginLeft: 6,
@@ -106,6 +110,34 @@ export default function Explorestack({ navigation }) {
               }} />
           ),
         }} component={Exploredetails} />
+      <Stack.Screen name="Alertscreen"
+        options={{
+          headerShown: true,
+          headerTitle: (props) => '',
+          headerStyle: {
+            backgroundColor: colors.white,
+            shadowColor: "#00000050",
+            shadowOffset: {
+              width: 0,
+              height: 1,
+            },
+            shadowOpacity: 0.22,
+            shadowRadius: 2.22,
+
+            elevation: 3,
+            // borderBottomWidth: 1,
+            // borderBottomColor: colors.white3
+          },
+          headerLeft: () => (
+            <Entypo
+              onPress={() => navigation.navigate('Explorescreen')}
+              name='chevron-left' size={28} color={colors.lightblack} style={{
+                // marginHorizontal: 2, Exploredetails
+                marginLeft: 6,
+
+              }} />
+          ),
+        }} component={Alertscreen} />
       {/* <Stack.Screen
         <Image
         source={require('./../assets/Image/Logo.png')}

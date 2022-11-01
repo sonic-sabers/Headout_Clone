@@ -4,7 +4,7 @@ export { default as Explorestack } from '../navigation/Explorestack';
 export { default as Exploredetails } from './Exploredetails';
 export { default as Searchscreen } from './Searchscreen';
 export { default as Profilescreen } from './Profilescreen';
-// export { default as colors } from './colors';
+export { default as Alertscreen } from './Alertscreen';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';

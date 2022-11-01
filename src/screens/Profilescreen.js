@@ -48,6 +48,8 @@ export const Hline = () => {
       height: 0.8,
       borderRadius: 30,
       marginVertical: 10,
+      marginHorizontal: 10,
+      marginTop: 20,
 
     }}>
     </View>
@@ -55,11 +57,42 @@ export const Hline = () => {
 }
 
 
-export const Endalign = () => {
+export const Endalign = ({ title, text, icon, size }) => {
   return (
-    <Hstack centered between >
-      <Text>Contactus</Text>
-      <Text>Contactus</Text>
+    <Hstack centered between styles={{
+      marginHorizontal: 10,
+      marginTop: 15,
+    }}>
+      <TouchableOpacity>
+        <Text
+          style={[{
+            fontSize: 16,
+            fontWeight: '500',
+            fontFamily: 'Roboto',
+            color: colors.black2,
+          },
+          size && {
+            fontSize: 18,
+
+          }
+          ]}>
+          {title ? title : 'Title'}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <Hstack centered >
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: '600',
+              fontFamily: 'Roboto',
+              color: colors.black2,
+            }}>
+            {text ? text : null}
+          </Text>
+          {icon ? <Entypo name='chevron-right' size={18} color={colors.black2} /> : null}
+        </Hstack>
+      </TouchableOpacity>
     </Hstack>
   )
 }
@@ -69,8 +102,9 @@ export default function Profilescreen() {
 
   return (
     <ScrollView
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={{
-        flex: 1,
+        // flex: 1,
 
       }}
       style={{
@@ -124,8 +158,13 @@ export default function Profilescreen() {
             borderWidth: 1,
             borderColor: colors.black6,
             marginTop: 10,
-
+            flexDirection: 'row',
+            alignItems: 'center',
           }}>
+          <Image
+            source={require('../assets/Image/Google.png')}
+            style={{ width: 20, height: 20, marginRight: 10 }}
+          />
           <Text
             style={{
               fontSize: 15,
@@ -147,14 +186,21 @@ export default function Profilescreen() {
             borderWidth: 1,
             borderColor: colors.black6,
             marginTop: 10,
+            flexDirection: 'row',
+            alignItems: 'center',
 
           }}>
+
+          <MaterialCommunityIcons name='email-outline' size={18} color={colors.black2} />
+
           <Text
             style={{
               fontSize: 15,
               fontWeight: '500',
               fontFamily: 'Roboto',
               color: colors.black1,
+              marginLeft: 7,
+
             }}>
             Continue With Email
           </Text>
@@ -164,14 +210,72 @@ export default function Profilescreen() {
 
       <View style={{
         padding: 10,
+        paddingBottom: 50,
 
       }}>
 
         <Customheader nested title='Settings' />
-        <Endalign />
+        <Endalign title='City' text='New York' icon />
+        <Endalign title='Currency' icon />
+
         <Hline />
+        <Customheader nested title='Help' />
+        <Endalign title='Chat with us' icon />
+        <Endalign title='FAQs' icon />
+
+        <Hline />
+        <Customheader nested title='Legal' />
+        <Endalign title='Privacy Policy' icon />
+        <Endalign title='Terms of Usage' icon />
+
+        <Hline />
+
+        <Text
+          style={{
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Roboto',
+            color: colors.lightblack,
+            marginLeft: 10,
+            marginTop: 10,
+
+
+          }}>
+          Ashish Ins.
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Roboto',
+            color: colors.lightblack,
+            marginLeft: 10,
+            // marginTop:10,
+
+
+          }}>
+          Made with ❤️ all over the O
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Roboto',
+            color: colors.lightblack,
+            marginLeft: 10,
+            marginTop: 10,
+
+
+          }}>
+          App Version 1.0.1
+        </Text>
       </View>
-      <Text>Profilescreen</Text>
+      {/* <View style={{
+        paddingBottom: 50,
+
+      }} /> */}
+      {/* <Text>Profilescreen</Text> */}
     </ScrollView>
   )
 }

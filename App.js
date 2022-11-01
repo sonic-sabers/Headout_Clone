@@ -8,15 +8,15 @@
     )
   }
 
-  <Text
-    style={{
-      fontSize: 12,
-      fontWeight: '500',
-      fontFamily: 'Roboto',
-      color: colors.lightblack,
-    }}>
-    ScaleRic
-  </Text>
+    <Text
+      style={{
+        fontSize: 12,
+        fontWeight: '500',
+        fontFamily: 'Roboto',
+        color: colors.lightblack,
+      }}>
+      ScaleRic
+    </Text>
 
   <AntDesign name='star' size={20} color={colors.primary} />
 
@@ -118,7 +118,7 @@ function MyTabs() {
           ),
           tabBarStyle: ((route) => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-            if (routeName === 'Exploredetails') {
+            if (routeName === 'Exploredetails' || routeName === 'Alertscreen') {
               return { display: "none" }
             }
             return

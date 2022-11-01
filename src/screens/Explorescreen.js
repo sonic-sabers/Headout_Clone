@@ -22,6 +22,8 @@ import {
   Switch,
   Dimensions,
   TouchableWithoutFeedback,
+  TouchableHighlight,
+  Pressable,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../constants';
@@ -50,27 +52,33 @@ let images = 320;
 
 
 
-export const Customheader = ({ title, seeall, style,nested }) => {
+export const Customheader = ({ title, seeall, style, nested, category,size }) => {
   const navigation = useNavigation();
 
   return (
     <Hstack centered between styles={[{
-      marginTop: 10.
+      marginTop: 10,
 
+    }, category && {
+      marginLeft: 5
     }, style]}>
       <Text
-        style={{
+        style={[{
           fontSize: 17,
           fontWeight: '700',
           fontFamily: 'Roboto',
           color: colors.black,
           // marginTop: 10,
           marginLeft: 10,
-        }}>
+        }, size&&{
+          fontSize: 25,
+      marginTop: 20,
+        
+        }]}>
         {title ? title : 'Title'}
       </Text>
       {seeall && <TouchableOpacity
-        onPress={() => nested ? navigation.navigate('Explorestack', { screen: 'Exploredetails' }) :navigation.navigate('Exploredetails')}
+        onPress={() => nested ? navigation.navigate('Explorestack', { screen: 'Exploredetails' }) : navigation.navigate('Exploredetails')}
       >
         <Hstack centered styles={{
           marginTop: 0,
@@ -463,12 +471,12 @@ export default function Explorescreen() {
               </Text>
             </ImageBackground>
           </View>
-          <TouchableOpacity
+          <Pressable
             onPress={() => navigation.navigate('Search')}
 
             style={{
               // backgroundColor:colors.primary
-              backgroundColor: colors.white
+              // backgroundColor: colors.white
             }}
           >
             <Hstack
@@ -531,7 +539,7 @@ export default function Explorescreen() {
 
               </TouchableOpacity>
             </Hstack>
-          </TouchableOpacity>
+          </Pressable>
 
         </View>
         <Customheader title='Top Experience in New York' />

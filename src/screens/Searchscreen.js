@@ -118,8 +118,8 @@ export default function Searchscreen() {
 
 
   const [search, setSearch] = useState('');
-  const [filteredDataSource, setFilteredDataSource] = useState(null);
-  const [masterDataSource, setMasterDataSource] = useState(null);
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
   const [Loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -145,12 +145,12 @@ export default function Searchscreen() {
     // Check if searched text is not blank
     if (text) {
       // Inserted text is not blank
-      // Filter the masterDataSource
+      // Filter the masterDataSourceCity
       // Update FilteredDataSource
       const newData = masterDataSource.filter(
         function (item) {
-          const itemData = item.isin
-            ? item.security.toUpperCase()
+          const itemData = item.City
+            ? item.City.toUpperCase()
             : ''.toUpperCase();
           const textData = text.toUpperCase();
           return itemData.indexOf(textData) > -1;
@@ -199,8 +199,9 @@ export default function Searchscreen() {
 
           }}
           placeholder='Where are you heading ?'
-          onChangeText={onChangeText}
-          value={text}
+          // onChangeText={onChangeText}
+          onChangeText={(text) => searchFilterFunction(text)}
+        // value={text}
         />
       </Hstack>
 
