@@ -55,7 +55,7 @@ export const Hline = () => {
 }
 
 
-const Endalign = () => {
+export const Endalign = () => {
   return (
     <Hstack centered between >
       <Text>Contactus</Text>

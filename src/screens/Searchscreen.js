@@ -21,6 +21,7 @@ import {
   ViewPropTypes,
   Switch,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../constants';
@@ -51,8 +52,119 @@ const Nearbydata = ([
 ]);
 
 
+
+const Searchcomonent = ({ item }) => {
+  return (
+    <TouchableOpacity key={item.key}>
+      <Hstack
+        centered
+        key={item.key} styles={{
+          // backgroundColor: '#9bacb2',
+          marginBottom: 15,
+
+        }}>
+        {/* Feather map-pin */}
+        <View style={{
+          height: 55,
+          width: 55,
+          backgroundColor: colors.black3,
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: 5,
+          borderWidth: 1,
+          borderColor: colors.black4,
+
+        }}>
+          <Feather name="map-pin" color={colors.black2} size={22} />
+
+        </View>
+        <View style={{
+          flex: 1,
+          marginLeft: 10,
+          justifyContent: 'center',
+
+        }}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: '700',
+              fontFamily: 'Roboto',
+              color: colors.black2,
+            }}>
+            {item.City}
+            {/* dsc */}
+          </Text>
+          <Text
+            style={{
+              fontSize: 13,
+              fontWeight: '500',
+              fontFamily: 'Roboto',
+              color: colors.black2,
+              marginTop: 4,
+
+            }}>
+            {item.Country}
+          </Text>
+        </View>
+      </Hstack>
+    </TouchableOpacity>
+
+  )
+}
+
 export default function Searchscreen() {
   const [text, onChangeText] = React.useState("");
+
+
+
+  const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState(null);
+  const [masterDataSource, setMasterDataSource] = useState(null);
+  const [Loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true)
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      // console.log(Data)
+      // console.log(Data.bonds)
+      .then((responseJson) => {
+        setFilteredDataSource(Nearbydata);
+        setMasterDataSource(Nearbydata);
+        console.log('masterDataSource', masterDataSource)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error(error);
+        // alert(error);
+        // setLoading(false)
+      });
+  }, []);
+
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(
+        function (item) {
+          const itemData = item.isin
+            ? item.security.toUpperCase()
+            : ''.toUpperCase();
+          const textData = text.toUpperCase();
+          return itemData.indexOf(textData) > -1;
+        });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
+
   return (
     <View style={{
       flex: 1,
@@ -107,7 +219,7 @@ export default function Searchscreen() {
           }}>
           Nearby Destinations
         </Text>
-        <ScrollView
+        <View
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
 
@@ -119,62 +231,88 @@ export default function Searchscreen() {
             flex: 1,
 
           }}>
-          {Nearbydata.map((data, index) => {
+
+          {!(Loading) ?
+            <FlatList
+              // initialNumToRender={4}
+              data={filteredDataSource}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={Searchcomonent}
+              keyboardDismissMode='onDrag'
+              decelerationRate='normal'
+              keyboardShouldPersistTaps='handled'
+              pagingEnabled
+              initialNumToRender={10}
+              maxToRenderPerBatch={10}
+              removeClippedSubviews={true}
+              contentContainerStyle={{
+                paddingBottom: 100,
+                paddingTop: 10,
+                backgroundColor: colors.white
+              }}
+            /> :
+            <ActivityIndicator
+              animating
+              color={colors.primary}
+            />
+          }
+          {/* {Nearbydata.map((data, index) => {
             return (
+              <TouchableOpacity key={data.key}>
+                <Hstack
+                  centered
+                  key={data.key} styles={{
+                    // backgroundColor: '#9bacb2',
+                    marginBottom: 15,
 
-              <Hstack
-                centered
-                key={data.key} styles={{
-                  // backgroundColor: '#9bacb2',
-                  marginBottom: 15,
+                  }}>
+                  <View style={{
+                    height: 55,
+                    width: 55,
+                    backgroundColor: colors.black3,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 5,
+                    borderWidth: 1,
+                    borderColor: colors.black4,
 
-                }}>
-                {/* Feather map-pin */}
-                <View style={{
-                  height: 55,
-                  width: 55,
-                  backgroundColor: colors.black3,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: 5,
-                  borderWidth: 1,
-                  borderColor: colors.black4,
+                  }}>
+                    <Feather name="map-pin" color={colors.black2} size={22} />
 
-                }}>
-                  <Feather name="map-pin" color={colors.black2} size={22} />
+                  </View>
+                  <View style={{
+                    flex: 1,
+                    marginLeft: 10,
+                    justifyContent: 'center',
 
-                </View>
-                <View style={{
-                  flex: 1,
-                  marginLeft: 10,
-                  justifyContent: 'center',
+                  }}>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: '700',
+                        fontFamily: 'Roboto',
+                        color: colors.black2,
+                      }}>
+                      {data.City}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 13,
+                        fontWeight: '500',
+                        fontFamily: 'Roboto',
+                        color: colors.black2,
+                        marginTop: 4,
 
-                }}>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: '700',
-                      fontFamily: 'Roboto',
-                      color: colors.black2,
-                    }}>
-                    {data.City}
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      fontWeight: '500',
-                      fontFamily: 'Roboto',
-                      color: colors.black2,
-                      marginTop: 4,
+                      }}>
+                      {data.Country}
+                    </Text>
+                  </View>
+                </Hstack>
+              </TouchableOpacity>
 
-                    }}>
-                    {data.Country}
-                  </Text>
-                </View>
-              </Hstack>
             )
-          })}
-        </ScrollView>
+          })} */}
+        </View>
       </View>
 
     </View>

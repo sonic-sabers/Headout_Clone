@@ -66,11 +66,47 @@ const Categoriesdata = ([
   { title: 'Classes', key: '14' },
   { title: 'Specials', key: '15' },
   { title: 'Staycations', key: '16' },
-  { title: 'Entertainment', key: '17' },
+  // { title: 'Entertainment', key: '17' },
   // { title: ' bdbfb bb', key: '9' },
 ]);
 
+
+const Datacomponent = ({ data }) => {
+  return (
+    <TouchableOpacity
+      key={data.key}
+      style={{
+        backgroundColor: colors.white,
+        borderColor: colors.white4,
+        borderWidth: 1,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        width: categoriesWidth,
+        marginHorizontal: 5,
+        paddingVertical: 14,
+        marginVertical: 5,
+
+      }}>
+      <Text
+        style={{
+          fontSize: 14,
+          fontWeight: '600',
+          fontFamily: 'Roboto',
+          color: '#00000095',
+          marginLeft: 10,
+
+        }}>
+        {data.title}
+      </Text>
+    </TouchableOpacity>
+  )
+}
+
+
 export default function Categoriesscreen() {
+
+
   return (
     <View style={{
       flex: 1,
@@ -83,6 +119,8 @@ export default function Categoriesscreen() {
         flex: 1,
 
       }}
+        showsVerticalScrollIndicator={false}
+
         contentContainerStyle={{
           paddingBottom: 80,
 
@@ -100,7 +138,7 @@ export default function Categoriesscreen() {
 
           <ScrollView
             horizontal
-            showsHorizontalScrollIndicator={false}
+            // showsVerticalScrollIndicator={false}
             contentContainerStyle={{
               // backgroundColor: colors.black2,
               // flex: 1,
@@ -136,33 +174,9 @@ export default function Categoriesscreen() {
           }}>
             {Categoriesdata.map((data, index) => {
               return (
-                <TouchableOpacity
-                  key={data.key}
-                  style={{
-                    backgroundColor: colors.white,
-                    borderColor: colors.white4,
-                    borderWidth: 1,
-                    borderRadius: 5,
-                    justifyContent: 'center',
-                    alignItems: 'flex-start',
-                    width: categoriesWidth,
-                    marginHorizontal: 5,
-                    paddingVertical: 14,
-                    marginVertical: 5,
-
-                  }}>
-                  <Text
-                    style={{
-                      fontSize: 14,
-                      fontWeight: '600',
-                      fontFamily: 'Roboto',
-                      color: '#00000095',
-                      marginLeft: 10,
-
-                    }}>
-                    {data.title}
-                  </Text>
-                </TouchableOpacity>
+                <View key={data.key}>
+                  <Datacomponent data={data} />
+                </View>
               )
             })}
           </View>
