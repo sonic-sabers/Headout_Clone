@@ -1,11 +1,11 @@
 export { default as Explorescreen } from './Explorescreen';
 export { default as Categoriesscreen } from './Categoriesscreen';
 export { default as Explorestack } from '../navigation/Explorestack';
-export { default as Exploredetails } from './Exploredetails';
+export { default as ExploreAll } from './ExploreAll';
 export { default as Searchscreen } from './Searchscreen';
 export { default as Profilescreen } from './Profilescreen';
 export { default as Alertscreen } from './Alertscreen';
-// export { default as colors } from './colors';
+export { default as Exploredetails } from './Exploredetails';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';

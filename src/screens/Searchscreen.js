@@ -169,8 +169,8 @@ export default function Searchscreen() {
     <View style={{
       flex: 1,
       backgroundColor: colors.white,
-      padding: 15,
-
+      paddingHorizontal: 15,
+      paddingTop: 15,
     }}>
 
       <Hstack centered styles={{
@@ -198,6 +198,8 @@ export default function Searchscreen() {
             fontSize: 16,
 
           }}
+          placeholderTextColor={colors.lightblack}
+
           placeholder='Where are you heading ?'
           // onChangeText={onChangeText}
           onChangeText={(text) => searchFilterFunction(text)}

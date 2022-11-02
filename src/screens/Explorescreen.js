@@ -52,7 +52,7 @@ let images = 320;
 
 
 
-export const Customheader = ({ title, seeall, style, nested, category,size }) => {
+export const Customheader = ({ title, seeall, style, nested, category, size }) => {
   const navigation = useNavigation();
 
   return (
@@ -67,18 +67,18 @@ export const Customheader = ({ title, seeall, style, nested, category,size }) =>
           fontSize: 17,
           fontWeight: '700',
           fontFamily: 'Roboto',
-          color: colors.black,
+          color: '#00000099',
           // marginTop: 10,
           marginLeft: 10,
-        }, size&&{
+        }, size && {
           fontSize: 25,
-      marginTop: 20,
-        
+          marginTop: 20,
+
         }]}>
         {title ? title : 'Title'}
       </Text>
       {seeall && <TouchableOpacity
-        onPress={() => nested ? navigation.navigate('Explorestack', { screen: 'Exploredetails' }) : navigation.navigate('Exploredetails')}
+        onPress={() => nested ? navigation.navigate('Explorestack', { screen: 'ExploreAll' }) : navigation.navigate('ExploreAll')}
       >
         <Hstack centered styles={{
           marginTop: 0,
@@ -94,7 +94,7 @@ export const Customheader = ({ title, seeall, style, nested, category,size }) =>
             See All
           </Text>
           <Entypo name='chevron-right' size={17} color={colors.black1} style={{
-            // marginHorizontal: 2, Exploredetails
+            // marginHorizontal: 2, ExploreAll
             marginRight: 6,
 
           }} />
@@ -113,7 +113,7 @@ export const Helicopter = require('./../assets/Image/Helicopter.png');
 export const ExperienceComponent = (props) => {
   const { free, img, center, style, title, Category, rate, discount, about, reviewcount } = props;
 
-
+  const navigation = useNavigation();
   let imgSource = Museum1;
 
   if (img) {
@@ -121,18 +121,14 @@ export const ExperienceComponent = (props) => {
   }
 
   return (
-    <TouchableOpacity style={[{
+    <Pressable
+      onPress={() => navigation.navigate('Exploredetails')}
+      style={[{
 
 
-    }, style,
-    center ? { alignSelf: 'center' } : { marginRight: 10, },
-      // !about && {
-      //   borderWidth: 1,
-      //   borderColor: colors.black2,
-      //   padding: 15,
-
-      // },
-    ]}>
+      }, style,
+      center ? { alignSelf: 'center' } : { marginRight: 10, },
+      ]}>
       <ImageBackground
 
         // source={require(Museum1)}
@@ -330,7 +326,7 @@ export const ExperienceComponent = (props) => {
         </TouchableOpacity>
       </>}
 
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
@@ -511,6 +507,7 @@ export default function Explorescreen() {
                   flex: 1,
 
                 }}
+                placeholderTextColor={colors.lightblack}
                 placeholder='Where you are heading'
                 onChangeText={onChangeText}
                 value={text}

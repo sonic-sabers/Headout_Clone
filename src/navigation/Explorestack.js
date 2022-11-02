@@ -3,7 +3,7 @@ import { View, Text, Dimensions, Image } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 // import StackN from './src/navigator/Navigation';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Explorescreen, Exploredetails, Alertscreen } from '../screens';
+import { Explorescreen, ExploreAll, Alertscreen, Exploredetails } from '../screens';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -41,12 +41,15 @@ export const Myheaderleft = () => {
       }} />
   )
 }
-export const MyheaderRight = () => {
+export const MyheaderRight = ({ nested }) => {
 
   const navigation = useNavigation();
   return (
     <Ionicons
-      onPress={() => navigation.navigate('Alertscreen')}
+      onPress={() => nested ? navigation.navigate('Explorestack', {
+        screen: 'Alertscreen',
+        from: nested
+      }) : navigation.navigate('Alertscreen')}
       name='help-circle-outline' style={{
         marginRight: 15,
       }} size={20} color={colors.black1} />
@@ -84,6 +87,38 @@ export default function Explorestack({ navigation }) {
         component={Explorescreen} />
       <Stack.Screen name="Exploredetails"
         options={{
+          headerTitle: (props) => '',
+          headerStyle: {
+            backgroundColor: colors.white,
+            shadowColor: "#00000050",
+            shadowOffset: {
+              width: 0,
+              height: 1,
+            },
+            shadowOpacity: 0.22,
+            shadowRadius: 2.22,
+
+            elevation: 3,
+            // borderBottomWidth: 1,
+            // borderBottomColor: colors.white3
+          },
+          headerLeft: (props) => (
+            <Entypo
+              onPress={() => navigation.goBack()}
+              name='chevron-left' size={28} color={colors.lightblack} style={{
+                // marginHorizontal: 2, ExploreAll
+                marginLeft: 6,
+
+              }} />
+          ),
+          headerRight: () => (
+            <MyheaderRight />
+
+          ),
+        }}
+        component={Exploredetails} />
+      <Stack.Screen name="ExploreAll"
+        options={{
           headerShown: true,
           headerTitle: (props) => '',
           headerStyle: {
@@ -104,12 +139,12 @@ export default function Explorestack({ navigation }) {
             <Entypo
               onPress={() => navigation.goBack()}
               name='chevron-left' size={28} color={colors.lightblack} style={{
-                // marginHorizontal: 2, Exploredetails
+                // marginHorizontal: 2, ExploreAll
                 marginLeft: 6,
 
               }} />
           ),
-        }} component={Exploredetails} />
+        }} component={ExploreAll} />
       <Stack.Screen name="Alertscreen"
         options={{
           headerShown: true,
@@ -132,7 +167,7 @@ export default function Explorestack({ navigation }) {
             <Entypo
               onPress={() => navigation.navigate('Explorescreen')}
               name='chevron-left' size={28} color={colors.lightblack} style={{
-                // marginHorizontal: 2, Exploredetails
+                // marginHorizontal: 2, ExploreAll
                 marginLeft: 6,
 
               }} />

@@ -210,7 +210,7 @@ export default function Profilescreen() {
 
       <View style={{
         padding: 10,
-        paddingBottom: 50,
+        paddingBottom: 150,
 
       }}>
 

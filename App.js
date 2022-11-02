@@ -42,14 +42,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Categoriesscreen, Explorescreen, Explorestack, Searchscreen, Profilescreen } from './src/screens';
 import { colors } from './src/constants';
-
-import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Myheaderleft, MyheaderRight } from './src/navigation/Explorestack';
 
@@ -118,7 +111,7 @@ function MyTabs() {
           ),
           tabBarStyle: ((route) => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-            if (routeName === 'Exploredetails' || routeName === 'Alertscreen') {
+            if (routeName === 'ExploreAll' || routeName === 'Alertscreen' || routeName === 'Exploredetails') {
               return { display: "none" }
             }
             return
@@ -151,7 +144,7 @@ function MyTabs() {
             <Myheaderleft {...props} />
           ),
           headerRight: () => (
-            <MyheaderRight />
+            <MyheaderRight nested='Categoriesscreen' />
 
           ),
           tabBarIcon: ({ focused, color }) => (

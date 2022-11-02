@@ -36,62 +36,155 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { ExperienceComponent, Glass, Museum3 } from './Explorescreen';
+import { Customheader, ExperienceComponent, Glass, Museum1, Museum2, Museum3 } from './Explorescreen';
+
+import ReactNativeParallaxHeader from 'react-native-parallax-header';
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
+const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
+const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
+const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
+
+
+
+const Renderitem = ({ rating }) => {
+  return (
+    <View style={{
+
+      padding: 15,
+      backgroundColor: colors.primary,
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 29,
+      // marginTop: -10,
+      // position: 'absolute',
+
+    }}>
+      <Customheader title='Museum of Modern Art(MOMA) Tickets' />
+      <Hstack
+        centered between styles={[{
+          marginTop: 5,
+          // width:images
+        }]}>
+        <Text
+          style={{
+            fontSize: 12,
+            fontWeight: '500',
+            fontFamily: 'Roboto',
+            color: colors.lightblack,
+            // maxWidth: images - 20,
+            // backgroundColor: 'green' Category
+          }}>
+          Museum of Modern Art(MoMA) Tickets
+
+        </Text>
+        <Hstack centered>
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: '700',
+              fontFamily: 'Roboto',
+              color: colors.color1,
+            }}>
+            4.3
+          </Text>
+          <AntDesign name='star' size={11} color={colors.color1} style={{
+            marginHorizontal: 2,
+          }} />
+          <Text
+            style={{
+              fontSize: 12,
+              fontWeight: '500',
+              fontFamily: 'Roboto',
+              color: colors.lightblack,
+            }}>
+            ({rating ? rating : '2k'})
+          </Text>
+        </Hstack>
+      </Hstack>
+      {Array.from(Array(30).keys()).map((i) => (
+        <View
+          key={i}
+          style={{ padding: 15, justifyContent: 'center' }}>
+          <Text>Item {i + 1}</Text>
+        </View>
+      ))}
+    </View>
+  );
+};
+
+const Title = () => {
+  return (
+    <View style={styles.body}>
+      <Text style={{ color: 'white', fontSize: 25 }}>Parallax Header</Text>
+    </View>
+  );
+};
 
 export default function Exploredetails() {
+
+  let rating = 4.1;
   return (
     <View style={{
       flex: 1,
       backgroundColor: colors.white,
-      paddingHorizontal: 10,
+      // paddingHorizontal: 10,
       paddingBottom: 0,
+    }}
+    >
+      <ReactNativeParallaxHeader
 
-    }}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{
-
-          // justifyContent: 'center',
-          // alignItems: 'center',
-          paddingBottom: 40,
-
+        headerMinHeight={0}
+        headerMaxHeight={250}
+        extraScrollHeight={20}
+        navbarColor="#ffffff01"
+        // titleStyle={styles.titleStyle}
+        // title={title()}
+        backgroundImage={Museum1}
+        backgroundImageScale={1.2}
+        // renderNavBar={renderNavBar}
+        // renderContent={renderContent}
+        renderContent={() => (<Renderitem rating={rating} />)}
+        containerStyle={styles.container}
+        contentContainerStyle={styles.contentContainer}
+        innerContainerStyle={styles.container}
+        scrollViewProps={{
+          onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
+          onScrollEndDrag: () => console.log('onScrollEndDrag'),
         }}
-        style={{
-          // backgroundColor: 'green',
-          flex: 1,
-
-        }}>
-        <Text
-          style={{
-            fontSize: 23,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: colors.black5,
-          }}>
-          Broadway Tickets
-        </Text>
-        <Text
-          style={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: colors.black5,
-            marginTop: 15,
-
-          }}>
-          Explore Options
-        </Text>
-
-        <ExperienceComponent img={Museum3} center title='Chicago' Category='Entertainment' rate='67' discount='10' />
-
-        <ExperienceComponent img={Glass} center title='The Lion King' Category='Entertainment' rate='95.5' />
-        <ExperienceComponent img={Glass} center title='The Music Man' Category='Entertainment' rate='292.2' />
-        <ExperienceComponent img={Glass} center title='A Strange Loop' Category='Entertainment' rate='60' discount='10' />
-        <ExperienceComponent img={Glass} center title='Aladdin' Category='Entertainment' rate='69' discount='10' />
-      </ScrollView>
-
+      />
     </View>
   )
 }
 
-const styles = StyleSheet.create({})
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  contentContainer: {
+    flexGrow: 1,
+  },
+  navContainer: {
+    height: HEADER_HEIGHT,
+    marginHorizontal: 10,
+  },
+  statusBar: {
+    height: STATUS_BAR_HEIGHT,
+    backgroundColor: 'transparent',
+  },
+  navBar: {
+    height: NAV_BAR_HEIGHT,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+  titleStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+});

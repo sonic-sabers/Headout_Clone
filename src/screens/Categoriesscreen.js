@@ -80,10 +80,10 @@ const Datacomponent = ({ data }) => {
 
       onPress={() =>
         navigation.navigate('Explorestack', {
-          screen: 'Exploredetails',
+          screen: 'ExploreAll',
           initial: false,
         })
-        // navigation.navigate('Exploredetails')
+        // navigation.navigate('ExploreAll')
       }
 
       key={data.key}
