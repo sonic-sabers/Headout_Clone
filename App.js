@@ -1,12 +1,12 @@
 {/* <>
   
-  const Contactus = ()=> {
-    return (
-    <View>
-      <Text>Contactus</Text>
-    </View>
-    )
-  }
+    const Contactus = ()=> {
+      return (
+      <View>
+        <Text>Contactus</Text>
+      </View>
+      )
+    }
 
     <Text
       style={{
@@ -45,6 +45,7 @@ import { colors } from './src/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Myheaderleft, MyheaderRight } from './src/navigation/Explorestack';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 let dimensions = Dimensions.get('window');
 let imageHeight = Math.round((dimensions.width * 768) / 120);
@@ -55,6 +56,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
+
     <Tab.Navigator
       initialRouteName="Explorescreen"
       screenOptions={{
@@ -192,8 +194,10 @@ function MyTabs() {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+    <PaperProvider>
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }

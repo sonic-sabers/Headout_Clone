@@ -52,7 +52,7 @@ let images = 320;
 
 
 
-export const Customheader = ({ title, seeall, style, nested, category, size }) => {
+export const Customheader = ({ title, seeall, style, nested, category, size, styles }) => {
   const navigation = useNavigation();
 
   return (
@@ -74,7 +74,7 @@ export const Customheader = ({ title, seeall, style, nested, category, size }) =
           fontSize: 25,
           marginTop: 20,
 
-        }]}>
+        }, styles]}>
         {title ? title : 'Title'}
       </Text>
       {seeall && <TouchableOpacity
@@ -119,10 +119,12 @@ export const ExperienceComponent = (props) => {
   if (img) {
     imgSource = img;
   }
-
+  // onPress={() => navigation.push('Explorestack', {
+  //   screen: 'Exploredetails'
+  // })}
   return (
     <Pressable
-      onPress={() => navigation.navigate('Exploredetails')}
+      onPress={() => navigation.push('Exploredetails',)}
       style={[{
 
 

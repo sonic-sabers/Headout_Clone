@@ -2,7 +2,7 @@ export default colors = {
 		primary: '#7F00FF',
 	secondary: '#0c7ff2',
 	white: '#FFF',
-	black: '#000',
+		black: '#000',
 	facebook: '#395185',
 	google: '#db4A39',
 	twitter: '#00ACEE',
