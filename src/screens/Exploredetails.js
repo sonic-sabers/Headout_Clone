@@ -41,6 +41,13 @@ import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { Hline } from './Profilescreen';
 import { List } from 'react-native-paper';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { Cayntext } from './Alertscreen';
+
+let dimensions = Dimensions.get('window');
+let imageHeight = Math.round((dimensions.width * 768) / 120);
+let imageWidth = dimensions.width - 20;
+// let imageHeight = dimensions.height;
+let itemwidth = imageWidth / 2 - 20
 
 const Reviewcomponent = ({ Nmae }) => {
   return (
@@ -308,6 +315,7 @@ const Renderitem = ({ rating }) => {
           <Points text="when an unknown " />
           <Points text="when an unknown Lorem" />
         </List.Accordion>
+        <Hline />
 
         <List.Accordion style={{
           backgroundColor: colors.white
@@ -322,6 +330,7 @@ const Renderitem = ({ rating }) => {
           <Points text="Lorem Ipsum is simply dummy " />
           <Points text="when an unknown Lorem" />
         </List.Accordion>
+        <Hline />
 
         <List.Accordion style={{
           backgroundColor: colors.white
@@ -336,6 +345,8 @@ const Renderitem = ({ rating }) => {
           <Points nodot text="Lorem Ipsum is simply dummy " />
           {/* <Points text="when an unknown Lorem" /> */}
         </List.Accordion>
+        <Hline />
+
         <List.Accordion style={{
           backgroundColor: colors.white
         }}
@@ -349,6 +360,8 @@ const Renderitem = ({ rating }) => {
           <Points nodot text="Lorem Ipsum is simply dummy " />
           <Points nodot text="when an unknown Lorem" />
         </List.Accordion>
+        <Hline />
+
         <List.Accordion style={{
           backgroundColor: colors.white
         }}
@@ -362,6 +375,8 @@ const Renderitem = ({ rating }) => {
           <Points text="Lorem Ipsum is simply dummy " />
           <Points text="when an unknown Lorem" />
         </List.Accordion>
+        <Hline />
+
 
         <List.Accordion style={{
           backgroundColor: colors.white
@@ -414,6 +429,7 @@ const Renderitem = ({ rating }) => {
             </View>
           </View>
         </List.Accordion>
+        <Hline />
 
         {/* </List.AccordionGroup> */}
         {/* {Array.from(Array(10).keys()).map((i) => (
@@ -424,22 +440,48 @@ const Renderitem = ({ rating }) => {
           </View>
         ))} */}
       </View>
-      
-      
-      <View style={styles.container}>
-     <MapView
-       style={styles.map}
-       region={{
-         latitude: 37.78825,
-         longitude: -122.4324,
-         latitudeDelta: 0.015,
-         longitudeDelta: 0.0121,
-       }}
-     >
-     </MapView>
-   </View>
-      <View>
-        <Customheader title='Similar Experiences' seeall />
+
+
+      <View style={{
+
+        marginHorizontal: 10,
+        overflow: 'hidden',
+
+      }}>
+        <Cayntext text="Museum of Modern Art 11 West 53rd street" left style={{
+
+          marginVertical: 10,
+        }}>
+          <Ionicons
+            // onPress={() => navigation.goBack()}
+            name='map-outline' size={18} color='#008b8b' style={{
+              // marginTop: 5,
+              // marginRight: 5,
+
+            }} />
+        </Cayntext>
+        {/* <View style={styles.container2}> */}
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        >
+        </MapView>
+      </View>
+
+      <Hline />
+      <View style={{
+        marginHorizontal: -20
+      }}>
+        {/* </View> */}
+        <Customheader title='Similar Experiences' seeall  style={{
+        marginLeft:20,
+        
+        }}/>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -447,7 +489,7 @@ const Renderitem = ({ rating }) => {
             color: colors.color2,
           }}
           style={{
-            paddingLeft: 10,
+            paddingLeft: 30,
             marginBottom: 25,
 
           }}
@@ -565,7 +607,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     color: colors.black1,
   },
-  container: {
+  container2: {
     ...StyleSheet.absoluteFillObject,
     height: 400,
     width: 400,
@@ -573,6 +615,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    height: imageWidth * 9 / 16,
+    width: imageWidth,
+    alignSelf: 'center',
+
   },
 });
