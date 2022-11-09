@@ -43,12 +43,12 @@ const { width } = Dimensions.get('window');
 const widths = width / 1.4;
 const ratio = 310 / 460;
 
-export const Cayntext = ({ text, size, children,right,left ,style}) => {
+export const Cayntext = ({ text, size, children, right, left, style }) => {
   return (
-    <Hstack  styles={[{
+    <Hstack styles={[{
 
       marginTop: 20,
-    },style]}>
+    }, style]}>
       {left ? children : null}
       <Text
         style={[{
@@ -74,6 +74,8 @@ export const Cayntext = ({ text, size, children,right,left ,style}) => {
 
 
 export default function Alertscreen() {
+  const [text, onChangeText] = React.useState("");
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -127,6 +129,39 @@ export default function Alertscreen() {
         padding: 10,
         paddingBottom: 40,
       }}>
+        <Hstack styles={{
+          borderWidth: 1,
+          // backgroundColor: 'green',
+          alignItems: 'center',
+          borderColor: colors.black4,
+          borderRadius: 5,
+          marginVertical: 10,
+          paddingLeft: 10,
+
+        }}>
+          <AntDesign name="search1" color={colors.black} size={20} />
+
+          <TextInput
+            // autoFocus={true}
+            contextMenuHidden
+            // selectTextOnFocus
+            style={{
+              // backgroundColor: 'blue',
+              marginLeft: 10,
+              flex: 1,
+              color: colors.black1,
+              fontWeight: '400',
+              fontSize: 16,
+
+            }}
+            placeholderTextColor={colors.lightblack}
+
+            placeholder='Search help articles'
+            // onChangeText={onChangeText}
+            onChangeText={(text) => onChangeText(text)}
+          // value={text}
+          />
+        </Hstack>
         <Customheader size nested title='Booking' />
         <Endalign size title='Experience duration & start time' />
         <Endalign size title='Inclusions & Exclusions' />

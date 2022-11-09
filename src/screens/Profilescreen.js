@@ -216,7 +216,7 @@ export default function Profilescreen() {
 
         <Customheader nested title='Settings' />
         <Endalign title='City' text='New York' icon />
-        <Endalign title='Currency' icon />
+        <Endalign title='Currency' text='USD $' icon />
 
         <Hline />
         <Customheader nested title='Help' />

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Dimensions, Image } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 // import StackN from './src/navigator/Navigation';
@@ -15,7 +15,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { colors } from '../constants';
 import { Headercomponent } from '../screens/Explorescreen';
-
+import { StackActions } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
 let dimensions = Dimensions.get('window');
@@ -57,6 +57,9 @@ export const MyheaderRight = ({ nested }) => {
 }
 
 export default function Explorestack({ navigation }) {
+  const popAction = StackActions.pop(1);
+  const [Screendetails, setScreendetails] = useState('Explorescreen')
+  const [Screenexplore, setScreenexplore] = useState('Explorescreen')
   return (
     <Stack.Navigator screenOptions={{}}>
       <Stack.Screen name="Explorescreen"
@@ -104,7 +107,9 @@ export default function Explorestack({ navigation }) {
           },
           headerLeft: (props) => (
             <Entypo
-              onPress={() => navigation.goBack()}
+              // onPress={() => navigation.navigate(Screendetails)}
+              onPress={() => navigation.dispatch(popAction)}
+              
               name='chevron-left' size={28} color={colors.lightblack} style={{
                 // marginHorizontal: 2, ExploreAll
                 marginLeft: 6,
@@ -116,7 +121,10 @@ export default function Explorestack({ navigation }) {
 
           ),
         }}
-        component={Exploredetails} />
+        // initialParams={{ screenname: 'Explorescreen' }}
+        component={Exploredetails}
+      // children={() => <Exploredetails setScreen={setScreen} />}
+      />
       <Stack.Screen name="ExploreAll"
         options={{
           headerShown: true,
@@ -137,14 +145,19 @@ export default function Explorestack({ navigation }) {
           },
           headerLeft: () => (
             <Entypo
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate(Screenexplore)}
+
               name='chevron-left' size={28} color={colors.lightblack} style={{
                 // marginHorizontal: 2, ExploreAll
                 marginLeft: 6,
 
               }} />
           ),
-        }} component={ExploreAll} />
+        }}
+        component={ExploreAll}
+      // children={() => <ExploreAll setScreenexplore={setScreenexplore} />}
+        
+        />
       <Stack.Screen name="Alertscreen"
         options={{
           headerShown: true,

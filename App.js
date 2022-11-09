@@ -40,9 +40,10 @@ import { Text, View, Dimensions } from 'react-native';
 import { NavigationContainer, getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Categoriesscreen, Explorescreen, Explorestack, Searchscreen, Profilescreen } from './src/screens';
+import { Categoriesscreen, Explorescreen, Explorestack, Searchscreen, Profilescreen, Categoriesstack } from './src/screens';
 import { colors } from './src/constants';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Myheaderleft, MyheaderRight } from './src/navigation/Explorestack';
 import { Provider as PaperProvider } from 'react-native-paper';
@@ -88,15 +89,21 @@ function MyTabs() {
         activeTintColor: '#845EC2',
         tabBarItemStyle: {
           // backgroundColor: 'green',
-          // flex: 1,
+          flex: 1,
           paddingVertical: 4,
           // paddingBottom: 6,
+          height: 45,
 
         },
+
       }}
       barStyle={{
         marginLeft: 10, marginRight: 10,
-        backgroundColor: 'green'
+        // backgroundColor: 'green',
+        height: 45,
+        // flex:1,
+
+
       }}
 
 
@@ -108,9 +115,16 @@ function MyTabs() {
         options={({ route }) => ({
           tabBarLabel: 'Explore',
           // headerTitle: (props) => <LogoTitle {...props} />,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="compass" color={color} size={size} />
+          // tabBarIcon: ({ color, size }) => (
+          //   <Ionicons name="compass" color={color} size={size} />
+          // ),
+          tabBarIcon: ({ focused, color }) => (
+
+            focused ?
+              <Ionicons name="compass" color={color} size={18} /> :
+              <Ionicons name="compass-outline" size={18} color={color} />
           ),
+
           tabBarStyle: ((route) => {
             const routeName = getFocusedRouteNameFromRoute(route) ?? ""
             if (routeName === 'ExploreAll' || routeName === 'Alertscreen' || routeName === 'Exploredetails') {
@@ -123,39 +137,48 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Categories"
-        component={Categoriesscreen}
-        options={{
+        component={Categoriesstack}
+        options={({ route }) => ({
+
           tabBarLabel: 'Categories',
-          headerShown: true,
+          // headerShown: true,
 
-          headerTitle: (props) => '',
-          headerStyle: {
-            backgroundColor: colors.white,
-            backgroundColor: colors.white,
-            shadowColor: "#00000050",
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
+          // headerTitle: (props) => '',
+          // headerStyle: {
+          //   backgroundColor: colors.white,
+          //   backgroundColor: colors.white,
+          //   shadowColor: "#00000050",
+          //   shadowOffset: {
+          //     width: 0,
+          //     height: 1,
+          //   },
+          //   shadowOpacity: 0.22,
+          //   shadowRadius: 2.22,
 
-            elevation: 3,
-          },
-          headerLeft: (props) => (
-            <Myheaderleft {...props} />
-          ),
-          headerRight: () => (
-            <MyheaderRight nested='Categoriesscreen' />
+          //   elevation: 3,
+          // },
+          // headerLeft: (props) => (
+          //   <Myheaderleft {...props} />
+          // ),
+          // headerRight: () => (
+          //   <MyheaderRight nested='Categoriesscreen' />
 
-          ),
+          // ),
           tabBarIcon: ({ focused, color }) => (
 
             focused ?
-              <AntDesign name="appstore1" size={21} color={colors.black} /> :
-              <AntDesign name="appstore-o" color={color} size={21} />
+              <AntDesign name="appstore1" size={18} color={colors.black} /> :
+              <AntDesign name="appstore-o" color={color} size={18} />
           ),
-        }}
+          tabBarStyle: ((route) => {
+            // console.log(route)
+            const routeName = getFocusedRouteNameFromRoute(route) ?? ""
+            if (routeName === 'Categoriesdetails' || routeName === 'Categoriesall' || routeName === 'Exploredetails' || routeName === 'Alertscreen' ) {
+              return { display: "none", }
+            }
+            return
+          })(route),
+        })}
       />
       <Tab.Screen
         name="Search"
@@ -164,7 +187,7 @@ function MyTabs() {
           tabBarLabel: 'Search',
 
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="search1" color={color} size={size} />
+            <AntDesign name="search1" color={color} size={18} />
           ),
         }}
       />
@@ -178,12 +201,12 @@ function MyTabs() {
               <MaterialCommunityIcons
                 name="account"
                 color={color}
-                size={size}
+                size={20}
               /> :
               <MaterialCommunityIcons
                 name="account-outline"
                 color={color}
-                size={size}
+                size={20}
               />
           ),
         }}

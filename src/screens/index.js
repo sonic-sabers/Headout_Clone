@@ -1,6 +1,7 @@
 export { default as Explorescreen } from './Explorescreen';
 export { default as Categoriesscreen } from './Categoriesscreen';
 export { default as Explorestack } from '../navigation/Explorestack';
+export { default as Categoriesstack } from '../navigation/Categoriesstack';
 export { default as ExploreAll } from './ExploreAll';
 export { default as Searchscreen } from './Searchscreen';
 export { default as Profilescreen } from './Profilescreen';

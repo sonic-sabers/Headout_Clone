@@ -21,10 +21,11 @@ import {
   ViewPropTypes,
   Switch,
   Dimensions,
+  Pressable,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../constants';
-import { Hstack } from '../components';
+import { Hstack, Loadingscreen } from '../components';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -49,7 +50,7 @@ let itemwidth = imageWidth / 2 - 20
 let Logo1 = 160;
 let images = 320;
 
-const Categoriesdata = ([
+export const Categoriesdata = ([
   { title: 'Tickets', key: '1' },
   { title: 'Tours', key: '2' },
   { title: 'Transportation', key: '3' },
@@ -76,14 +77,19 @@ const Datacomponent = ({ data }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity
+    <Pressable
 
       onPress={() =>
-        navigation.navigate('Explorestack', {
-          screen: 'ExploreAll',
-          initial: false,
+        // navigation.navigate('Explorestack', {
+        //   screen: 'ExploreAll',
+        //   params: {
+        //     title: data.title,
+        //     // itemId: 30
+        //   }
+        // })
+        navigation.navigate('Categoriesall', {
+          title: data.title,
         })
-        // navigation.navigate('ExploreAll')
       }
 
       key={data.key}
@@ -111,110 +117,131 @@ const Datacomponent = ({ data }) => {
         }}>
         {data.title}
       </Text>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
 
 export default function Categoriesscreen() {
+  const [show, setShow] = React.useState(false);
+  const [dataRestored, setDataRestored] = React.useState(false);
+  const delay = 1.5;
 
-
+  const ratio = 120 / 786;
+  const logowidth = dimensions.width / 2
+  React.useEffect(
+    () => {
+      let timer1 = setTimeout(() => setShow(true), delay * 1000);
+      return () => {
+        clearTimeout(timer1);
+      };
+    },
+    [],
+  );
+  let rating = '4k';
   return (
-    <View style={{
-      flex: 1,
-      backgroundColor: colors.white,
-
-
-    }}>
-      {/* <Headercomponent /> */}
-      <ScrollView style={{
-        flex: 1,
-
-      }}
-        showsVerticalScrollIndicator={false}
-
-        contentContainerStyle={{
-          paddingBottom: 80,
-
-        }}
-      >
-        <View
-          style={{
-            // marginBottom: 30,
-            backgroundColor: colors.white,
-            flex: 1,
-            paddingVertical: 30
-          }}
-        >
-          <Customheader nested seeall title='Top Attractions in New York' />
-
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{
-              // backgroundColor: colors.black2,
-              // flex: 1,
-
-            }}
-            style={{
-              paddingHorizontal: 10,
-              paddingRight: 20,
-              marginTop: 20
-            }}
-          >
-            <Topattractions />
-            <Topattractions />
-            <Topattractions />
-            <Topattractions />
-            <Topattractions />
-          </ScrollView>
-        </View>
+    <>
+      {!show ?
+        <Loadingscreen />
+        :
 
         <View style={{
+          flex: 1,
+          backgroundColor: colors.white,
+
 
         }}>
-          <Customheader title='Categories in New York' />
-          <View style={{
-            // backgroundColor: "green",
+          {/* <Headercomponent /> */}
+          <ScrollView style={{
             flex: 1,
-            flexDirection: 'row',
-            flexWrap: "wrap",
-            justifyContent: 'space-between',
-            marginHorizontal: 10,
-            marginTop: 10,
 
-          }}>
-            {Categoriesdata.map((data, index) => {
-              return (
-                <View key={data.key}>
-                  <Datacomponent data={data} />
-                </View>
-              )
-            })}
-          </View>
-          <Customheader category title='Categories Worldwide' />
-          <View style={{
-            // backgroundColor: "green",
-            flex: 1,
-            flexDirection: 'row',
-            flexWrap: "wrap",
-            justifyContent: 'space-between',
-            marginHorizontal: 10,
-            marginTop: 10,
+          }}
+            showsVerticalScrollIndicator={false}
 
-          }}>
-            {Categoriesdata.map((data, index) => {
-              return (
-                <View key={data.key}>
-                  <Datacomponent data={data} />
-                </View>
-              )
-            })}
-          </View>
+            contentContainerStyle={{
+              paddingBottom: 80,
+
+            }}
+          >
+            <View
+              style={{
+                // marginBottom: 30,
+                backgroundColor: colors.white,
+                flex: 1,
+                paddingVertical: 30
+              }}
+            >
+              <Customheader nested seeall title='Top Attractions in New York' />
+
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{
+                  // backgroundColor: colors.black2,
+                  // flex: 1,
+
+                }}
+                style={{
+                  paddingHorizontal: 10,
+                  paddingRight: 20,
+                  marginTop: 20
+                }}
+              >
+                <Topattractions Categoriesdetails nested />
+                <Topattractions Categoriesdetails nested />
+                <Topattractions Categoriesdetails nested />
+                <Topattractions Categoriesdetails nested />
+                <Topattractions Categoriesdetails nested />
+              </ScrollView>
+            </View>
+
+            <View style={{
+
+            }}>
+              <Customheader title='Categories in New York' />
+              <View style={{
+                // backgroundColor: "green",
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: "wrap",
+                justifyContent: 'space-between',
+                marginHorizontal: 10,
+                marginTop: 10,
+
+              }}>
+                {Categoriesdata.map((data, index) => {
+                  return (
+                    <View key={data.key}>
+                      <Datacomponent data={data} />
+                    </View>
+                  )
+                })}
+              </View>
+              <Customheader category title='Categories Worldwide' />
+              <View style={{
+                // backgroundColor: "green",
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: "wrap",
+                justifyContent: 'space-between',
+                marginHorizontal: 10,
+                marginTop: 10,
+
+              }}>
+                {Categoriesdata.map((data, index) => {
+                  return (
+                    <View key={data.key}>
+                      <Datacomponent data={data} />
+                    </View>
+                  )
+                })}
+              </View>
+            </View>
+          </ScrollView>
+
         </View>
-      </ScrollView>
-
-    </View>
+      }
+    </>
   )
 }
 

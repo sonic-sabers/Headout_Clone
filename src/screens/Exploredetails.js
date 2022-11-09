@@ -21,10 +21,14 @@ import {
   ViewPropTypes,
   Switch,
   Dimensions,
+  LayoutAnimation,
+  UIManager,
+  Platform,
+  Pressable
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../constants';
-import { Hstack } from '../components';
+import { Hstack, Loadingscreen } from '../components';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -40,7 +44,7 @@ import { Customheader, ExperienceComponent, Glass, Museum1, Museum2, Museum3 } f
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
 import { Hline } from './Profilescreen';
 import { List } from 'react-native-paper';
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { Cayntext } from './Alertscreen';
 
 let dimensions = Dimensions.get('window');
@@ -48,6 +52,70 @@ let imageHeight = Math.round((dimensions.width * 768) / 120);
 let imageWidth = dimensions.width - 20;
 // let imageHeight = dimensions.height;
 let itemwidth = imageWidth / 2 - 20
+
+
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
+
+const tokyoRegion = {
+  latitude: 35.6762,
+  longitude: 139.6503,
+  latitudeDelta: 0.01,
+  longitudeDelta: 0.01,
+};
+
+const Accordion = ({ title, children }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleOpen = () => {
+    setIsOpen(value => !value);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }
+
+  return (
+    <View style={{
+      // backgroundColor: colors.white,
+      marginHorizontal: 15,
+      marginVertical: 10,
+
+    }}>
+      <Pressable
+        onPress={toggleOpen}
+      >
+        <Hstack centered between styles={{
+        }} >
+          <Text style={styles.titleStyle}>
+            {title}
+          </Text>
+          <Entypo
+            name={isOpen ? 'chevron-up' : 'chevron-down'}
+            size={20}
+            color={colors.black5}
+            style={{
+              marginRight: 5,
+            }}
+          />
+        </Hstack>
+      </Pressable>
+      <View style={[!isOpen ? styles.hidden : {
+        marginTop: 10,
+      }, {
+        flex: 1,
+        overflow: 'hidden',
+        zIndex: 500,
+        // marginBottom: 10,
+
+      }]}>
+        {children}
+      </View>
+    </View>
+  );
+};
+
 
 const Reviewcomponent = ({ Nmae }) => {
   return (
@@ -143,22 +211,31 @@ const Points = ({ text, nodot }) => {
       marginHorizontal: 10,
 
     }}>
-      {!nodot && <View style={{
+      <View style={[{
         height: 5,
-        width: 5,
         borderRadius: 30,
-        backgroundColor: colors.black1,
+        backgroundColor: '#ffffff00',
         margin: 10,
         marginTop: 8,
+      }, !nodot && {
+        backgroundColor: colors.black1,
+        width: 5,
         marginLeft: 15,
-      }} />}
+
+      }]} />
       <Text
         style={[{
-          // maxWidth:'90%'
-          marginRight: 40,
+          maxWidth: '85%',
+          // marginRight: 40,
           lineHeight: 22,
+          fontSize: 17,
+          fontWeight: '600',
+          fontFamily: 'Roboto',
+          color: colors.black1,
+          // backgroundColor: 'green',
+          // flex: 1,
 
-        }, styles.Abouttext]}>
+        },]}>
         {text ? text : '214'}
       </Text>
     </Hstack>
@@ -190,8 +267,8 @@ const Aboutexplore = ({ children, title }) => {
   )
 }
 
+const Renderitem = ({ rating, title, Costings, Reviewcount }) => {
 
-const Renderitem = ({ rating }) => {
   return (
     <View style={{
 
@@ -205,7 +282,7 @@ const Renderitem = ({ rating }) => {
       flex: 1
     }}>
       <View>
-        <Customheader title='Museum of Modern Art(MOMA) Tickets' styles={{
+        <Customheader title={title} styles={{
           fontSize: 23,
 
         }} />
@@ -225,7 +302,7 @@ const Renderitem = ({ rating }) => {
               // maxWidth: images - 20,
               // backgroundColor: 'green' Category
             }}>
-            $25
+            ${Costings ? Costings : 28}
 
           </Text>
           <Hstack centered styles={{
@@ -249,7 +326,7 @@ const Renderitem = ({ rating }) => {
                 fontFamily: 'Roboto',
                 color: colors.lightblack,
               }}>
-              ({rating ? rating : '2k'})
+              {Reviewcount}k
             </Text>
           </Hstack>
         </Hstack>
@@ -287,107 +364,108 @@ const Renderitem = ({ rating }) => {
         </Text>
         <Hline />
 
-        <List.Accordion style={{
+        {/* <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Highlights" id="1">
+        </List.Accordion> */}
+        <Accordion title='Highlights' >
           <Points text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s" />
           <Points text="when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five " />
-        </List.Accordion>
+        </Accordion>
+
+
         <Hline />
-        <List.Accordion style={{
+        {/* <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Inclusions" id="2">
           <Points text="Lorem Ipsum is simply dummy " />
           <Points text="when an unknown " />
           <Points text="when an unknown Lorem" />
         </List.Accordion>
+        <Hline /> */}
+
+
+        {/* <Accordion title='Inclusions'> */}
+        <Accordion title='Inclusions' >
+          <Points text="Lorem Ipsum is simply dummy " />
+          <Points text="when an unknown " />
+          <Points text="when an unknown Lorem" />
+        </Accordion>
+
         <Hline />
 
-        <List.Accordion style={{
+        {/* <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Exclusions" id="3">
+
+        </List.Accordion> */}
+        <Accordion title='Exclusions' >
           <Points text="Lorem Ipsum is simply dummy " />
           <Points text="when an unknown Lorem" />
-        </List.Accordion>
-        <Hline />
+        </Accordion>
 
+
+        <Hline />
+        {/* 
         <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Cancellation Policy" id="4">
           <Points nodot text="Lorem Ipsum is simply dummy " />
-          {/* <Points text="when an unknown Lorem" /> */}
-        </List.Accordion>
+        </List.Accordion> */}
+        <Accordion title='Cancellation Policy' >
+          <Points nodot text="Lorem Ipsum is simply dummy " />
+          <Points nodot text="Lorem Ipsum is simply dummy " />
+
+        </Accordion>
+
         <Hline />
 
-        <List.Accordion style={{
+        {/* <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Your Experience" id="5">
+   
+        </List.Accordion> */}
+        <Accordion title='Your Experience' >
           <Points nodot text="Lorem Ipsum is simply dummy " />
           <Points nodot text="when an unknown Lorem" />
-        </List.Accordion>
+        </Accordion>
+
         <Hline />
 
-        <List.Accordion style={{
+        {/* <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Know Before you Go" id="6">
           <Points text="Lorem Ipsum is simply dummy " />
           <Points text="when an unknown Lorem" />
-        </List.Accordion>
+        </List.Accordion> */}
+        <Accordion title='Know Before you Go' >
+          <Points text="Lorem Ipsum is simply dummy " />
+          <Points text="when an unknown Lorem" />
+        </Accordion>
+
         <Hline />
 
 
-        <List.Accordion style={{
+        {/* <List.Accordion style={{
           backgroundColor: colors.white
         }}
-          titleStyle={{
-            fontSize: 17,
-            fontWeight: '700',
-            fontFamily: 'Roboto',
-            color: '#000000',
-          }}
+          titleStyle={styles.titleStyle}
           title="Ratings & Reviews" id="7">
+
+        </List.Accordion> */}
+        <Accordion title='Ratings & Reviews' >
           <View style={{
 
             marginHorizontal: 15,
@@ -428,7 +506,8 @@ const Renderitem = ({ rating }) => {
 
             </View>
           </View>
-        </List.Accordion>
+        </Accordion>
+
         <Hline />
 
         {/* </List.AccordionGroup> */}
@@ -441,6 +520,7 @@ const Renderitem = ({ rating }) => {
         ))} */}
       </View>
 
+      <Customheader nested title='Where?' />
 
       <View style={{
 
@@ -448,6 +528,7 @@ const Renderitem = ({ rating }) => {
         overflow: 'hidden',
 
       }}>
+
         <Cayntext text="Museum of Modern Art 11 West 53rd street" left style={{
 
           marginVertical: 10,
@@ -461,27 +542,34 @@ const Renderitem = ({ rating }) => {
             }} />
         </Cayntext>
         {/* <View style={styles.container2}> */}
+
         <MapView
           style={styles.map}
-          region={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
-          }}
+          region={tokyoRegion}
+          initialRegion={tokyoRegion}
         >
+          {/* <Marker pinColor='green' title='ac' coordinate={tokyoRegion} /> */}
+
+          {/* <Marker pinColor='green' title='ac' coordinate={tokyoRegion} /> */}
+          <Marker
+            coordinate={tokyoRegion}
+            pinColor="#7F00FF"
+          />
         </MapView>
       </View>
 
       <Hline />
       <View style={{
-        marginHorizontal: -20
+        marginHorizontal: -20,
+        marginBottom: 30,
+
       }}>
         {/* </View> */}
-        <Customheader title='Similar Experiences' seeall  style={{
-        marginLeft:20,
-        
-        }}/>
+        <Customheader title='Similar Experiences' style={{
+          marginLeft: 20,
+          marginRight: 20,
+
+        }} />
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -536,45 +624,71 @@ const Renderitem = ({ rating }) => {
 };
 
 
-export default function Exploredetails() {
+export default function Exploredetails({ route }) {
+  // const { itemId } =  route.params;
+  const { title, Reviewcount, Costings } = route?.params;
 
+  // const { title } = route?.params;
+  // console.log(title)
+  // console.log(screenname)
+  const [show, setShow] = React.useState(false);
+  const [dataRestored, setDataRestored] = React.useState(false);
+  const delay = 1;
+
+  const ratio = 120 / 786;
+  const logowidth = dimensions.width / 2
+  React.useEffect(
+    () => {
+      let timer1 = setTimeout(() => setShow(true), delay * 1000);
+      return () => {
+        clearTimeout(timer1);
+      };
+    },
+    [],
+  );
   let rating = '4k';
   return (
-    <View style={{
-      flex: 1,
-      backgroundColor: colors.white,
-      // paddingHorizontal: 10,
-      paddingBottom: 0,
-    }}
-    >
-      <ReactNativeParallaxHeader
-
-        headerMinHeight={0}
-        headerMaxHeight={250}
-        extraScrollHeight={20}
-        navbarColor="#ffffff01"
-        // titleStyle={styles.titleStyle}
-        // title={title()}
-        backgroundImage={Museum1}
-        backgroundImageScale={1.2}
-        // renderNavBar={renderNavBar}
-        // renderContent={renderContent}
-        renderContent={() => (<Renderitem rating={rating} />)}
-        containerStyle={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        innerContainerStyle={styles.container}
-        scrollViewProps={{
-          onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
-          onScrollEndDrag: () => console.log('onScrollEndDrag'),
+    <>
+      {!show ?
+        <Loadingscreen />
+        :
+        <View style={{
+          flex: 1,
+          backgroundColor: colors.white,
+          // paddingHorizontal: 10,
+          paddingBottom: 0,
         }}
-      />
-    </View>
+        >
+          <ReactNativeParallaxHeader
+            headerMinHeight={0}
+            headerMaxHeight={250}
+            extraScrollHeight={20}
+            navbarColor="#ffffff01"
+            // titleStyle={styles.titleStyle}
+            // title={title()}
+            backgroundImage={Museum1}
+            backgroundImageScale={1.2}
+            // renderNavBar={renderNavBar}
+            // renderContent={renderContent}
+            renderContent={() => (<Renderitem rating={rating} title={title} Costings={Costings} Reviewcount={Reviewcount} />)}
+            containerStyle={styles.container}
+            contentContainerStyle={styles.contentContainer}
+            innerContainerStyle={styles.container}
+            scrollViewProps={{
+              onScrollBeginDrag: () => console.log('onScrollBeginDrag'),
+              onScrollEndDrag: () => console.log('onScrollEndDrag'),
+            }}
+          />
+        </View>
+      }
+    </>
+
   )
 }
 
 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -596,11 +710,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'transparent',
   },
-  titleStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
+  // titleStyle: {
+  //   color: 'white',
+  //   fontWeight: 'bold',
+  //   fontSize: 18,
+  // },
   Abouttext: {
     fontSize: 17,
     fontWeight: '600',
@@ -619,5 +733,17 @@ const styles = StyleSheet.create({
     width: imageWidth,
     alignSelf: 'center',
 
+  },
+  hidden: {
+    height: 0,
+  },
+  list: {
+    overflow: 'hidden'
+  },
+  titleStyle: {
+    fontSize: 17,
+    fontWeight: '700',
+    fontFamily: 'Roboto',
+    color: '#000000',
   },
 });

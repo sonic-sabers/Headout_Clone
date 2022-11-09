@@ -88,8 +88,9 @@ const Searchcomonent = ({ item }) => {
             style={{
               fontSize: 16,
               fontWeight: '700',
-              fontFamily: 'Roboto',
-              color: colors.black2,
+              fontFamily: 'Inter-Regular',
+              color: colors.black,
+              opacity:0.8
             }}>
             {item.City}
             {/* dsc */}
@@ -98,7 +99,7 @@ const Searchcomonent = ({ item }) => {
             style={{
               fontSize: 13,
               fontWeight: '500',
-              fontFamily: 'Roboto',
+              fontFamily: 'Inter-Medium',
               color: colors.black2,
               marginTop: 4,
 
@@ -131,7 +132,7 @@ export default function Searchscreen() {
       .then((responseJson) => {
         setFilteredDataSource(Nearbydata);
         setMasterDataSource(Nearbydata);
-        console.log('masterDataSource', masterDataSource)
+        // console.log('masterDataSource', masterDataSource)
         setLoading(false)
       })
       .catch((error) => {

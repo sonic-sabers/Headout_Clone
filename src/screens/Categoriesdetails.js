@@ -1,3 +1,15 @@
+// import { StyleSheet, Text, View } from 'react-native'
+// import React from 'react'
+
+// export default function Categoriesdetails() {
+//   return (
+//     <View>
+//       <Text>Categoriesdetails</Text>
+//     </View>
+//   )
+// }
+
+// const styles = StyleSheet.create({})
 import React,
 {
   Component,
@@ -22,12 +34,12 @@ import { colors } from '../constants';
 import { Hstack, Loadingscreen } from '../components';
 import * as  Exploredetails from './Exploredetails';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { Customheader, ExperienceComponent, Glass, Museum1, Museum2, Museum3 } from './Explorescreen';
+import { ExperienceComponent, Glass, Museum1, Museum2, Museum3 } from './Explorescreen';
 import { Categoriesdata } from './Categoriesscreen';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 let dimensions = Dimensions.get('window');
 
-export default function ExploreAll({ route }) {
+export default function Categoriesdetails({ route }) {
   const { itemId, details, title } = route?.params;
   // console.log(itemId, details, title)
   const [show, setShow] = React.useState(false);
@@ -98,14 +110,13 @@ export default function ExploreAll({ route }) {
                   }}
                   style={{
                     // marginLeft: -10,
-
+                  
                   }}
-                >
+                  >
                   {Categoriesdata.map((data, index) => {
                     {/* console.log(data) */ }
                     return (
                       <TouchableOpacity
-                      key={data.key}
                         onPress={() => setActive(data.title)}
                         style={[
 
@@ -173,15 +184,7 @@ export default function ExploreAll({ route }) {
             <ExperienceComponent img={Glass} center title='The Lion King' Category='Entertainment' rate='95.5' />
             <ExperienceComponent free img={Museum2} center title='A Strange Loop' Category='Entertainment' rate='60' discount='10' />
             <ExperienceComponent img={Museum1} center title='The Music Man' Category='Entertainment' rate='292.2' />
-            <Customheader
-              style={{
-                marginLeft: -10,
-                marginTop: 20,
-
-              }}
-              title='Headout Picks' />
-            <ExperienceComponent img={Glass} center title='Aladdin' Category='Entertainment' rate='69' discount='10' Full />
-            <ExperienceComponent img={Glass} center title='Chicago' Category='Entertainment' rate='67' discount='10' Full />
+            <ExperienceComponent img={Glass} center title='Aladdin' Category='Entertainment' rate='69' discount='10' Full/>
           </ScrollView>
 
         </View>
