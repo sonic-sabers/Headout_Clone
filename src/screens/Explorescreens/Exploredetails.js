@@ -27,8 +27,8 @@ import {
   Pressable
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from '../constants';
-import { Hstack, Loadingscreen } from '../components';
+import { colors } from '../../constants';
+import { Hstack, Loadingscreen } from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -42,10 +42,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { Customheader, ExperienceComponent, Glass, Museum1, Museum2, Museum3 } from './Explorescreen';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
-import { Hline } from './Profilescreen';
+import { Hline } from '../Profilescreen';
 import { List } from 'react-native-paper';
 import MapView, { Marker } from 'react-native-maps';
-import { Cayntext } from './Alertscreen';
+import { Cayntext } from '../Alertscreen';
 
 let dimensions = Dimensions.get('window');
 let imageHeight = Math.round((dimensions.width * 768) / 120);

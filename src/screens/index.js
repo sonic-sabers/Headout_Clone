@@ -1,12 +1,13 @@
-export { default as Explorescreen } from './Explorescreen';
-export { default as Categoriesscreen } from './Categoriesscreen';
+export { default as Explorescreen } from './Explorescreens/Explorescreen';
+export { default as Categoriesscreen } from './Categoriesscreens/Categoriesscreen';
 export { default as Explorestack } from '../navigation/Explorestack';
+export { default as Bottomtab } from '../navigation/Bottomtab';
 export { default as Categoriesstack } from '../navigation/Categoriesstack';
-export { default as ExploreAll } from './ExploreAll';
+export { default as ExploreAll } from './Explorescreens/ExploreAll';
 export { default as Searchscreen } from './Searchscreen';
 export { default as Profilescreen } from './Profilescreen';
 export { default as Alertscreen } from './Alertscreen';
-export { default as Exploredetails } from './Exploredetails';
+export { default as Exploredetails } from './Explorescreens/Exploredetails';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';

@@ -24,8 +24,8 @@ import {
   Pressable,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from '../constants';
-import { Hstack, Loadingscreen } from '../components';
+import { colors } from '../../constants';
+import { Hstack, Loadingscreen } from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -37,7 +37,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { Customheader, Headercomponent, Topattractions } from './Explorescreen';
+import { Customheader, Headercomponent, Topattractions } from '../Explorescreens/Explorescreen';
 
 
 let dimensions = Dimensions.get('window');

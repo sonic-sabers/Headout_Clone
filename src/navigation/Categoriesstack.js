@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 // import StackN from './src/navigator/Navigation';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Alertscreen, Categoriesscreen, ExploreAll, Exploredetails } from '../screens';
-import Categoriesdetails from '../screens/Categoriesdetails';
+import Categoriesdetails from '../screens/Categoriesscreens/Categoriesdetails';
 import { Myheaderleft, MyheaderRight } from './Explorestack';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';

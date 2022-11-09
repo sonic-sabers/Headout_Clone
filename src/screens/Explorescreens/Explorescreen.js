@@ -26,8 +26,8 @@ import {
   Pressable,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { colors } from '../constants';
-import { Hstack } from '../components';
+import { colors } from '../../constants';
+import { Hstack } from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Feather from 'react-native-vector-icons/Feather';
@@ -115,12 +115,12 @@ export const Customheader = ({ title, seeall, style, nested, category, size, sty
     </Hstack>
   )
 }
-export const Museum1 = require('./../assets/Image/Museum1.png');
-export const Museum2 = require('./../assets/Image/Museum2.png');
-export const Museum3 = require('./../assets/Image/Museum3.png');
-export const Glass = require('./../assets/Image/Glass.png');
-export const NewYork = require('./../assets/Image/NewYork.png');
-export const Helicopter = require('./../assets/Image/Helicopter.png');
+export const Museum1 = require('../../assets/Image/Museum1.png');
+export const Museum2 = require('../../assets/Image/Museum2.png');
+export const Museum3 = require('../../assets/Image/Museum3.png');
+export const Glass = require('../../assets/Image/Glass.png');
+export const Helicopter = require('../../assets/Image/Helicopter.png');
+export const NewYork = require('../../assets/Image/NewYork.png');
 
 export const ExperienceComponent = (props) => {
   const { free, img, center, style, title, Category, rate, discount, about, reviewcount, N, Full } = props;
@@ -460,7 +460,7 @@ export const Topattractions = ({ nested, details, Categoriesdetails }) => {
       }
     >
       <Image
-        source={require('./../assets/Image/NewYork.png')}
+        source={require('../../assets/Image/NewYork.png')}
         style={{
           width: 160, height: 220,
           borderRadius: 6,
@@ -523,7 +523,7 @@ export const Headercomponent = () => {
 
     }}>
       <Image
-        source={require('./../assets/Image/Logo.png')}
+        source={require('../../assets/Image/Logo.png')}
         style={{
           width: Logo1, height: Logo1 * 120 / 768,
           zIndex: 300,
@@ -569,7 +569,7 @@ export default function Explorescreen() {
 
           }}>
             <ImageBackground
-              source={require('./../assets/Image/Liberty.png')}
+              source={require('../../assets/Image/Liberty.png')}
               style={{
                 width: imageWidth, height: imageWidth * 600 / 527,
                 marginTop: 20,

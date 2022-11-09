@@ -14,7 +14,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { colors } from '../constants';
-import { Headercomponent } from '../screens/Explorescreen';
+import { Headercomponent } from '../screens/Explorescreens/Explorescreen';
 import { StackActions } from '@react-navigation/native';
 const Stack = createStackNavigator();
 

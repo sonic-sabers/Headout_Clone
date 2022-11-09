@@ -37,7 +37,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { Customheader, ExperienceComponent, Glass, Museum3 } from './Explorescreen';
+import { Customheader, ExperienceComponent, Glass, Museum3 } from './Explorescreens/Explorescreen';
 
 
 export const Hline = () => {

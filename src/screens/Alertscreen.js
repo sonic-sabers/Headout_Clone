@@ -36,7 +36,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import RBSheet from 'react-native-raw-bottom-sheet';
-import { Customheader, Headercomponent, Topattractions } from './Explorescreen';
+import { Customheader, Headercomponent, Topattractions } from './Explorescreens/Explorescreen';
 import { Endalign } from './Profilescreen';
 
 const { width } = Dimensions.get('window');
