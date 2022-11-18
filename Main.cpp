@@ -8,7 +8,7 @@ struct street
  int B,E,L;dfdsc
  char *str1;ddd
 };
-int main()
+int main()ssdc
 {
     long long int D,I,S,V,F;
     cin>>D>>I>>S>>V>>F;
