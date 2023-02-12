@@ -133,7 +133,7 @@ export default function Alertscreen() {
           borderWidth: 1,
           // backgroundColor: 'green',
           alignItems: 'center',
-          borderColor: colors.black4,
+          borderColor: colors.black5,
           borderRadius: 5,
           marginVertical: 10,
           paddingLeft: 10,
@@ -149,12 +149,12 @@ export default function Alertscreen() {
               // backgroundColor: 'blue',
               marginLeft: 10,
               flex: 1,
-              color: colors.black1,
+              color: colors.black3,
               fontWeight: '400',
               fontSize: 16,
 
             }}
-            placeholderTextColor={colors.lightblack}
+            placeholderTextColor={colors.black4}
 
             placeholder='Search help articles'
             // onChangeText={onChangeText}

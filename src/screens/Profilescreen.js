@@ -1,283 +1,291 @@
-import React,
-{
-  Component,
-  useState,
-  useEffect,
-  useRef
-} from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
 import {
-  StyleSheet,
-  Button,
+  // StyleSheet,
   Image,
   Text,
   TouchableOpacity,
   View,
-  TextInput,
   ScrollView,
-  KeyboardAvoidingView,
-  SafeAreaView,
-  ImageBackground,
-  FlatList,
-  ViewPropTypes,
-  Switch,
-  Dimensions,
   StatusBar,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { colors } from '../constants';
-import { Hstack } from '../components';
-import LinearGradient from 'react-native-linear-gradient';
+import {colors} from '../constants';
+import {Customheader, Hstack} from '../components';
 
-import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import { Customheader, ExperienceComponent, Glass, Museum3 } from './Explorescreens/Explorescreen';
-
+// import { Customheader, ExperienceComponent, Glass, Museum3 } from './Explorescreens/Explorescreen';
 
 export const Hline = () => {
   return (
-    <View style={{
-      backgroundColor: colors.black4,
-      // flex: 1,
-      height: 0.8,
-      borderRadius: 30,
-      marginVertical: 10,
-      marginHorizontal: 10,
-      marginTop: 20,
+    <View
+      style={{
+        backgroundColor: colors.black5,
+        // flex: 1,
+        height: 0.8,
+        borderRadius: 30,
+        marginVertical: 20,
+        marginHorizontal: 25,
+        // marginTop: 20,
+      }}
+    />
+  );
+};
 
-    }}>
-    </View>
-  )
-}
-
-
-export const Endalign = ({ title, text, icon, size }) => {
+const AuthButton = props => {
+  const {title, icon, onPress} = props;
   return (
-    <Hstack centered between styles={{
-      marginHorizontal: 10,
-      marginTop: 15,
-    }}>
+    <TouchableOpacity
+      onPress={() => (onPress ? onPress : null)}
+      style={{
+        backgroundColor: colors.white,
+        padding: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        borderWidth: 0.8,
+        borderColor: colors.black6,
+        marginTop: 15,
+        flexDirection: 'row',
+      }}>
+      {icon ? (
+        <MaterialCommunityIcons
+          name="email-outline"
+          size={18}
+          color={colors.black2}
+        />
+      ) : (
+        <Image
+          source={require('../assets/Image/Google.png')}
+          style={{width: 17, height: 17}}
+        />
+      )}
+      <Text
+        style={{
+          fontSize: 14,
+          fontFamily: 'Inter-Regular',
+          color: colors.black,
+          opacity: 0.75,
+          marginLeft: 10,
+        }}>
+        {title ? title : 'Continue with Google'}
+      </Text>
+    </TouchableOpacity>
+  );
+};
+export const Endalign = ({title, text, icon, size, dollor}) => {
+  return (
+    <Hstack
+      centered
+      between
+      styles={{
+        marginHorizontal: 25,
+        marginTop: 15,
+      }}>
       <TouchableOpacity>
         <Text
-          style={[{
-            fontSize: 16,
-            fontWeight: '500',
-            fontFamily: 'Roboto',
-            color: colors.black2,
-          },
-          size && {
-            fontSize: 18,
-
-          }
+          style={[
+            {
+              fontSize: 13.5,
+              // fontWeight: '500',
+              fontFamily: 'Inter-Regular',
+              color: colors.black,
+              opacity: 0.75,
+            },
+            size && {
+              fontSize: 18,
+            },
           ]}>
           {title ? title : 'Title'}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Hstack centered >
+        <Hstack centered>
           <Text
             style={{
-              fontSize: 16,
-              fontWeight: '600',
-              fontFamily: 'Roboto',
-              color: colors.black2,
+              fontSize: 12.5,
+              fontFamily: 'Inter-Regular',
+              color: colors.black,
+              opacity: 0.75,
+              marginRight: 4,
             }}>
             {text ? text : null}
           </Text>
-          {icon ? <Entypo name='chevron-right' size={18} color={colors.black2} /> : null}
+          {dollor && (
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: 'Roboto-Regular',
+                color: colors.black,
+                opacity: 0.6,
+              }}>
+              $
+            </Text>
+          )}
+          {icon ? (
+            <Entypo name="chevron-thin-right" size={13} color={colors.black2} />
+          ) : null}
         </Hstack>
       </TouchableOpacity>
     </Hstack>
-  )
-}
+  );
+};
 
 export default function Profilescreen() {
-
-
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={{
-        // flex: 1,
-
-      }}
       style={{
         flex: 1,
         backgroundColor: colors.white,
-
       }}>
       <StatusBar
         animated={true}
         backgroundColor="#F8F7FF"
-      // barStyle={statusBarStyle}
-      // showHideTransition={statusBarTransition}
-      // hidden={hidden}
       />
-      <View style={{
-        padding: 30,
-        backgroundColor: '#F8F7FF'
-      }}>
-        <Hstack styles={{
-          marginVertical: 30,
-
+      <View
+        style={{
+          padding: 25,
+          backgroundColor: '#F8F7FF',
         }}>
-          <Text
+        <Hstack
+          styles={{
+            marginVertical: 20,
+          }}>
+          <View
             style={{
-              fontSize: 15,
-              fontWeight: '400',
-              fontFamily: 'Roboto',
-              color: colors.black,
               flex: 1,
-              marginRight: 20
-
             }}>
-            Sign in to get cashback as credits insider-only offers and exclusive deals
-          </Text>
+            <Text
+              style={{
+                fontSize: 13,
+                // fontWeight: '400',
+                fontFamily: 'Inter-Regular',
+                color: colors.black,
+
+                marginRight: 20,
+                opacity: 0.8,
+                lineHeight: 20,
+                maxWidth: '80%',
+              }}>
+              Sign in to get cashback as credits, insider-only offers and
+              exclusive deals
+            </Text>
+          </View>
           <FontAwesome5
             name="gifts"
             color={colors.black}
             size={55}
-            style={{
-            }}
+            style={{}}
           />
         </Hstack>
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: colors.white,
-            padding: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-            borderWidth: 1,
-            borderColor: colors.black6,
-            marginTop: 10,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <Image
-            source={require('../assets/Image/Google.png')}
-            style={{ width: 20, height: 20, marginRight: 10 }}
-          />
-          <Text
-            style={{
-              fontSize: 15,
-              fontWeight: '500',
-              fontFamily: 'Roboto',
-              color: colors.black1,
-            }}>
-            Continue With Google
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            backgroundColor: colors.white,
-            padding: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: 10,
-            borderWidth: 1,
-            borderColor: colors.black6,
-            marginTop: 10,
-            flexDirection: 'row',
-            alignItems: 'center',
-
-          }}>
-
-          <MaterialCommunityIcons name='email-outline' size={18} color={colors.black2} />
-
-          <Text
-            style={{
-              fontSize: 15,
-              fontWeight: '500',
-              fontFamily: 'Roboto',
-              color: colors.black1,
-              marginLeft: 7,
-
-            }}>
-            Continue With Email
-          </Text>
-        </TouchableOpacity>
-
+        <AuthButton />
+        <AuthButton title="Continue with Email" icon />
       </View>
 
-      <View style={{
-        padding: 10,
-        paddingBottom: 150,
-
-      }}>
-
-        <Customheader nested title='Settings' />
-        <Endalign title='City' text='New York' icon />
-        <Endalign title='Currency' text='USD $' icon />
-
-        <Hline />
-        <Customheader nested title='Help' />
-        <Endalign title='Chat with us' icon />
-        <Endalign title='FAQs' icon />
+      <View
+        style={{
+          // padding: 10,
+          paddingBottom: 130,
+        }}>
+        <Customheader account title="Settings" />
+        <Endalign title="City" text="New York" icon />
+        <Endalign title="Currency" text="USD" dollor icon />
 
         <Hline />
-        <Customheader nested title='Legal' />
-        <Endalign title='Privacy Policy' icon />
-        <Endalign title='Terms of Usage' icon />
-
-        <Hline />
-
-        <Text
+        <Customheader
+          account
           style={{
-            fontSize: 12,
-            fontWeight: '500',
-            fontFamily: 'Roboto',
-            color: colors.lightblack,
-            marginLeft: 10,
+            marginTop: 0,
+          }}
+          nested
+          title="Help"
+        />
+        <Endalign title="Chat with us" icon />
+        <Endalign title="FAQs" icon />
+
+        <Hline />
+        <Customheader
+          account
+          style={{
+            marginTop: 0,
+          }}
+          nested
+          title="Legal"
+        />
+        <Endalign title="Privacy Policy" icon />
+        <Endalign title="Terms of Usage" icon />
+
+        <Hline />
+        <View
+          style={{
+            marginLeft: 25,
             marginTop: 10,
-
-
           }}>
-          Ashish Ins.
-        </Text>
-        <Text
-          style={{
-            fontSize: 12,
-            fontWeight: '500',
-            fontFamily: 'Roboto',
-            color: colors.lightblack,
-            marginLeft: 10,
-            // marginTop:10,
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: 'Inter-Regular',
+              color: colors.black,
+              opacity: 0.45,
+            }}>
+            Ashish Inc.
+          </Text>
+          <Hstack>
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter-Regular',
+                color: colors.black,
+                opacity: 0.45,
+              }}>
+              Made with
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter-Regular',
+                color: colors.black,
+                marginHorizontal: 2,
+              }}>
+              ❤️
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter-Regular',
+                color: colors.black,
+                opacity: 0.45,
+              }}>
+              all over the
+            </Text>
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter-Regular',
+                color: colors.black,
+                marginHorizontal: 2,
+              }}>
+              🌎
+            </Text>
+          </Hstack>
 
-
-          }}>
-          Made with ❤️ all over the O
-        </Text>
-
-        <Text
-          style={{
-            fontSize: 12,
-            fontWeight: '500',
-            fontFamily: 'Roboto',
-            color: colors.lightblack,
-            marginLeft: 10,
-            marginTop: 10,
-
-
-          }}>
-          App Version 1.0.1
-        </Text>
+          <Text
+            style={{
+              fontSize: 11.5,
+              fontFamily: 'Inter-Regular',
+              color: colors.black,
+              opacity: 0.4,
+              marginTop: 20,
+            }}>
+            App Version 2.0.1
+          </Text>
+        </View>
       </View>
-      {/* <View style={{
-        paddingBottom: 50,
-
-      }} /> */}
-      {/* <Text>Profilescreen</Text> */}
     </ScrollView>
-  )
+  );
 }
 
-const styles = StyleSheet.create({})
+// const styles = StyleSheet.create({});

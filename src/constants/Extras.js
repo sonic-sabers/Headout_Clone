@@ -13,7 +13,7 @@
         fontSize: 12,
         fontWeight: '500',
         fontFamily: 'Roboto',
-        color: colors.lightblack,
+        color: colors.black4,
       }}>
       ScaleRic
     </Text>
