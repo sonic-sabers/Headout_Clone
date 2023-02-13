@@ -76,17 +76,6 @@ export default function Alertscreen() {
           }}>
           Hi,have an existing reservation?
         </Text>
-        {/* <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '600',
-            fontFamily: 'Roboto',
-            color: '#008b8b',
-            marginTop: 20,
-
-          }}>
-          We're here to help {'>'}
-        </Text> */}
         <Cayntext text="We're here to help " size right>
           <Entypo
             // onPress={() => navigation.goBack()}
@@ -128,11 +117,8 @@ export default function Alertscreen() {
           <AntDesign name="search1" color={colors.black} size={20} />
 
           <TextInput
-            // autoFocus={true}
             contextMenuHidden
-            // selectTextOnFocus
             style={{
-              // backgroundColor: 'blue',
               marginLeft: 10,
               flex: 1,
               color: colors.black3,
@@ -141,9 +127,8 @@ export default function Alertscreen() {
             }}
             placeholderTextColor={colors.black4}
             placeholder="Search help articles"
-            // onChangeText={onChangeText}
             onChangeText={onChangeText}
-            // value={text}
+            value={text}
           />
         </Hstack>
         <Customheader size nested title="Booking" />
