@@ -17,7 +17,7 @@ import {
   Museum3,
 } from './Explorescreen';
 import { Categoriesdata } from '../Categoriesscreens/Categoriesscreen';
-import { topText } from '../../assets/fontStyles';
+import { innerText, topText } from '../../assets/fontStyles';
 
 export default function ExploreAll({ route }) {
   const { title } = route?.params;
@@ -38,7 +38,6 @@ export default function ExploreAll({ route }) {
     };
   }, []);
 
-  console.log(Object.values(Categoriesdata)[0].title);
   return (
     <>
       {!show && show ? (
@@ -63,13 +62,13 @@ export default function ExploreAll({ route }) {
               flex: 1,
             }}>
             <Text
-              style={{
+              style={[{
                 fontSize: 23,
-                // fontWeight: '600',
                 fontFamily: 'Roboto',
                 color: colors.black,
                 paddingHorizontal: 20,
-              }}>
+              }, innerText,
+              !title && { marginLeft: -8 }]}>
               {title ? title : ' Broadway Tickets'}
             </Text>
             {title ? (
@@ -145,7 +144,7 @@ export default function ExploreAll({ route }) {
                   fontFamily: 'Roboto',
                   color: colors.black1,
                   marginTop: 15,
-                  marginLeft: 5,
+                  marginLeft: 20,
                 }}>
                 Explore Options
               </Text>

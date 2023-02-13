@@ -21,6 +21,16 @@ export const h1 = {
   fontFamily: 'Inter-Bold',
   lineHeight: 18,
 };
+export const h1Regular = {
+  fontSize: 15,
+  fontFamily: 'Inter-Regular',
+  lineHeight: 18,
+};
+export const h2 = {
+  fontSize: 14,
+  fontFamily: 'Inter-Regular',
+  lineHeight: 22,
+};
 
 // export const h2BoldNunitoSans = {
 //   fontFamily: 'NunitoSans-Bold', // NunitoSans-SemiBold

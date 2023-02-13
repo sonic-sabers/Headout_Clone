@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {Component, useState, useEffect, useRef} from 'react';
+import React, { Component, useState, useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Button,
@@ -21,13 +21,14 @@ import {
   Platform,
   Pressable,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {colors} from '../../constants';
+import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../constants';
 import {
   Customheader,
   ExperienceComponent,
   Hstack,
   Loadingscreen,
+  Detailsheader,
 } from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -49,10 +50,11 @@ import {
   Museum3,
 } from './Explorescreen';
 import ReactNativeParallaxHeader from 'react-native-parallax-header';
-import {Hline} from '../Profilescreen';
-import {List} from 'react-native-paper';
-import MapView, {Marker} from 'react-native-maps';
-import {Cayntext} from '../Alertscreen';
+import { Hline } from '../Profilescreen';
+import { List } from 'react-native-paper';
+import MapView, { Marker } from 'react-native-maps';
+import { Cayntext } from '../Alertscreen';
+import { innerText, h2, h1, topText } from '../../assets/fontStyles';
 
 let dimensions = Dimensions.get('window');
 let imageHeight = Math.round((dimensions.width * 768) / 120);
@@ -74,7 +76,7 @@ const tokyoRegion = {
   longitudeDelta: 0.01,
 };
 
-const Accordion = ({title, children}) => {
+const Accordion = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
@@ -87,14 +89,16 @@ const Accordion = ({title, children}) => {
       style={{
         // backgroundColor: colors.white,
         marginHorizontal: 15,
-        marginVertical: 10,
+        marginVertical: 15,
       }}>
       <Pressable onPress={toggleOpen}>
         <Hstack centered between styles={{}}>
-          <Text style={styles.titleStyle}>{title}</Text>
+          <Text style={[innerText, { color: colors.black, opacity: 0.8 }]}>
+            {title}
+          </Text>
           <Entypo
-            name={isOpen ? 'chevron-up' : 'chevron-down'}
-            size={20}
+            name={isOpen ? 'chevron-thin-up' : 'chevron-thin-down'}
+            size={19}
             color={colors.black1}
             style={{
               marginRight: 5,
@@ -107,13 +111,12 @@ const Accordion = ({title, children}) => {
           !isOpen
             ? styles.hidden
             : {
-                marginTop: 10,
-              },
+              marginTop: 10,
+            },
           {
             flex: 1,
             overflow: 'hidden',
             zIndex: 500,
-            // marginBottom: 10,
           },
         ]}>
         {children}
@@ -122,13 +125,29 @@ const Accordion = ({title, children}) => {
   );
 };
 
-const Reviewcomponent = ({Nmae}) => {
+const Reviewcomponent = ({ Nmae, stars }) => {
+  var mystars = [];
+
+  for (let i = 0; i < stars; i++) {
+    mystars.push(
+      <View key={i}>
+        <FontAwesome
+          name="star"
+          size={17}
+          color={colors.color1}
+          style={{
+            marginHorizontal: 2,
+          }}
+        />
+      </View>
+    );
+  }
   return (
     <View
       style={{
         marginVertical: 10,
       }}>
-      <Hstack between>
+      <Hstack between centered>
         <Hstack>
           <View
             style={{
@@ -153,55 +172,17 @@ const Reviewcomponent = ({Nmae}) => {
           </View>
           <View>
             <Text
-              style={{
-                fontSize: 22,
-                fontWeight: '800',
-                fontFamily: 'Roboto',
-                color: colors.black3,
-              }}>
+              style={[{
+                // fontSize: 22,
+                // fontWeight: '800',
+                // fontFamily: 'Roboto',
+                color: colors.black,
+
+              }, topText]}>
               {Nmae ? Nmae : ' Lorem Ipsum'}
             </Text>
             <Hstack>
-              <AntDesign
-                name="star"
-                size={15}
-                color={colors.color1}
-                style={{
-                  marginHorizontal: 2,
-                }}
-              />
-              <AntDesign
-                name="star"
-                size={15}
-                color={colors.color1}
-                style={{
-                  marginHorizontal: 2,
-                }}
-              />
-              <AntDesign
-                name="star"
-                size={15}
-                color={colors.color1}
-                style={{
-                  marginHorizontal: 2,
-                }}
-              />
-              <AntDesign
-                name="star"
-                size={15}
-                color={colors.color1}
-                style={{
-                  marginHorizontal: 2,
-                }}
-              />
-              <AntDesign
-                name="star"
-                size={15}
-                color={colors.color1}
-                style={{
-                  marginHorizontal: 2,
-                }}
-              />
+              {mystars}
             </Hstack>
           </View>
         </Hstack>
@@ -234,18 +215,19 @@ const Reviewcomponent = ({Nmae}) => {
   );
 };
 
-const {height: SCREEN_HEIGHT} = Dimensions.get('window');
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
 const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
-const Points = ({text, nodot}) => {
+const Points = ({ text, nodot }) => {
   return (
     <Hstack
       styles={{
         marginBottom: 10,
-        marginHorizontal: 10,
+        // marginHorizontal: 10,
+        marginTop: 10,
       }}>
       <View
         style={[
@@ -255,27 +237,24 @@ const Points = ({text, nodot}) => {
             backgroundColor: '#ffffff00',
             margin: 10,
             marginTop: 8,
+            marginLeft: 0,
           },
           !nodot && {
             backgroundColor: colors.black3,
             width: 5,
-            marginLeft: 15,
+            marginLeft: 5,
           },
         ]}
       />
       <Text
         style={[
           {
-            maxWidth: '85%',
-            // marginRight: 40,
+            maxWidth: '90%',
             lineHeight: 22,
-            fontSize: 17,
-            fontWeight: '600',
-            fontFamily: 'Roboto',
-            color: colors.black3,
-            // backgroundColor: 'green',
-            // flex: 1,
+            color: colors.black,
+            opacity: 0.7,
           },
+          h2,
         ]}>
         {text ? text : '214'}
       </Text>
@@ -283,7 +262,7 @@ const Points = ({text, nodot}) => {
   );
 };
 
-const Aboutexplore = ({children, title}) => {
+const Aboutexplore = ({ children, title }) => {
   return (
     <Hstack
       centered
@@ -302,7 +281,13 @@ const Aboutexplore = ({children, title}) => {
           {
             marginLeft: 10,
           },
-          styles.Abouttext,
+          {
+            maxWidth: '90%',
+            lineHeight: 22,
+            color: colors.black,
+            opacity: 0.7,
+          },
+          h2,
         ]}>
         {title ? title : null}
       </Text>
@@ -310,24 +295,27 @@ const Aboutexplore = ({children, title}) => {
   );
 };
 
-const Renderitem = ({rating, title, Costings, Reviewcount}) => {
+const Renderitem = ({ rating, title, Costings, Reviewcount }) => {
   return (
     <View
       style={{
-        padding: 10,
+        // padding: 10,
         backgroundColor: colors.white3,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 29,
+        // borderTopLeftRadius: 20,
+        // borderTopRightRadius: 29,
         // marginTop: -10,
         // position: 'absolute',
         position: 'relative',
         flex: 1,
+        marginTop: 10,
+        // maxWidth: '90%',
       }}>
-      <View>
-        <Customheader
+      <View style={{ padding: 15 }}>
+        <Detailsheader
           title={title}
           styles={{
             fontSize: 23,
+            maxWidth: '90%',
           }}
         />
         <Hstack
@@ -335,36 +323,46 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
           between
           styles={[
             {
-              marginVertical: 15,
+              marginVertical: 10,
               marginLeft: 10,
-
+              marginBottom: 15,
               // width:images
             },
           ]}>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: '700',
-              fontFamily: 'Roboto',
-              color: colors.black,
-              // maxWidth: images - 20,
-              // backgroundColor: 'green' Category
-            }}>
-            ${Costings ? Costings : 28}
-          </Text>
+          <Hstack centered>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: 'Roboto-Medium',
+                color: colors.black,
+                opacity: 0.7
+              }}>
+              $
+            </Text>
+            <Text
+              style={{
+                fontSize: 18,
+                fontFamily: 'Inter-SemiBold',
+                color: colors.black,
+                opacity: 0.7,
+              }}>
+              {Costings ? Costings : '25'}
+            </Text>
+          </Hstack>
           <Hstack centered styles={{}}>
             <Text
               style={{
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: '700',
                 fontFamily: 'Roboto',
                 color: colors.color1,
               }}>
               4.3
             </Text>
-            <AntDesign
+
+            <FontAwesome
               name="star"
-              size={11}
+              size={12}
               color={colors.color1}
               style={{
                 marginHorizontal: 2,
@@ -372,41 +370,81 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
             />
             <Text
               style={{
-                fontSize: 14,
-                fontWeight: '500',
-                fontFamily: 'Roboto',
-                color: colors.black4,
+                fontSize: 16,
+                fontFamily: 'Inter-Regular',
+                color: colors.black2,
+                opacity: 0.7,
               }}>
-              {Reviewcount}k
+              ({Reviewcount ? Reviewcount : 9})
             </Text>
           </Hstack>
         </Hstack>
         <Aboutexplore title="Skip the line and save time">
-          <MaterialCommunityIcons name="run" size={20} color={colors.black4} />
+          <MaterialCommunityIcons
+            name="run"
+            style-={{
+              color: colors.black,
+              opacity: 0.4,
+            }}
+            size={20}
+            color={colors.black4}
+          />
         </Aboutexplore>
         <Aboutexplore title="Show tickets on your phone">
-          <Feather name="smartphone" size={20} color={colors.black4} />
+          <Feather
+            name="smartphone"
+            style={{
+              color: colors.black,
+              opacity: 0.4,
+            }}
+            size={20}
+            color={colors.black}
+          />
         </Aboutexplore>
         <Aboutexplore title="Instant Confirmation">
-          <Ionicons name="flash-outline" size={20} color={colors.black4} />
+          <Ionicons
+            name="flash-outline"
+            style={{
+              color: colors.black,
+              opacity: 0.4,
+            }}
+            size={20}
+            color={colors.black}
+          />
         </Aboutexplore>
         <Aboutexplore title="Free Cancillation">
           <Ionicons
             name="shield-checkmark-outline"
+            style={{
+              color: colors.black,
+              opacity: 0.5,
+            }}
             size={18}
-            color={colors.black4}
+            color={colors.black}
           />
         </Aboutexplore>
         <Aboutexplore title="Flexible Hours">
-          <Feather name="clock" size={20} color={colors.black4} />
+          <Feather
+            name="clock"
+            style={{
+              color: colors.black,
+              opacity: 0.4,
+            }}
+            size={17}
+            color={colors.black4}
+          />
         </Aboutexplore>
         <Hline />
         <Text
           style={[
             {
+              maxWidth: '90%',
+              lineHeight: 22,
+              color: colors.black,
+              opacity: 0.7,
               marginHorizontal: 10,
             },
-            styles.Abouttext,
+            h2,
           ]}>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -458,7 +496,7 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
         <Accordion title="Ratings & Reviews">
           <View
             style={{
-              marginHorizontal: 15,
+              // marginHorizontal: 15,
             }}>
             <View>
               <Hstack between centered styles={{}}>
@@ -472,7 +510,7 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
                     }}>
                     4.3
                   </Text>
-                  <AntDesign
+                  <FontAwesome
                     name="star"
                     size={21}
                     color={colors.color1}
@@ -492,8 +530,8 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
                 </Text>
               </Hstack>
 
-              <Reviewcomponent Nmae="Daria Borntrager" />
-              <Reviewcomponent Nmae="Dona mason" />
+              <Reviewcomponent stars="4" Nmae="Daria Borntrager" />
+              {/* <Reviewcomponent star="2" Nmae="Dona mason" /> */}
             </View>
           </View>
         </Accordion>
@@ -501,18 +539,24 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
         <Hline />
       </View>
 
-      <Customheader nested title="Where?" />
+      <Customheader
+        innerTexts
+        style={{
+          marginTop: 0,
+        }}
+        title="Where?"
+      />
 
       <View
         style={{
-          marginHorizontal: 10,
+          marginHorizontal: 20,
           overflow: 'hidden',
         }}>
         <Cayntext
-          text="Museum of Modern Art 11 West 53rd street"
+          text="34 E 42nd street"
           left
           style={{
-            marginVertical: 10,
+            margiottom: 10,
           }}>
           <Ionicons
             // onPress={() => navigation.goBack()}
@@ -565,38 +609,41 @@ const Renderitem = ({rating, title, Costings, Reviewcount}) => {
           />
         </ScrollView>
       </View>
+      <View style={{
 
-      <TouchableOpacity
-        style={{
-          // position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: colors.primary,
-          zIndex: 600,
-          flex: 1,
-          height: 50,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 10,
-        }}>
-        <Text
+        padding: 10,
+        backgroundColor: colors.white
+      }}>
+        <TouchableOpacity
           style={{
-            fontSize: 16,
-            fontWeight: '600',
-            fontFamily: 'Roboto',
-            color: colors.white,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: colors.primary,
+            zIndex: 600,
+            flex: 1,
+            height: 50,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+            margin: 10,
+
           }}>
-          Check Availability
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={[{
+              color: colors.white,
+            }, h1]}>
+            Check Availability
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
-export default function Exploredetails({route}) {
+export default function Exploredetails({ route }) {
   // const { itemId } =  route.params;
-  const {title, Reviewcount, Costings} = route?.params;
+  const { title, Reviewcount, Costings } = route?.params;
 
   // const { title } = route?.params;
   // console.log(title)
@@ -703,6 +750,7 @@ export const styles = StyleSheet.create({
     height: (imageWidth * 9) / 16,
     width: imageWidth,
     alignSelf: 'center',
+    marginTop: 10,
   },
   hidden: {
     height: 0,
@@ -712,8 +760,9 @@ export const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: 17,
-    fontWeight: '700',
+    // fontWeight: '700',
     fontFamily: 'Roboto',
-    color: '#000000',
+    // color: '#000000',
+    ...innerText,
   },
 });

@@ -56,7 +56,6 @@ export default function Categoriesdetails({route}) {
   }, []);
   const [Active, setActive] = useState(Object.values(Categoriesdata)[0].title);
 
-  console.log(Object.values(Categoriesdata)[0].title);
   return (
     <>
       {!show && show ? (

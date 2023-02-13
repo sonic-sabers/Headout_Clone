@@ -97,12 +97,12 @@ export default function Explorestack({navigation}) {
           headerLeft: () => (
             <Entypo
               onPress={() => navigation.dispatch(popAction)}
-              // name="chevron-left"
               name="chevron-thin-left"
-              size={28}
-              color={colors.black4}
+              size={16.5}
+              color={colors.black}
               style={{
-                marginLeft: 6,
+                opacity: 0.6,
+                marginLeft: 15,
               }}
             />
           ),
@@ -132,10 +132,11 @@ export default function Explorestack({navigation}) {
               onPress={() => navigation.navigate('Explorescreen')}
               // name="chevron-left"
               name="chevron-thin-left"
-              size={28}
-              color={colors.black4}
+              size={16.5}
+              color={colors.black}
               style={{
-                marginLeft: 6,
+                opacity: 0.6,
+                marginLeft: 15,
               }}
             />
           ),
@@ -163,11 +164,11 @@ export default function Explorestack({navigation}) {
               onPress={() => navigation.navigate('Explorescreen')}
               // name="chevron-left"
               name="chevron-thin-left"
-              
-              size={28}
-              color={colors.black4}
+              size={16.5}
+              color={colors.black}
               style={{
-                marginLeft: 6,
+                opacity: 0.6,
+                marginLeft: 15,
               }}
             />
           ),

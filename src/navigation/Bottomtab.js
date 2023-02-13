@@ -1,13 +1,9 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-import {Text, View, Dimensions} from 'react-native';
-import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
-} from '@react-navigation/native';
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  Categoriesscreen,
-  Explorescreen,
   Explorestack,
   Searchscreen,
   Profilescreen,
@@ -18,9 +14,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../constants';
-
-let dimensions = Dimensions.get('window');
-let imageHeight = Math.round((dimensions.width * 768) / 120);
 
 const Tab = createBottomTabNavigator();
 export default function Bottomtab() {
@@ -39,7 +32,6 @@ export default function Bottomtab() {
           alignSelf: 'center',
           borderTopStartRadius: 5,
           borderTopEndRadius: 5,
-
           shadowColor: '#000',
           shadowOffset: {
             width: 0,
@@ -125,7 +117,7 @@ export default function Bottomtab() {
         options={{
           tabBarLabel: 'Search',
 
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({color}) => (
             <AntDesign name="search1" color={color} size={18} />
           ),
         }}
@@ -135,7 +127,7 @@ export default function Bottomtab() {
         component={Profilescreen}
         options={{
           tabBarLabel: 'Account',
-          tabBarIcon: ({color, size, focused}) =>
+          tabBarIcon: ({color, focused}) =>
             focused ? (
               <MaterialCommunityIcons name="account" color={color} size={20} />
             ) : (
@@ -150,3 +142,192 @@ export default function Bottomtab() {
     </Tab.Navigator>
   );
 }
+
+// import React from 'react';
+// import {
+//   Alert,
+//   Animated,
+//   StyleSheet,
+//   TouchableOpacity,
+//   View,
+//   Text,
+// } from 'react-native';
+// import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+// import AntDesign from 'react-native-vector-icons/AntDesign';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import {NavigationContainer} from '@react-navigation/native';
+
+// const Customcomponent = () => {
+//   return <View style={{backgroundColor: '#BFEFFF', flex: 1}} />;
+// };
+
+// // export const tabBar = () => {
+// export default function Bottomtab() {
+//   const _renderIcon = (routeName, selectedTab) => {
+//     let icon = '';
+//     let iconcategory = '';
+
+//     console.log('routeName === selectedTab', routeName === selectedTab);
+//     switch (routeName) {
+//       case 'Explore':
+//         icon = 'compass';
+//         iconcategory = 'Ionicons';
+//         break;
+//       case 'Categories':
+//         icon = 'settings-outline';
+//         iconcategory = 'Ionicons';
+//         break;
+//       case 'Search':
+//         icon = 'search1';
+//         iconcategory = 'AntDesign';
+//         break;
+//       case 'Account':
+//         icon = 'account';
+//         iconcategory = 'MaterialCommunityIcons';
+//         break;
+//     }
+
+//     return (
+//       <View style={{height: 50}}>
+//         {iconcategory == 'Ionicons' && (
+//           <Ionicons
+//             name={icon}
+//             size={25}
+//             color={routeName === selectedTab ? 'black' : 'green'}
+//           />
+//         )}
+//         {iconcategory == 'AntDesign' && (
+//           <AntDesign
+//             name={icon}
+//             size={25}
+//             color={routeName === selectedTab ? 'black' : 'green'}
+//           />
+//         )}
+//         {iconcategory == 'MaterialCommunityIcons' && (
+//           <MaterialCommunityIcons
+//             name={icon}
+//             size={25}
+//             color={routeName === selectedTab ? 'black' : 'green'}
+//           />
+//         )}
+//         <Text
+//           style={{
+//             fontSize: 20,
+//             fontWeight: '400',
+//             fontFamily: 'Roboto',
+//             color: '#000',
+//           }}>
+//           text
+//         </Text>
+//       </View>
+//     );
+//   };
+//   const renderTabBar = ({routeName, selectedTab, navigate}: any) => {
+//     return (
+//       <TouchableOpacity
+//         onPress={() => navigate(routeName)}
+//         style={{
+//           flex: 1,
+//           alignItems: 'center',
+//           justifyContent: 'center',
+//         }}>
+//         {_renderIcon(routeName, selectedTab)}
+//       </TouchableOpacity>
+//     );
+//   };
+
+//   return (
+//     <View style={{flex: 1}}>
+//       <NavigationContainer independent>
+//         <CurvedBottomBar.Navigator
+//           type="UP"
+//           // style={styles.bottomBar}
+//           strokeWidth={0.5}
+//           strokeColor="#DDDDDD"
+//           height={55}
+//           circleWidth={55}
+//           bgColor="white"
+//           initialRouteName="Explore"
+//           // borderTopLeftRight
+//           renderCircle={({selectedTab, navigate}) => (
+//             <Animated.View style={styles.btnCircleUp}>
+//               <TouchableOpacity
+//                 style={{
+//                   flex: 1,
+//                   justifyContent: 'center',
+//                 }}
+//                 onPress={() => Alert.alert('Click Action')}>
+//                 <Ionicons name={'apps-sharp'} color="gray" size={25} />
+//               </TouchableOpacity>
+//             </Animated.View>
+//           )}
+//           tabBar={renderTabBar}>
+//           <CurvedBottomBar.Screen
+//             name="Explore"
+//             position="LEFT"
+//             component={Customcomponent}
+//           />
+//           <CurvedBottomBar.Screen
+//             name="Categories"
+//             position="LEFT"
+//             // component={() => (
+//             //   <View style={{ backgroundColor: '#BFEFFF', flex: 1 }} />
+//             // )}
+//             component={Customcomponent}
+//           />
+//           <CurvedBottomBar.Screen
+//             name="Search"
+//             component={Customcomponent}
+//             position="RIGHT"
+//           />
+//           <CurvedBottomBar.Screen
+//             name="Account"
+//             component={Customcomponent}
+//             position="RIGHT"
+//           />
+//         </CurvedBottomBar.Navigator>
+//       </NavigationContainer>
+//     </View>
+//   );
+// }
+
+// export const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 20,
+//   },
+//   button: {
+//     marginVertical: 5,
+//   },
+//   bottomBar: {
+//     backgroundColor: 'red',
+//     borderRadius: 20,
+//   },
+//   btnCircleUp: {
+//     width: 60,
+//     height: 60,
+//     borderRadius: 30,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     backgroundColor: '#E8E8E8',
+//     bottom: 18,
+//     shadowColor: '#000',
+//     shadowOffset: {
+//       width: 0,
+//       height: 1,
+//     },
+//     shadowOpacity: 0.2,
+//     shadowRadius: 1.41,
+//     elevation: 1,
+//   },
+//   imgCircle: {
+//     width: 30,
+//     height: 30,
+//     tintColor: 'gray',
+//   },
+//   img: {
+//     width: 30,
+//     height: 30,
+//   },
+// });

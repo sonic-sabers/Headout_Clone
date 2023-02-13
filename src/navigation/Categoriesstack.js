@@ -103,7 +103,6 @@ export default function Categoriesstack({navigation}) {
               color={colors.black}
               style={{
                 opacity: 0.6,
-                // marginHorizontal: 2, ExploreAll
                 marginLeft: 15,
               }}
             />
@@ -142,7 +141,6 @@ export default function Categoriesstack({navigation}) {
               color={colors.black}
               style={{
                 opacity: 0.6,
-                // marginHorizontal: 2, ExploreAll
                 marginLeft: 15,
               }}
             />

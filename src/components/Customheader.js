@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Hstack from './Hstack';
 import { colors } from '../constants';
-import { topText } from '../assets/fontStyles';
+import { topText,innerText } from '../assets/fontStyles';
 
 const Customheader = ({
   title,
@@ -21,6 +21,7 @@ const Customheader = ({
   size,
   styles,
   account,
+  innerTexts,
 }) => {
   const navigation = useNavigation();
   let details = 'details';
@@ -53,6 +54,7 @@ const Customheader = ({
             fontSize: 15,
           },
           styles,
+          innerTexts && innerText,
         ]}>
         {title ? title : 'Title'}
       </Text>

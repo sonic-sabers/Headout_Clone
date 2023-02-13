@@ -23,10 +23,11 @@ export const Hline = () => {
       style={{
         backgroundColor: colors.black5,
         // flex: 1,
-        height: 0.8,
+        height: 1,
         borderRadius: 30,
-        marginVertical: 20,
-        marginHorizontal: 25,
+        marginVertical: 15,
+        marginHorizontal: 10,
+        opacity: 0.5
         // marginTop: 20,
       }}
     />
