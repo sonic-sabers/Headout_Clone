@@ -148,12 +148,6 @@ export default function Categoriesstack({navigation}) {
         }}
         component={Alertscreen}
       />
-
-      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
-      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
-      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
-      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
-      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
     </Stack.Navigator>
   );
 }

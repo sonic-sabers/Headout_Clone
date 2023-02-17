@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {Image} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // import StackN from './src/navigator/Navigation';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   Explorescreen,
   ExploreAll,
@@ -12,8 +12,8 @@ import {
 } from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {colors} from '../constants';
-import {StackActions} from '@react-navigation/native';
+import { colors } from '../constants';
+import { StackActions } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
 let Logo1 = 105;
@@ -33,16 +33,16 @@ export const Myheaderleft = () => {
     />
   );
 };
-export const MyheaderRight = ({nested}) => {
+export const MyheaderRight = ({ nested }) => {
   const navigation = useNavigation();
   return (
     <Ionicons
       onPress={() =>
         nested
           ? navigation.navigate('Explorestack', {
-              screen: 'Alertscreen',
-              from: nested,
-            })
+            screen: 'Alertscreen',
+            from: nested,
+          })
           : navigation.navigate('Alertscreen')
       }
       name="help-circle-outline"
@@ -55,8 +55,10 @@ export const MyheaderRight = ({nested}) => {
   );
 };
 
-export default function Explorestack({navigation}) {
+export default function Explorestack({ }) {
   const popAction = StackActions.pop(1);
+  const navigation = useNavigation();
+
   return (
     <Stack.Navigator screenOptions={{}}>
       <Stack.Screen

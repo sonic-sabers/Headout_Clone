@@ -651,7 +651,7 @@ export default function Exploredetails({ route }) {
   const [show, setShow] = React.useState(false);
   const [dataRestored, setDataRestored] = React.useState(false);
   const delay = 1;
-
+  const navigation = useNavigation();
   const ratio = 120 / 786;
   const logowidth = dimensions.width / 2;
   React.useEffect(() => {
@@ -660,6 +660,18 @@ export default function Exploredetails({ route }) {
       clearTimeout(timer1);
     };
   }, []);
+
+  useEffect(() => {
+    navigation.getParent()?.setOptions({
+      tabBarStyle: {
+        display: 'none',
+      },
+    });
+    return () =>
+      navigation.getParent()?.setOptions({
+        tabBarStyle: undefined,
+      });
+  }, [navigation]);
   let rating = '4k';
   return (
     <>

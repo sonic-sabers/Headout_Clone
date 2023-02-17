@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Image,
   Text,
@@ -75,7 +75,17 @@ export const Headercomponent = () => {
 export default function Explorescreen() {
   const [text, onChangeText] = React.useState('');
   const navigation = useNavigation();
-
+  useEffect(() => {
+    navigation.getParent()?.setOptions({
+      tabBarStyle: {
+        display: 'none',
+      },
+    });
+    return () =>
+      navigation.getParent()?.setOptions({
+        tabBarStyle: undefined,
+      });
+  }, [navigation]);
   return (
     <View
       style={{
