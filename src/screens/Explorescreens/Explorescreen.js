@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   Text,
@@ -10,10 +10,9 @@ import {
   ScrollView,
   ImageBackground,
   Dimensions,
-  Pressable,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {colors} from '../../constants';
+import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../constants';
 import {
   Customheader,
   ExperienceComponent,
@@ -23,7 +22,7 @@ import {
 
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {innerText} from '../../assets/fontStyles';
+import { innerText } from '../../assets/fontStyles';
 
 let dimensions = Dimensions.get('window');
 let imageWidth = dimensions.width - 30;
@@ -37,55 +36,64 @@ export const Museum3 = require('../../assets/Image/Museum3.png');
 export const Glass = require('../../assets/Image/Glass.png');
 export const Helicopter = require('../../assets/Image/Helicopter.png');
 export const NewYork = require('../../assets/Image/NewYork.png');
+export const Liberty = require('../../assets/Image/Liberty.png');
 
-export const Headercomponent = () => {
-  return (
-    <Hstack
-      centered
-      between
-      styles={{
-        padding: 10,
-        backgroundColor: colors.white,
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
+// export const Headercomponent = () => {
+//   return (
+//     <Hstack
+//       centered
+//       between
+//       styles={{
+//         padding: 10,
+//         backgroundColor: colors.white,
+//         shadowColor: '#000',
+//         shadowOffset: {
+//           width: 0,
+//           height: 1,
+//         },
+//         shadowOpacity: 0.22,
+//         shadowRadius: 2.22,
 
-        elevation: 3,
-        paddingLeft: 15,
-        height: 50,
-      }}>
-      <Image
-        source={require('../../assets/Image/Logo.png')}
-        style={{
-          width: Logo1,
-          height: (Logo1 * 120) / 768,
-          zIndex: 300,
-          marginTop: 5,
-        }}
-      />
-      <Ionicons name="help-circle-outline" size={20} color={colors.black4} />
-    </Hstack>
-  );
-};
+//         elevation: 3,
+//         paddingLeft: 15,
+//         height: 50,
+//       }}>
+//       <Image
+//         source={require('../../assets/Image/Logo.png')}
+//         style={{
+//           width: Logo1,
+//           height: (Logo1 * 120) / 768,
+//           zIndex: 300,
+//           marginTop: 5,
+//         }}
+//       />
+//       <Ionicons name="help-circle-outline" size={20} color={colors.black4} />
+//     </Hstack>
+//   );
+// };
 
-export default function Explorescreen() {
-  const [text, onChangeText] = React.useState('');
+export default function Explorescreen(route) {
+
+  // const { City } = route?.params;
+  const [text, onChangeText] = useState('');
+  const [City, onChangeCity] = useState('New York');
   const navigation = useNavigation();
+  const [onLoad, setOnLoad] = useState(true);
   useEffect(() => {
-    navigation.getParent()?.setOptions({
-      tabBarStyle: {
-        display: 'none',
-      },
-    });
-    return () =>
-      navigation.getParent()?.setOptions({
-        tabBarStyle: undefined,
-      });
-  }, [navigation]);
+    const CurrentCity = route?.route?.params?.City;
+    console.log('City', CurrentCity);
+    onChangeCity(CurrentCity?.length ? CurrentCity : 'New York');
+    // if (!initialRef.current) {
+    setOnLoad(false);
+    //   return;
+    // }
+    // setInterval(() => {
+    //   setOnLoad(false);
+    // }, 1000);
+    // initialRef.current = false;
+    // console.log('123');
+  }, []);
+
   return (
     <View
       style={{
@@ -94,6 +102,7 @@ export default function Explorescreen() {
       }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
+        scrollEnabled={!onLoad}
         contentContainerStyle={{
           paddingBottom: 40,
         }}
@@ -109,8 +118,24 @@ export default function Explorescreen() {
             style={{
               overflow: 'hidden',
             }}>
+            {/* {onLoad ? (
+              <SkeletonPlaceholder>
+                <View
+                  style={{
+                    // alignSelf: 'center',
+                    width: imageWidth,
+                    height: (imageWidth * 600) / 527,
+                    marginTop: 20,
+                    borderRadius: 15,
+                    // flex: 1,
+                    // padding: 35,
+                    marginLeft: 10,
+                  }}
+                />
+              </SkeletonPlaceholder>
+            ) : ( */}
             <ImageBackground
-              source={require('../../assets/Image/Liberty.png')}
+              source={City === 'New York' ? Liberty : Museum2}
               style={{
                 alignSelf: 'center',
                 width: imageWidth,
@@ -123,12 +148,13 @@ export default function Explorescreen() {
                 borderRadius: 15,
               }}
               resizeMode="cover">
-              <Text style={[innerText, {color: colors.white}]}>
-                New York's best experiences are waiting for you
+              <Text style={[innerText, { color: colors.white }]}>
+                {City}'s best experiences are waiting for you
               </Text>
             </ImageBackground>
+            {/* )} */}
           </View>
-          <Pressable onPress={() => navigation.navigate('Search')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
             <Hstack
               styles={{
                 height: 50,
@@ -178,11 +204,12 @@ export default function Explorescreen() {
                 <Feather name="search" size={20} color={colors.white} />
               </TouchableOpacity>
             </Hstack>
-          </Pressable>
+          </TouchableOpacity>
         </View>
-        <Customheader title="Top Experience in New York" />
+        <Customheader title="Top Experience in" City={City} />
         <ScrollView
           horizontal
+          // scrollEnabled={!onLoad}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             color: colors.color2,
@@ -192,13 +219,6 @@ export default function Explorescreen() {
             marginBottom: 25,
           }}>
           <ExperienceComponent
-            free
-            title="Tickets to Edge Observation Deck"
-            Category="Edge Observation Deck Tickets"
-            rate="40.82"
-            reviewcount="29"
-          />
-          <ExperienceComponent
             img={Glass}
             title="SUMMIT One Vanderbilt Tickets"
             Category="Summit One Vanderbilt"
@@ -206,6 +226,15 @@ export default function Explorescreen() {
             discount="10"
             reviewcount="128"
             free
+            onLoad={onLoad}
+          />
+          <ExperienceComponent
+            free
+            title="Tickets to Edge Observation Deck"
+            Category="Edge Observation Deck Tickets"
+            rate="40.82"
+            reviewcount="29"
+            onLoad={onLoad}
           />
 
           <ExperienceComponent
@@ -215,6 +244,7 @@ export default function Explorescreen() {
             rate="44"
             discount="10"
             reviewcount="443"
+            onLoad={onLoad}
           />
           <ExperienceComponent
             img={Museum2}
@@ -248,7 +278,8 @@ export default function Explorescreen() {
             style={{
               marginTop: 5,
             }}
-            title="Top Attractions in New York"
+            title="Top Attractions in"
+            City={City}
           />
           <ScrollView
             horizontal
@@ -485,12 +516,13 @@ export default function Explorescreen() {
           </ScrollView>
         </View>
         <View>
-          <Customheader title="Cruises in New York" />
+          <Customheader title="Cruises in" City={City} />
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={{
               paddingHorizontal: 25,
+              paddingBottom: 100,
             }}>
             <ExperienceComponent
               free

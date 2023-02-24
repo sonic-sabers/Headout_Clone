@@ -8,22 +8,23 @@ import Hstack from './Hstack';
 
 const Topattractions = props => {
   const navigation = useNavigation();
-  const { nested, details, Categoriesdetails, title, price } = props;
+  const { nested, details, Categoriesdetails, title, price, data, style, imageStyle } = props;
+  // console.log('data', data);
   return (
     <Pressable
+      style={style}
       onPress={() =>
         Categoriesdetails
           ? navigation.navigate('Categoriesall', {
-            itemId: 86,
             otherParam: 'anything you want here',
             details,
           })
           : nested
-            ? navigation.navigate('Explorestack', {
+            ? navigation.navigate('Explore', {
               screen: 'ExploreAll',
               params: { itemId: 120, details },
             })
-            : // navigation.navigate('ExploreAll',{itemId: 120 })
+            :
             navigation.push('ExploreAll', {
               itemId: 86,
               otherParam: 'anything you want here',
@@ -32,12 +33,12 @@ const Topattractions = props => {
       }>
       <Image
         source={require('../assets/Image/NewYork.png')}
-        style={{
+        style={[{
           width: 150,
           height: 220,
           borderRadius: 3,
           marginRight: 15,
-        }}
+        }, imageStyle]}
       />
       <Text
         style={[
@@ -83,7 +84,7 @@ const Topattractions = props => {
             opacity: 0.85,
             maxWidth: 200,
           }}>
-         {price ? price : 94}
+          {price ? price : 94}
         </Text>
       </Hstack>
     </Pressable>

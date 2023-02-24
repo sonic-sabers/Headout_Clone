@@ -1,5 +1,6 @@
 export { default as Explorescreen } from './Explorescreens/Explorescreen';
 export { default as Categoriesscreen } from './Categoriesscreens/Categoriesscreen';
+export { default as Seeall } from './Categoriesscreens/Seeall';
 export { default as Explorestack } from '../navigation/Explorestack';
 export { default as Bottomtab } from '../navigation/Bottomtab';
 export { default as Categoriesstack } from '../navigation/Categoriesstack';

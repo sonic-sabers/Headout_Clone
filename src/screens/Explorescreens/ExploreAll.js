@@ -1,13 +1,16 @@
+/* eslint-disable no-sparse-arrays */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import { colors } from '../../constants';
 import {
   ExperienceComponent,
   Customheader,
   Loadingscreen,
+  Hstack,
 } from '../../components';
-import * as Exploredetails from './Exploredetails';
+import Entypo from 'react-native-vector-icons/Entypo';
+
 import {
   // Customheader,
   // ExperienceComponent,
@@ -26,10 +29,9 @@ export default function ExploreAll({ route }) {
 
   const [updatedcategories, setUpdatedcategories] = useState(Categoriesdata);
   const [Active, setActive] = useState(Object.values(Categoriesdata)[0].title);
-  React.useEffect(() => {
+  useEffect(() => {
     let timer1 = setTimeout(() => setShow(true), delay * 1000);
     const newFirstElement = { title: 'All', key: '0' };
-
     const newCategoriesdata = [newFirstElement].concat(Categoriesdata); // [ 4, 3, 2, 1 ]
     setUpdatedcategories(newCategoriesdata);
     setActive(Object.values(newCategoriesdata)[0].title);
@@ -50,6 +52,47 @@ export default function ExploreAll({ route }) {
             // paddingHorizontal: 20,
             paddingBottom: 0,
           }}>
+          <View style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 10,
+            marginBottom: 40,
+            // 
+            // flex: 1,
+            width: '95%',
+            // backgroundColor: 'red',
+            zIndex: 400
+          }}>
+            <TouchableOpacity style={{
+              backgroundColor: colors.white,
+              alignSelf: 'center',
+              borderRadius: 4,
+              padding: 6,
+              paddingHorizontal: 10,
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 1,
+              },
+              shadowOpacity: 0.20,
+              shadowRadius: 1.41,
+
+              elevation: 2,
+            }}>
+              <Hstack centered>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    fontFamily: 'Inter-Bold',
+                    color: colors.black2,
+                    marginRight: 4,
+                  }}>
+                  Filter
+                </Text>
+                <Entypo name='sound-mix' size={15} color={colors.black2} />
+              </Hstack>
+            </TouchableOpacity>
+          </View>
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{
@@ -62,13 +105,18 @@ export default function ExploreAll({ route }) {
               flex: 1,
             }}>
             <Text
-              style={[{
-                fontSize: 23,
-                fontFamily: 'Roboto',
-                color: colors.black,
-                paddingHorizontal: 20,
-              }, innerText,
-              !title && { marginLeft: -8 }]}>
+              style={[
+                {
+                  fontSize: 23,
+                  // fontFamily: 'Roboto',
+                  color: colors.black,
+                  paddingHorizontal: 22,
+                  // marginLeft: 52,
+                  marginTop: 20,
+                },
+                innerText,
+                !title && { marginLeft: -8 },
+              ]}>
               {title ? title : ' Broadway Tickets'}
             </Text>
             {title ? (
@@ -133,19 +181,19 @@ export default function ExploreAll({ route }) {
                   }}>
                   {/* Museum of Modern Art(MoMA) Tickets */}
                   Showing 20 experiences
-
                 </Text>
               </>
             ) : (
               <Text
-                style={{
-                  fontSize: 17,
-                  fontWeight: '700',
-                  fontFamily: 'Roboto',
-                  color: colors.black1,
-                  marginTop: 15,
-                  marginLeft: 20,
-                }}>
+                style={[
+                  topText,
+                  {
+                    color: colors.black,
+                    marginTop: 15,
+                    marginLeft: 18,
+                    opacity: 0.75,
+                  },
+                ]}>
                 Explore Options
               </Text>
             )}

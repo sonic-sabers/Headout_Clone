@@ -1,16 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 
 import React from 'react';
-import {
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Entypo from 'react-native-vector-icons/Entypo';
 import Hstack from './Hstack';
 import { colors } from '../constants';
-import { topText,innerText } from '../assets/fontStyles';
+import { topText, innerText } from '../assets/fontStyles';
 
 const Customheader = ({
   title,
@@ -22,6 +19,9 @@ const Customheader = ({
   styles,
   account,
   innerTexts,
+  Categoriesall,
+  home,
+  City,
 }) => {
   const navigation = useNavigation();
   let details = 'details';
@@ -35,6 +35,9 @@ const Customheader = ({
           marginLeft: 15,
         },
         category && {
+          marginLeft: 5,
+        },
+        home && {
           marginLeft: 5,
         },
         style,
@@ -56,22 +59,29 @@ const Customheader = ({
           styles,
           innerTexts && innerText,
         ]}>
-        {title ? title : 'Title'}
+        {title ? title : 'Title'} {City && City}
       </Text>
       {seeall && (
         <TouchableOpacity
           onPress={() =>
-            nested
-              ? navigation.navigate('Explorestack', {
-                screen: 'ExploreAll',
-                params: { itemId: 120, details },
-              })
-              : navigation.push('ExploreAll', {
+            Categoriesall
+              ? navigation.push('Categoriesall', {
                 itemId: 86,
                 otherParam: 'anything you want here',
                 details,
                 title: 'New York Tours',
               })
+              : nested
+                ? navigation.push('Explore', {
+                  screen: 'ExploreAll',
+                  params: { itemId: 120, details },
+                })
+                : navigation.push('Seeall', {
+                  itemId: 86,
+                  otherParam: 'anything you want here',
+                  details,
+                  title: 'New York Tours',
+                })
           }>
           <Hstack centered styles={{}}>
             <Text

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -8,26 +8,39 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import {colors} from '../constants';
-import {Hstack} from '../components';
+import { colors } from '../constants';
+import { Hstack } from '../components';
 
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from '@react-navigation/native';
 
 const Nearbydata = [
-  {City: 'Dubai', Country: 'United Arab Emirates', key: '1'},
-  {City: 'Merida', Country: 'Mexico', key: '2'},
-  {City: 'Muscat', Country: 'Oman', key: '3'},
-  {City: 'Fujairah', Country: 'United Arab Emirates', key: '4'},
-  {City: 'Pattaya', Country: 'Thailand', key: '5'},
-  {City: 'Delhi', Country: 'India', key: '6'},
-  {City: 'Ras Al khaimah', Country: 'United Arab Emirates', key: '7'},
-  {City: 'Malé', Country: 'Maldives', key: '8'},
+  { City: 'Dubai', Country: 'United Arab Emirates', key: '1' },
+  { City: 'New York', Country: 'United States Of America', key: '9' },
+  { City: 'Merida', Country: 'Mexico', key: '2' },
+  { City: 'Muscat', Country: 'Oman', key: '3' },
+  { City: 'Fujairah', Country: 'United Arab Emirates', key: '4' },
+  { City: 'Pattaya', Country: 'Thailand', key: '5' },
+  { City: 'Delhi', Country: 'India', key: '6' },
+  { City: 'Ras Al khaimah', Country: 'United Arab Emirates', key: '7' },
+  { City: 'Malé', Country: 'Maldives', key: '8' },
 ];
 
-const Searchcomonent = ({item}) => {
+const Searchcomonent = ({ items }) => {
+  const { item } = items;
+  const navigation = useNavigation();
+  // console.log('item', item);
+  // let item = new Parse.Object('items');
   return (
-    <TouchableOpacity key={item.key}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('Explore', {
+          screen: 'Explorescreen',
+          params: { City: item.City, Country: item.Country },
+        })
+      }
+      key={item.key} >
       <Hstack
         centered
         key={item.key}
@@ -76,7 +89,7 @@ const Searchcomonent = ({item}) => {
           </Text>
         </View>
       </Hstack>
-    </TouchableOpacity>
+    </TouchableOpacity >
   );
 };
 
@@ -165,7 +178,7 @@ export default function Searchscreen() {
           placeholder="Where are you heading?"
           // onChangeText={onChangeText}
           onChangeText={text => searchFilterFunction(text)}
-          // value={text}
+        // value={text}
         />
       </Hstack>
 
@@ -188,7 +201,7 @@ export default function Searchscreen() {
               data={filteredDataSource}
               ListHeaderComponent={ListHeader}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={Searchcomonent}
+              renderItem={item => <Searchcomonent items={item} />}
               keyboardDismissMode="onDrag"
               decelerationRate="normal"
               keyboardShouldPersistTaps="handled"
