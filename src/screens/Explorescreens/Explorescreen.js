@@ -118,22 +118,7 @@ export default function Explorescreen(route) {
             style={{
               overflow: 'hidden',
             }}>
-            {/* {onLoad ? (
-              <SkeletonPlaceholder>
-                <View
-                  style={{
-                    // alignSelf: 'center',
-                    width: imageWidth,
-                    height: (imageWidth * 600) / 527,
-                    marginTop: 20,
-                    borderRadius: 15,
-                    // flex: 1,
-                    // padding: 35,
-                    marginLeft: 10,
-                  }}
-                />
-              </SkeletonPlaceholder>
-            ) : ( */}
+         
             <ImageBackground
               source={City === 'New York' ? Liberty : Museum2}
               style={{

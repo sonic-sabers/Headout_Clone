@@ -799,7 +799,7 @@ export const styles = StyleSheet.create({
   },
   pagination: {
     position: 'absolute',
-    top: ITEM_HEIGHT - 50,
+    top: ITEM_HEIGHT - 70,
     left: ITEM_WIDTH / 2,
     flexDirection: 'row',
     marginLeft: -30,

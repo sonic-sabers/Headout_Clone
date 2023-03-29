@@ -18,7 +18,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../constants';
 import Hstack from './Hstack';
 import { h1 } from '../assets/fontStyles';
-import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 let images = 315;
 
 export const Museum1 = require('../assets/Image/Museum1.png');
@@ -60,30 +59,6 @@ const ExperienceComponent = props => {
 
   return (
     <View>
-      {onLoad ? (
-        <SkeletonPlaceholder>
-          <View style={{
-            marginTop: 10,
-            borderRadius: 7,
-            marginRight: 10,
-            // height: 40,
-          }}>
-            <View style={{
-              width: images, height: (images * 315) / 504,
-            }} />
-            {/* <View
-              style={{ marginTop: 6, width: 260, height: 20, borderRadius: 5 }}
-            />
-            <View
-              style={{ marginTop: 6, width: 350, height: 70, borderRadius: 10 }}
-            /> */}
-            <View style={{ height: 10, marginTop: 15, width: images, }} />
-            <View style={{ height: 10, marginTop: 15, width: '90%', }} />
-            <View style={{ height: 10, marginTop: 15, width: '50%', }} />
-            <View style={{ height: 10, marginTop: 15, width: '20%', }} />
-          </View>
-        </SkeletonPlaceholder>
-      ) : (
         <Pressable
           onPress={() =>
             navigation.push('Exploredetails', {
@@ -358,7 +333,6 @@ const ExperienceComponent = props => {
             </Hstack>
           </View>
         </Pressable>
-      )}
     </View>
   );
 };
