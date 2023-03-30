@@ -1,33 +1,10 @@
+/* eslint-disable no-sparse-arrays */
 /* eslint-disable react-native/no-inline-styles */
-// import { StyleSheet, Text, View } from 'react-native'
-// import React from 'react'
-
-// export default function Categoriesdetails() {
-//   return (
-//     <View>
-//       <Text>Categoriesdetails</Text>
-//     </View>
-//   )
-// }
-
-// const styles = StyleSheet.create({})
-import React, {Component, useState, useEffect, useRef} from 'react';
-import {
-  StyleSheet,
-  Button,
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  TextInput,
-  ScrollView,
-  Dimensions,
-} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {Text, TouchableOpacity, View, ScrollView} from 'react-native';
 import {colors} from '../../constants';
-import {Hstack, Loadingscreen} from '../../components';
+import {Loadingscreen} from '../../components';
 import * as Exploredetails from '../Explorescreens/Exploredetails';
-import RBSheet from 'react-native-raw-bottom-sheet';
 import {
   ExperienceComponent,
   Glass,
@@ -36,18 +13,13 @@ import {
   Museum3,
 } from '../Explorescreens/Explorescreen';
 import {Categoriesdata} from './Categoriesscreen';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
-let dimensions = Dimensions.get('window');
 
 export default function Categoriesdetails({route}) {
-  const {itemId, details, title} = route?.params;
+  const {title} = route?.params;
   // console.log(itemId, details, title)
   const [show, setShow] = React.useState(false);
-  const [dataRestored, setDataRestored] = React.useState(false);
   const delay = 1;
 
-  const ratio = 120 / 786;
-  const logowidth = dimensions.width / 2;
   React.useEffect(() => {
     let timer1 = setTimeout(() => setShow(true), delay * 1000);
     return () => {
@@ -105,10 +77,7 @@ export default function Categoriesdetails({route}) {
                       // marginLeft: -10,
                     }
                   }>
-                  {Categoriesdata.map((data, index) => {
-                    {
-                      /* console.log(data) */
-                    }
+                  {Categoriesdata.map(data => {
                     return (
                       <TouchableOpacity
                         onPress={() => setActive(data.title)}
@@ -217,5 +186,3 @@ export default function Categoriesdetails({route}) {
     </>
   );
 }
-
-const styles = StyleSheet.create({});

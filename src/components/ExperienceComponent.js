@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+
+import React from 'react';
 import {
   // StyleSheet,
   Text,
@@ -9,15 +9,13 @@ import {
   ImageBackground,
   Pressable,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
-import { colors } from '../constants';
+import {colors} from '../constants';
 import Hstack from './Hstack';
-import { h1 } from '../assets/fontStyles';
+import {h1} from '../assets/fontStyles';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 let images = 315;
 
@@ -47,9 +45,6 @@ const ExperienceComponent = props => {
     reducewidth,
     onLoad,
   } = props;
-  const [itemtitle, setitemtitle] = useState(
-    'Museum of Modern Art(MoMA) Tickets',
-  );
 
   const navigation = useNavigation();
   let imgSource = Museum1;
@@ -62,25 +57,29 @@ const ExperienceComponent = props => {
     <View>
       {onLoad ? (
         <SkeletonPlaceholder>
-          <View style={{
-            marginTop: 10,
-            borderRadius: 7,
-            marginRight: 10,
-            // height: 40,
-          }}>
-            <View style={{
-              width: images, height: (images * 315) / 504,
-            }} />
+          <View
+            style={{
+              marginTop: 10,
+              borderRadius: 7,
+              marginRight: 10,
+              // height: 40,
+            }}>
+            <View
+              style={{
+                width: images,
+                height: (images * 315) / 504,
+              }}
+            />
             {/* <View
               style={{ marginTop: 6, width: 260, height: 20, borderRadius: 5 }}
             />
             <View
               style={{ marginTop: 6, width: 350, height: 70, borderRadius: 10 }}
             /> */}
-            <View style={{ height: 10, marginTop: 15, width: images, }} />
-            <View style={{ height: 10, marginTop: 15, width: '90%', }} />
-            <View style={{ height: 10, marginTop: 15, width: '50%', }} />
-            <View style={{ height: 10, marginTop: 15, width: '20%', }} />
+            <View style={{height: 10, marginTop: 15, width: images}} />
+            <View style={{height: 10, marginTop: 15, width: '90%'}} />
+            <View style={{height: 10, marginTop: 15, width: '50%'}} />
+            <View style={{height: 10, marginTop: 15, width: '20%'}} />
           </View>
         </SkeletonPlaceholder>
       ) : (
@@ -88,7 +87,7 @@ const ExperienceComponent = props => {
           onPress={() =>
             navigation.push('Exploredetails', {
               screenname: 'Explorescreen',
-              title: itemtitle,
+              title,
               reviewcount,
             })
           }
@@ -97,7 +96,7 @@ const ExperienceComponent = props => {
               overflow: 'hidden',
             },
             style,
-            center ? { alignSelf: 'center' } : { marginRight: 15 },
+            center ? {alignSelf: 'center'} : {marginRight: 15},
             reducewidth && {
               width: images + 40,
               alignSelf: 'center',
@@ -117,12 +116,12 @@ const ExperienceComponent = props => {
               },
               center
                 ? {
-                  width: images + 50,
-                  height: ((images + 50) * 315) / 504,
-                }
+                    width: images + 50,
+                    height: ((images + 50) * 315) / 504,
+                  }
                 : {
-                  width: images,
-                },
+                    width: images,
+                  },
               reducewidth && {
                 width: images + 40,
                 height: ((images + 30) * 315) / 504,
@@ -188,7 +187,7 @@ const ExperienceComponent = props => {
                 }}>
                 {Category ? Category : 'Museum of Modern Art(MoMA) Tickets'}
               </Text>
-              <Hstack centered styles={{ marginTop: 5 }}>
+              <Hstack centered styles={{marginTop: 5}}>
                 <Text
                   style={{
                     fontSize: 13,

@@ -630,6 +630,7 @@ const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
 export default function Exploredetails({route}) {
   const {title, Reviewcount, Costings} = route?.params;
 
+  console.log('title', title);
   const [show, setShow] = React.useState(false);
   const delay = 1;
   React.useEffect(() => {
@@ -799,7 +800,7 @@ export const styles = StyleSheet.create({
   },
   pagination: {
     position: 'absolute',
-    top: ITEM_HEIGHT - 50,
+    top: ITEM_HEIGHT - 70,
     left: ITEM_WIDTH / 2,
     flexDirection: 'row',
     marginLeft: -30,

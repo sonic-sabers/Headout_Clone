@@ -1,8 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  Image,
   Text,
   TouchableOpacity,
   View,
@@ -11,8 +10,8 @@ import {
   ImageBackground,
   Dimensions,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { colors } from '../../constants';
+import {useNavigation} from '@react-navigation/native';
+import {colors} from '../../constants';
 import {
   Customheader,
   ExperienceComponent,
@@ -21,14 +20,11 @@ import {
 } from '../../components';
 
 import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { innerText } from '../../assets/fontStyles';
+import {innerText} from '../../assets/fontStyles';
 
 let dimensions = Dimensions.get('window');
 let imageWidth = dimensions.width - 30;
 // let imageHeight = dimensions.height;
-
-let Logo1 = 160;
 
 export const Museum1 = require('../../assets/Image/Museum1.png');
 export const Museum2 = require('../../assets/Image/Museum2.png');
@@ -38,43 +34,7 @@ export const Helicopter = require('../../assets/Image/Helicopter.png');
 export const NewYork = require('../../assets/Image/NewYork.png');
 export const Liberty = require('../../assets/Image/Liberty.png');
 
-// export const Headercomponent = () => {
-//   return (
-//     <Hstack
-//       centered
-//       between
-//       styles={{
-//         padding: 10,
-//         backgroundColor: colors.white,
-//         shadowColor: '#000',
-//         shadowOffset: {
-//           width: 0,
-//           height: 1,
-//         },
-//         shadowOpacity: 0.22,
-//         shadowRadius: 2.22,
-
-//         elevation: 3,
-//         paddingLeft: 15,
-//         height: 50,
-//       }}>
-//       <Image
-//         source={require('../../assets/Image/Logo.png')}
-//         style={{
-//           width: Logo1,
-//           height: (Logo1 * 120) / 768,
-//           zIndex: 300,
-//           marginTop: 5,
-//         }}
-//       />
-//       <Ionicons name="help-circle-outline" size={20} color={colors.black4} />
-//     </Hstack>
-//   );
-// };
-
 export default function Explorescreen(route) {
-
-  // const { City } = route?.params;
   const [text, onChangeText] = useState('');
   const [City, onChangeCity] = useState('New York');
   const navigation = useNavigation();
@@ -83,16 +43,8 @@ export default function Explorescreen(route) {
     const CurrentCity = route?.route?.params?.City;
     console.log('City', CurrentCity);
     onChangeCity(CurrentCity?.length ? CurrentCity : 'New York');
-    // if (!initialRef.current) {
     setOnLoad(false);
-    //   return;
-    // }
-    // setInterval(() => {
-    //   setOnLoad(false);
-    // }, 1000);
-    // initialRef.current = false;
-    // console.log('123');
-  }, []);
+  }, [route?.route?.params?.City]);
 
   return (
     <View
@@ -118,22 +70,6 @@ export default function Explorescreen(route) {
             style={{
               overflow: 'hidden',
             }}>
-            {/* {onLoad ? (
-              <SkeletonPlaceholder>
-                <View
-                  style={{
-                    // alignSelf: 'center',
-                    width: imageWidth,
-                    height: (imageWidth * 600) / 527,
-                    marginTop: 20,
-                    borderRadius: 15,
-                    // flex: 1,
-                    // padding: 35,
-                    marginLeft: 10,
-                  }}
-                />
-              </SkeletonPlaceholder>
-            ) : ( */}
             <ImageBackground
               source={City === 'New York' ? Liberty : Museum2}
               style={{
@@ -148,7 +84,7 @@ export default function Explorescreen(route) {
                 borderRadius: 15,
               }}
               resizeMode="cover">
-              <Text style={[innerText, { color: colors.white }]}>
+              <Text style={[innerText, {color: colors.white}]}>
                 {City}'s best experiences are waiting for you
               </Text>
             </ImageBackground>
