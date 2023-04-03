@@ -92,7 +92,7 @@ export default function Categoriesdetails({route}) {
                             height: 35,
                             borderColor: colors.black4,
                           },
-                          Active == data.title && {
+                          Active === data.title && {
                             backgroundColor: '#ebeaff',
                           },
                           ,
@@ -106,7 +106,7 @@ export default function Categoriesdetails({route}) {
                               color: colors.black4,
                             },
 
-                            Active == data.title && {
+                            Active === data.title && {
                               color: colors.primary,
                             },
                           ]}>
