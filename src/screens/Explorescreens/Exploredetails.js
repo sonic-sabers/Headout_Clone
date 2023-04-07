@@ -646,17 +646,7 @@ const Renderitem = ({title, Costings, Reviewcount}) => {
 const ITEM_WIDTH = width;
 const ITEM_HEIGHT = (width * 315) / 504;
 
-const images = [
-  Glass,
-  Museum1,
-  Museum2,
-  Museum3,
-  // 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128',
-  // 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_1_1.jpg?ts=1606727908993',
-  // 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_3_1.jpg?ts=1606727896369',
-  // 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_2_4_1.jpg?ts=1606727898445',
-  // 'https://static.zara.net/photos///2020/I/1/1/p/6543/610/091/2/w/2460/6543610091_1_1_1.jpg?ts=1606727905128',
-];
+const images = [Glass, Museum1, Museum2, Museum3];
 
 const DOT_SPACING = 8;
 const DOT_SIZE = 8;
