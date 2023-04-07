@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {Text, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import Entypo from 'react-native-vector-icons/Entypo';
 import Hstack from './Hstack';
-import { colors } from '../constants';
-import { topText, innerText } from '../assets/fontStyles';
+import {colors} from '../constants';
+import {topText, innerText} from '../assets/fontStyles';
+import {StyleSheet} from 'react-native';
 
 const Customheader = ({
   title,
@@ -66,17 +67,17 @@ const Customheader = ({
           onPress={() =>
             Categoriesall
               ? navigation.push('Categoriesall', {
-                itemId: 86,
-                otherParam: 'anything you want here',
-                details,
-                title: 'New York Tours',
-              })
-              : nested
-                ? navigation.push('Explore', {
-                  screen: 'ExploreAll',
-                  params: { itemId: 120, details },
+                  itemId: 86,
+                  otherParam: 'anything you want here',
+                  details,
+                  title: 'New York Tours',
                 })
-                : navigation.push('Seeall', {
+              : nested
+              ? navigation.push('Explore', {
+                  screen: 'ExploreAll',
+                  params: {itemId: 120, details},
+                })
+              : navigation.push('Seeall', {
                   itemId: 86,
                   otherParam: 'anything you want here',
                   details,
@@ -112,4 +113,4 @@ const Customheader = ({
 
 export default Customheader;
 
-// const styles = StyleSheet.create({});
+const styles = StyleSheet.create({});

@@ -1,7 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import * as React from 'react';
-// import StackN from './src/navigator/Navigation';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   Alertscreen,
   Categoriesscreen,
@@ -9,30 +8,32 @@ import {
   Exploredetails,
   Seeall,
 } from '../screens';
-import { Myheaderleft, MyheaderRight } from './Explorestack';
+import {Myheaderleft, MyheaderRight} from './Explorestack';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { StackActions } from '@react-navigation/native';
-import { colors } from '../constants';
-import { Pressable } from 'react-native';
+import {StackActions} from '@react-navigation/native';
+import {colors} from '../constants';
+import {Pressable} from 'react-native';
+import {StyleSheet} from 'react-native';
 const Stack = createStackNavigator();
 
-export default function Categoriesstack({ navigation }) {
-  // const navigation = useNavigation();
-
+export default function Categoriesstack({navigation}) {
   const popAction = StackActions.pop(1);
 
   const HeadLeft = () => {
     return (
-      <Entypo
-        onPress={() => navigation.navigate('Categoriesscreen')}
-        name="chevron-thin-left"
-        size={16.5}
-        color={colors.black}
-        style={{
-          opacity: 0.6,
-          marginLeft: 15,
-        }}
-      />
+      <Pressable>
+        <Entypo
+          onPress={() => navigation.navigate('Categoriesscreen')}
+          name="chevron-thin-left"
+          size={16.5}
+          color={colors.black}
+          // color="black"
+          style={{
+            opacity: 0.6,
+            marginLeft: 15,
+          }}
+        />
+      </Pressable>
     );
   };
   return (
@@ -41,17 +42,7 @@ export default function Categoriesstack({ navigation }) {
         name="Categoriesscreen"
         options={{
           headerTitle: props => '',
-          headerStyle: {
-            backgroundColor: colors.white,
-            shadowColor: '#00000050',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-            elevation: 3,
-          },
+          headerStyle: styles.header,
           headerLeft: props => <Myheaderleft {...props} />,
           headerRight: () => <MyheaderRight />,
         }}
@@ -61,20 +52,7 @@ export default function Categoriesstack({ navigation }) {
         name="Categoriesall"
         options={{
           headerTitle: props => '',
-          headerStyle: {
-            backgroundColor: colors.white,
-            shadowColor: '#00000050',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-
-            elevation: 3,
-            // borderBottomWidth: 1,
-            // borderBottomColor: colors.white3
-          },
+          headerStyle: styles.header,
           headerLeft: props => <HeadLeft />,
         }}
         component={ExploreAll}
@@ -83,28 +61,11 @@ export default function Categoriesstack({ navigation }) {
         name="Exploredetails"
         options={{
           headerTitle: props => '',
-          headerStyle: {
-            backgroundColor: colors.white,
-            shadowColor: '#00000050',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-
-            elevation: 3,
-            // borderBottomWidth: 1,
-            // borderBottomColor: colors.white3
-          },
+          headerStyle: styles.header,
 
           headerLeft: props => (
             <Pressable onPress={() => navigation.goBack()}>
               <Entypo
-                // onPress={() => navigation.navigate('Categoriesall', { itemId: 10 })}
-                // onPress={() => navigation.goBack()}
-                // onPress={() => navigation.pop()}
-
                 name="chevron-thin-left"
                 size={16.5}
                 color={colors.black}
@@ -117,31 +78,15 @@ export default function Categoriesstack({ navigation }) {
           ),
           headerRight: () => <MyheaderRight />,
         }}
-        // initialParams={{ itemId: 42 }}
-        // initialParams={{ screenname: 'Explorescreen' }}
         component={Exploredetails}
-      // children={() => <Exploredetails setScreen={setScreen} />}
       />
       <Stack.Screen
         name="Alertscreen"
         options={{
           headerShown: true,
           headerTitle: props => '',
-          headerStyle: {
-            backgroundColor: colors.white,
-            shadowColor: '#00000050',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-
-            elevation: 3,
-            // borderBottomWidth: 1,
-            // borderBottomColor: colors.white3
-          },
-          headerLeft: () => <HeadLeft />,
+          headerStyle: styles.header,
+          headerLeft: props => <HeadLeft />,
         }}
         component={Alertscreen}
       />
@@ -150,20 +95,7 @@ export default function Categoriesstack({ navigation }) {
         options={{
           headerShown: true,
           headerTitle: props => '',
-          headerStyle: {
-            backgroundColor: colors.white,
-            shadowColor: '#00000050',
-            shadowOffset: {
-              width: 0,
-              height: 1,
-            },
-            shadowOpacity: 0.22,
-            shadowRadius: 2.22,
-
-            elevation: 3,
-            // borderBottomWidth: 1,
-            // borderBottomColor: colors.white3
-          },
+          headerStyle: styles.header,
           headerLeft: () => <HeadLeft />,
         }}
         component={Seeall}
@@ -171,3 +103,17 @@ export default function Categoriesstack({ navigation }) {
     </Stack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: colors.white,
+    shadowColor: '#00000050',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 3,
+  },
+});

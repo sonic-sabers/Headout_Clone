@@ -2,7 +2,6 @@
 
 import React from 'react';
 import {
-  // StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -62,7 +61,6 @@ const ExperienceComponent = props => {
               marginTop: 10,
               borderRadius: 7,
               marginRight: 10,
-              // height: 40,
             }}>
             <View
               style={{
@@ -111,7 +109,6 @@ const ExperienceComponent = props => {
                 marginTop: 10,
                 borderRadius: 7,
                 padding: 8,
-                // overflow: 'hidden',
                 zIndex: 600,
               },
               center
@@ -179,7 +176,6 @@ const ExperienceComponent = props => {
               <Text
                 style={{
                   fontSize: 11,
-                  // fontWeight: '500',
                   fontFamily: 'Inter-Medium',
                   color: colors.black2,
                   opacity: 0.8,
@@ -191,7 +187,6 @@ const ExperienceComponent = props => {
                 <Text
                   style={{
                     fontSize: 13,
-                    // fontWeight: '700',
                     fontFamily: 'Inter-SemiBold',
                     color: colors.color1,
                   }}>
@@ -257,7 +252,6 @@ const ExperienceComponent = props => {
                 <Text
                   style={{
                     fontSize: 11,
-                    // fontWeight: '500',
                     fontFamily: 'Inter-Medium',
                     color: colors.black2,
                     opacity: 0.8,
@@ -267,7 +261,6 @@ const ExperienceComponent = props => {
                 <Text
                   style={{
                     fontSize: 11,
-                    // fontWeight: '500',
                     fontFamily: 'Inter-Medium',
 
                     color: colors.black2,
@@ -288,8 +281,6 @@ const ExperienceComponent = props => {
                 <Text
                   style={{
                     fontSize: 15,
-                    // fontWeight: '700',
-                    // fontFamily: 'Inter-SemiBold',
                     fontFamily: 'Roboto-Medium',
 
                     color: colors.black1,
@@ -300,9 +291,7 @@ const ExperienceComponent = props => {
                 <Text
                   style={{
                     fontSize: 15,
-                    // fontWeight: '700',
                     fontFamily: 'Inter-SemiBold',
-                    // fontFamily: 'Roboto',
 
                     color: colors.black1,
                     marginTop: 2,

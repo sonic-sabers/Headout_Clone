@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -8,39 +8,37 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { colors } from '../constants';
-import { Hstack } from '../components';
+import {colors} from '../constants';
+import {Hstack} from '../components';
 
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const Nearbydata = [
-  { City: 'Dubai', Country: 'United Arab Emirates', key: '1' },
-  { City: 'New York', Country: 'United States Of America', key: '9' },
-  { City: 'Merida', Country: 'Mexico', key: '2' },
-  { City: 'Muscat', Country: 'Oman', key: '3' },
-  { City: 'Fujairah', Country: 'United Arab Emirates', key: '4' },
-  { City: 'Pattaya', Country: 'Thailand', key: '5' },
-  { City: 'Delhi', Country: 'India', key: '6' },
-  { City: 'Ras Al khaimah', Country: 'United Arab Emirates', key: '7' },
-  { City: 'Malé', Country: 'Maldives', key: '8' },
+  {City: 'Dubai', Country: 'United Arab Emirates', key: '1'},
+  {City: 'New York', Country: 'United States Of America', key: '9'},
+  {City: 'Merida', Country: 'Mexico', key: '2'},
+  {City: 'Muscat', Country: 'Oman', key: '3'},
+  {City: 'Fujairah', Country: 'United Arab Emirates', key: '4'},
+  {City: 'Pattaya', Country: 'Thailand', key: '5'},
+  {City: 'Delhi', Country: 'India', key: '6'},
+  {City: 'Ras Al khaimah', Country: 'United Arab Emirates', key: '7'},
+  {City: 'Malé', Country: 'Maldives', key: '8'},
 ];
 
-const Searchcomonent = ({ items }) => {
-  const { item } = items;
+const Searchcomonent = ({items}) => {
+  const {item} = items;
   const navigation = useNavigation();
-  // console.log('item', item);
-  // let item = new Parse.Object('items');
   return (
     <TouchableOpacity
       onPress={() =>
         navigation.navigate('Explore', {
           screen: 'Explorescreen',
-          params: { City: item.City, Country: item.Country },
+          params: {City: item.City, Country: item.Country},
         })
       }
-      key={item.key} >
+      key={item.key}>
       <Hstack
         centered
         key={item.key}
@@ -89,7 +87,7 @@ const Searchcomonent = ({ items }) => {
           </Text>
         </View>
       </Hstack>
-    </TouchableOpacity >
+    </TouchableOpacity>
   );
 };
 
@@ -138,6 +136,23 @@ export default function Searchscreen() {
       setFilteredDataSource(masterDataSource);
     }
   };
+  const _listEmptyComponent = () => {
+    return (
+      <View>
+        <Text
+          style={{
+            fontSize: 15,
+            fontWeight: '400',
+            fontFamily: 'Inter-Regular',
+            color: '#000',
+            textAlign: 'center',
+            marginTop: 150,
+          }}>
+          The place you were searching now ,Is not yet availale in this platofmr
+        </Text>
+      </View>
+    );
+  };
 
   return (
     <View
@@ -178,7 +193,7 @@ export default function Searchscreen() {
           placeholder="Where are you heading?"
           // onChangeText={onChangeText}
           onChangeText={text => searchFilterFunction(text)}
-        // value={text}
+          // value={text}
         />
       </Hstack>
 
@@ -214,6 +229,7 @@ export default function Searchscreen() {
                 paddingTop: 10,
                 backgroundColor: colors.white,
               }}
+              ListEmptyComponent={_listEmptyComponent}
             />
           ) : (
             <ActivityIndicator animating color={colors.primary} />

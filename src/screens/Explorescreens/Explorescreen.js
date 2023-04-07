@@ -41,7 +41,6 @@ export default function Explorescreen(route) {
   const [onLoad, setOnLoad] = useState(true);
   useEffect(() => {
     const CurrentCity = route?.route?.params?.City;
-    console.log('City', CurrentCity);
     onChangeCity(CurrentCity?.length ? CurrentCity : 'New York');
     setOnLoad(false);
   }, [route?.route?.params?.City]);
@@ -228,14 +227,31 @@ export default function Explorescreen(route) {
               paddingRight: 20,
               marginTop: 20,
             }}>
-            <Topattractions title="Broadway Tickets" price="46.5" />
-            <Topattractions title="Empire State Building Tickets" price="44" />
+            <Topattractions
+              img={Helicopter}
+              title="Broadway Tickets"
+              price="46.5"
+              // img={Glass}
+            />
+            <Topattractions
+              img={Museum2}
+              title="Empire State Building Tickets"
+              price="44"
+            />
             <Topattractions
               title="One World Obervatory TIckets"
               price="40.82"
             />
-            <Topattractions title="Top of the Rock Tickets" price="74" />
-            <Topattractions title="Statue of Liberty Tickets" price="29" />
+            <Topattractions
+              img={Museum1}
+              title="Top of the Rock Tickets"
+              price="74"
+            />
+            <Topattractions
+              img={Museum3}
+              title="Statue of Liberty Tickets"
+              price="29"
+            />
           </ScrollView>
         </View>
         <View>
@@ -247,7 +263,7 @@ export default function Explorescreen(route) {
               paddingHorizontal: 25,
             }}>
             <ExperienceComponent
-              img={Museum3}
+              img={Museum1}
               Category="Entertainment"
               title="The Lion King"
               rate="99.5"
@@ -310,6 +326,7 @@ export default function Explorescreen(route) {
               rate="40.82"
               reviewcount="29"
               rating="4.34"
+              img={Museum2}
             />
             <ExperienceComponent
               img={Museum3}
@@ -321,7 +338,7 @@ export default function Explorescreen(route) {
               rating="4.38"
             />
             <ExperienceComponent
-              img={Museum3}
+              img={Museum2}
               Category="Tickets"
               title="Skip-the-Line Entry Tickets to One World Observatory"
               rate="47.91"
@@ -356,6 +373,7 @@ export default function Explorescreen(route) {
               rate="30"
               reviewcount="7"
               rating="4.31"
+              img={Liberty}
             />
             <ExperienceComponent
               free
@@ -393,6 +411,7 @@ export default function Explorescreen(route) {
               reviewcount="138"
               rating="4.53"
               discount="5"
+              img={Helicopter}
             />
             <ExperienceComponent
               free
@@ -402,6 +421,7 @@ export default function Explorescreen(route) {
               reviewcount="78"
               rating="4.51"
               discount="5"
+              img={Museum2}
             />
             <ExperienceComponent
               free
@@ -430,6 +450,7 @@ export default function Explorescreen(route) {
               reviewcount="3"
               rating="4.14"
               save="50"
+              img={Museum2}
             />
             <ExperienceComponent
               free

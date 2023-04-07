@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ScrollView,
   Dimensions,
   LayoutAnimation,
   UIManager,
@@ -15,6 +14,7 @@ import {
   Animated,
 } from 'react-native';
 import Bottomsheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
+import {ScrollView} from 'react-native-gesture-handler';
 import {colors} from '../../constants';
 import {
   Customheader,
@@ -590,13 +590,48 @@ const Renderitem = ({title, Costings, Reviewcount}) => {
           }}
           style={{
             paddingLeft: 40,
+            paddingRight: 40,
             marginBottom: 25,
           }}>
-          <ExperienceComponent />
-          <ExperienceComponent img={Glass} free />
-          <ExperienceComponent img={Museum3} />
-          <ExperienceComponent />
-          <ExperienceComponent free />
+          <ExperienceComponent
+            img={Glass}
+            title="SUMMIT One Vanderbilt Tickets"
+            Category="Summit One Vanderbilt"
+            rate="42.46"
+            discount="10"
+            reviewcount="128"
+            free
+          />
+          <ExperienceComponent
+            free
+            title="Tickets to Edge Observation Deck"
+            Category="Edge Observation Deck Tickets"
+            rate="40.82"
+            reviewcount="29"
+          />
+
+          <ExperienceComponent
+            img={Museum3}
+            Category="Empire State Building Tickets"
+            title="Skip-the-Line Entry Tickets to Empire State Building Observatory"
+            rate="44"
+            discount="10"
+            reviewcount="443"
+          />
+          <ExperienceComponent
+            img={Museum2}
+            title="Entry Tickets to The Museum of Modern Art(MoMA)"
+            Category="Museum of Modern Art(MoMA) Tickets"
+            rate="43.46"
+            reviewcount="402"
+          />
+          <ExperienceComponent
+            img={Museum2}
+            title="The Lion King"
+            Category="Broadway Tickets"
+            rate="99.5"
+            reviewcount="364"
+          />
           <View
             style={{
               paddingRight: 30,
@@ -630,7 +665,6 @@ const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
 export default function Exploredetails({route}) {
   const {title, Reviewcount, Costings} = route?.params;
 
-  console.log('title', title);
   const [show, setShow] = React.useState(false);
   const delay = 1;
   React.useEffect(() => {

@@ -1,8 +1,7 @@
-/* eslint-disable no-shadow */
 /* eslint-disable no-sparse-arrays */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useRef} from 'react';
-import {Animated, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {Animated, TouchableOpacity, View, Text, Pressable} from 'react-native';
 import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -20,6 +19,7 @@ import {
   Profilescreen,
   Categoriesstack,
 } from '../screens';
+import {styles} from './navigationStyles';
 
 export default function Bottomtab() {
   const tabBarRef = useRef(null);
@@ -31,7 +31,6 @@ export default function Bottomtab() {
     let icon = '';
     let iconcategory = '';
     let inactiveicon = '';
-    // console.log('routeName === selectedTab', routeName === selectedTab);
     switch (routeName) {
       case 'Explore':
         icon = 'compass';
@@ -130,14 +129,7 @@ export default function Bottomtab() {
         <Text
           style={[
             h1Regular,
-            {
-              fontSize: 10.5,
-              fontFamily: 'Inter-Regular',
-              lineHeight: 14,
-              flex: 1,
-              alignSelf: 'center',
-              marginTop: 3,
-            },
+            styles.routeNameText,
             routeName === selectedTab
               ? {color: colors.black}
               : {color: colors.black2},
@@ -151,7 +143,7 @@ export default function Bottomtab() {
 
   const renderTabBar = ({routeName, selectedTab, navigate}) => {
     return (
-      <TouchableOpacity
+      <Pressable
         onPress={() => navigate(routeName)}
         style={{
           flex: 1,
@@ -159,7 +151,7 @@ export default function Bottomtab() {
           justifyContent: 'center',
         }}>
         {_renderIcon(routeName, selectedTab)}
-      </TouchableOpacity>
+      </Pressable>
     );
   };
 
@@ -192,26 +184,7 @@ export default function Bottomtab() {
                 marginHorizontal: 15,
               },
             ]}>
-            <TouchableOpacity
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                width: 45,
-                height: 45,
-                borderRadius: 25,
-                alignItems: 'center',
-                backgroundColor: '#E8E8E8',
-
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 1,
-                },
-                shadowOpacity: 0.2,
-                shadowRadius: 1.41,
-                elevation: 1,
-              }}
-              onPress={() => console.log('selectedTab', selectedTab)}>
+            <TouchableOpacity style={styles.explorebutton}>
               <FontAwesome
                 name={'location-arrow'}
                 color={colors.primary}
@@ -220,14 +193,8 @@ export default function Bottomtab() {
             </TouchableOpacity>
             <Text
               style={[
-                {
-                  fontSize: 10.5,
-                  fontFamily: 'Inter-Regular',
-                  lineHeight: 14,
-                  alignSelf: 'center',
-                  marginTop: 5,
-                  color: colors.black1,
-                },
+                styles.exploreText,
+                {color: colors.black1, marginTop: 5},
               ]}>
               Experience
             </Text>
@@ -237,15 +204,10 @@ export default function Bottomtab() {
         <CurvedBottomBar.Screen
           name="Explore"
           position="LEFT"
-          setVisible="false"
           options={({route}) => ({
             tabBarStyle: (route => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? '';
-              console.log('routeName', routeName);
               if (route.name === 'Explore') {
-                // if (routeName === 'Categoriesscreen') {
-                //   return hideTabBar(false);
-                // }
                 if (
                   routeName === 'Categoriesdetails' ||
                   routeName === 'Categoriesall' ||
@@ -280,7 +242,7 @@ export default function Bottomtab() {
                 ) {
                   return hideTabBar(true);
                 }
-                return hideTabBar(false);
+                return hideTabBar(true);
               }
               if (route.name === 'Categories') {
                 if (
@@ -312,43 +274,3 @@ export default function Bottomtab() {
     </NavigationContainer>
   );
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  button: {
-    marginVertical: 5,
-  },
-  bottomBar: {
-    backgroundColor: 'red',
-    borderRadius: 20,
-  },
-  btnCircleUp: {
-    width: 45,
-    height: 45,
-    borderRadius: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E8E8E8',
-    bottom: 15,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 1,
-  },
-  imgCircle: {
-    width: 25,
-    height: 25,
-    tintColor: 'gray',
-  },
-  img: {
-    width: 25,
-    height: 25,
-  },
-});

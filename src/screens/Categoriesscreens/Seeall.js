@@ -1,14 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
-import { Text, View, ScrollView } from 'react-native';
-import { colors } from '../../constants';
-import { Topattractions } from '../../components';
+import React, {useState} from 'react';
+import {Text, View, ScrollView} from 'react-native';
+import {colors} from '../../constants';
+import {Topattractions} from '../../components';
 
-import { Categoriesdata } from '../Categoriesscreens/Categoriesscreen';
-import { innerText } from '../../assets/fontStyles';
+import {Categoriesdata} from '../Categoriesscreens/Categoriesscreen';
+import {innerText} from '../../assets/fontStyles';
+import {Museum1, Museum2, Museum3} from '../Explorescreens/Explorescreen';
 
-export default function Seeall({ route }) {
-  const { title } = route?.params;
+export default function Seeall({route}) {
+  const {title} = route?.params;
   const [updatedcategories, setUpdatedcategories] = useState(Categoriesdata);
 
   return (
@@ -24,21 +25,18 @@ export default function Seeall({ route }) {
           paddingBottom: 40,
         }}
         style={{
-          // backgroundColor: 'green',
           flex: 1,
         }}>
         <Text
           style={[
             {
               fontSize: 23,
-              // fontFamily: 'Roboto',
               color: colors.black,
               paddingHorizontal: 22,
-              // marginLeft: 52,
               marginTop: 20,
             },
             innerText,
-            !title && { marginLeft: -8 },
+            !title && {marginLeft: -8},
           ]}>
           {title ? title : ' Broadway Tickets'}
         </Text>
@@ -60,9 +58,8 @@ export default function Seeall({ route }) {
               return (
                 data.key % 2 == 1 && (
                   <Topattractions
-                    // Categoriesdetails
                     nested
-                    style={{ marginVertical: 10 }}
+                    style={{marginVertical: 10}}
                     title={data.title}
                     price={data.key + 30}
                     imageStyle={{
@@ -70,6 +67,13 @@ export default function Seeall({ route }) {
                       width: 160,
                       height: 230,
                     }}
+                    img={
+                      data.key % 3 == 1
+                        ? Museum1
+                        : data.key % 3 == 0
+                        ? Museum2
+                        : Museum3
+                    }
                   />
                 )
               );

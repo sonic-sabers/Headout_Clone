@@ -16,7 +16,6 @@ import {Categoriesdata} from './Categoriesscreen';
 
 export default function Categoriesdetails({route}) {
   const {title} = route?.params;
-  // console.log(itemId, details, title)
   const [show, setShow] = React.useState(false);
   const delay = 1;
 

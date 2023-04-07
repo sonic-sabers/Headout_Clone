@@ -5,6 +5,13 @@ import {useNavigation} from '@react-navigation/native';
 import {Customheader, Loadingscreen, Topattractions} from '../../components';
 
 import {colors} from '../../constants';
+import {
+  Helicopter,
+  Museum1,
+  Museum2,
+  Museum3,
+  NewYork,
+} from '../Explorescreens/Explorescreen';
 
 let dimensions = Dimensions.get('window');
 let categoriesWidth = dimensions.width / 2 - 35;
@@ -75,11 +82,9 @@ export default function Categoriesscreen() {
   useEffect(() => {
     const timetoLoad = Loading ? 1000 : 0;
     let timer1 = setTimeout(() => setShow(true), delay * timetoLoad);
-    // console.log(21, Loading);
     setLoading(false);
     return () => {
       clearTimeout(timer1);
-      // console.log(11, Loading);
     };
   }, [Loading]);
   return (
@@ -124,30 +129,35 @@ export default function Categoriesscreen() {
                   price="46.5"
                   Categoriesdetails
                   nested
+                  img={Helicopter}
                 />
                 <Topattractions
                   title="Empire State Building Tickets"
                   price="44"
                   Categoriesdetails
                   nested
+                  img={Museum1}
                 />
                 <Topattractions
                   title="One World Observatory Tickets"
                   price="40.82"
                   Categoriesdetails
                   nested
+                  img={Museum2}
                 />
                 <Topattractions
                   title="Top of the Rock Tickets"
                   price="74"
                   Categoriesdetails
                   nested
+                  img={Museum3}
                 />
                 <Topattractions
                   title="Statue Of Liberty Tickets"
                   price="29"
                   Categoriesdetails
                   nested
+                  img={NewYork}
                 />
               </ScrollView>
             </View>

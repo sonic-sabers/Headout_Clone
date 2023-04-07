@@ -19,7 +19,7 @@ import {h1Regular, h2} from '../assets/fontStyles';
 
 const {width} = Dimensions.get('window');
 
-export const Cayntext = ({text, size, children, right, left, style}) => {
+export const Cayntext = ({text, size, children, right, left, style,fontStyle}) => {
   return (
     <Hstack
       styles={[
@@ -42,7 +42,7 @@ export const Cayntext = ({text, size, children, right, left, style}) => {
             fontSize: 20,
             marginLeft: 0,
           },
-          ,
+          ,fontStyle
         ]}>
         {text ? text : null}
       </Text>
@@ -95,7 +95,14 @@ export default function Alertscreen() {
           }}>
           Hi,have an existing reservation?
         </Text>
-        <Cayntext text="We're here to help " right>
+        <Cayntext
+          text="We're here to help "
+          right
+          fontStyle={{
+            fontFamily: 'Inter-Bold',
+            marginLeft: 0,
+            fontSize: 15,
+          }}>
           <Entypo
             // onPress={() => navigation.goBack()}
             // name="chevron-right"
@@ -110,7 +117,7 @@ export default function Alertscreen() {
       </View>
 
       <Image
-        source={require('./../assets/Image/NewYork.png')}
+        source={require('./../assets/Image/Help-img.png')}
         style={{
           width: width,
           height: (width * 9) / 16,
