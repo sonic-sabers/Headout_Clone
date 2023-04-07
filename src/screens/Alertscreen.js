@@ -19,7 +19,15 @@ import {h1Regular, h2} from '../assets/fontStyles';
 
 const {width} = Dimensions.get('window');
 
-export const Cayntext = ({text, size, children, right, left, style,fontStyle}) => {
+export const Cayntext = ({
+  text,
+  size,
+  children,
+  right,
+  left,
+  style,
+  fontStyle,
+}) => {
   return (
     <Hstack
       styles={[
@@ -42,7 +50,9 @@ export const Cayntext = ({text, size, children, right, left, style,fontStyle}) =
             fontSize: 20,
             marginLeft: 0,
           },
-          ,fontStyle
+          ,
+          fontStyle,
+          ,
         ]}>
         {text ? text : null}
       </Text>
@@ -117,7 +127,7 @@ export default function Alertscreen() {
       </View>
 
       <Image
-        source={require('./../assets/Image/Help-img.png')}
+        source={require('./../assets/Image/Help-img.jpeg')}
         style={{
           width: width,
           height: (width * 9) / 16,
