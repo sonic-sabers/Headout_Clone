@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useRef, useMemo} from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import {
   StyleSheet,
   Image,
@@ -13,9 +13,9 @@ import {
   Pressable,
   Animated,
 } from 'react-native';
-import Bottomsheet, {BottomSheetScrollView} from '@gorhom/bottom-sheet';
-import {ScrollView} from 'react-native-gesture-handler';
-import {colors} from '../../constants';
+import Bottomsheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import { ScrollView } from 'react-native-gesture-handler';
+import { colors } from '../../constants';
 import {
   Customheader,
   ExperienceComponent,
@@ -36,15 +36,15 @@ import {
   Museum2,
   Museum3,
 } from './Explorescreen';
-import {Hline} from '../Profilescreen';
-import MapView, {Marker} from 'react-native-maps';
-import {Cayntext} from '../Alertscreen';
-import {innerText, h2, h1, topText} from '../../assets/fontStyles';
+import { Hline } from '../Profilescreen';
+import MapView, { Marker } from 'react-native-maps';
+import { Cayntext } from '../Alertscreen';
+import { innerText, h2, h1, topText } from '../../assets/fontStyles';
 
 let dimensions = Dimensions.get('window');
 let imageWidth = dimensions.width - 20;
 // let imageHeight = dimensions.height;
-const {width, height} = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 if (
   Platform.OS === 'android' &&
   UIManager.setLayoutAnimationEnabledExperimental
@@ -59,7 +59,7 @@ const tokyoRegion = {
   longitudeDelta: 0.01,
 };
 
-const Accordion = ({title, children, Opened}) => {
+const Accordion = ({ title, children, Opened }) => {
   const [isOpen, setIsOpen] = useState(Opened ? true : false);
 
   const toggleOpen = () => {
@@ -76,7 +76,7 @@ const Accordion = ({title, children, Opened}) => {
       }}>
       <Pressable onPress={toggleOpen}>
         <Hstack centered between styles={{}}>
-          <Text style={[innerText, {color: colors.black, opacity: 0.8}]}>
+          <Text style={[innerText, { color: colors.black, opacity: 0.8 }]}>
             {title}
           </Text>
           <Entypo
@@ -94,8 +94,8 @@ const Accordion = ({title, children, Opened}) => {
           !isOpen
             ? styles.hidden
             : {
-                marginTop: 10,
-              },
+              marginTop: 10,
+            },
           {
             flex: 1,
             overflow: 'hidden',
@@ -108,7 +108,7 @@ const Accordion = ({title, children, Opened}) => {
   );
 };
 
-const Reviewcomponent = ({Nmae, stars}) => {
+const Reviewcomponent = ({ Nmae, stars }) => {
   var mystars = [];
 
   for (let i = 0; i < stars; i++) {
@@ -198,13 +198,13 @@ const Reviewcomponent = ({Nmae, stars}) => {
   );
 };
 
-const {height: SCREEN_HEIGHT} = Dimensions.get('window');
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const IS_IPHONE_X = SCREEN_HEIGHT === 812 || SCREEN_HEIGHT === 896;
 const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
 const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
-const Points = ({text, nodot}) => {
+const Points = ({ text, nodot }) => {
   return (
     <Hstack
       styles={{
@@ -245,7 +245,7 @@ const Points = ({text, nodot}) => {
   );
 };
 
-const Aboutexplore = ({children, title}) => {
+const Aboutexplore = ({ children, title }) => {
   return (
     <Hstack
       centered
@@ -278,7 +278,7 @@ const Aboutexplore = ({children, title}) => {
   );
 };
 
-const Renderitem = ({title, Costings, Reviewcount}) => {
+const Renderitem = ({ title, Costings, Reviewcount }) => {
   return (
     <View
       style={{
@@ -287,7 +287,7 @@ const Renderitem = ({title, Costings, Reviewcount}) => {
         flex: 1,
         // maxWidth: '90%',
       }}>
-      <View style={{padding: 15}}>
+      <View style={{ padding: 15 }}>
         <Detailsheader
           title={title ? title : 'Lorem Ipsum'}
           styles={{
@@ -568,7 +568,7 @@ const Renderitem = ({title, Costings, Reviewcount}) => {
           />
         </MapView>
       </View>
-      <Hline style={{marginHorizontal: 20, marginTop: 30, marginBottom: 0}} />
+      <Hline style={{ marginHorizontal: 20, marginTop: 30, marginBottom: 0 }} />
 
       <View
         style={{
@@ -652,8 +652,8 @@ const DOT_SPACING = 8;
 const DOT_SIZE = 8;
 const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
 
-export default function Exploredetails({route}) {
-  const {title, Reviewcount, Costings} = route?.params;
+export default function Exploredetails({ route }) {
+  const { title, Reviewcount, Costings } = route?.params;
 
   const [show, setShow] = React.useState(false);
   const delay = 1;
@@ -695,12 +695,12 @@ export default function Exploredetails({route}) {
               showVerticalIndicator={false}
               bounces={false}
               onScroll={Animated.event(
-                [{nativeEvent: {contentOffset: {x: scrollX}}}],
-                {useNativeDriver: true},
+                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                { useNativeDriver: true },
               )}
               showHorizontalIndicator={false}
               horizontal
-              renderItem={({item}) => {
+              renderItem={({ item }) => {
                 return (
                   <View>
                     <Image source={item} style={styles.image} />
@@ -757,7 +757,7 @@ export default function Exploredetails({route}) {
               enableOverDrag={false}
               enablePanDownToClose={false}
               overDragResistanceFactor={100}
-              // animateOnMount
+            // animateOnMount
             >
               <Renderitem
                 rating={rating}
@@ -824,7 +824,7 @@ export const styles = StyleSheet.create({
   },
   pagination: {
     position: 'absolute',
-    top: ITEM_HEIGHT - 70,
+    top: ITEM_HEIGHT - 80,
     left: ITEM_WIDTH / 2,
     flexDirection: 'row',
     marginLeft: -30,
@@ -836,6 +836,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white1,
     marginBottom: DOT_SPACING,
     marginHorizontal: 4,
+    // marginTop: -10,
   },
   dotIndicator: {
     width: DOT_SIZE,
@@ -847,6 +848,7 @@ export const styles = StyleSheet.create({
     // top: -DOT_SIZE / 2,
     // left: -DOT_SIZE / 2,
     marginLeft: 4,
+    // marginTop: -10,
   },
   contentContainer: {
     flexGrow: 1,

@@ -9,6 +9,6 @@ export { default as Searchscreen } from './Searchscreen';
 export { default as Profilescreen } from './Profilescreen';
 export { default as Alertscreen } from './Alertscreen';
 export { default as Exploredetails } from './Explorescreens/Exploredetails';
-// export { default as colors } from './colors';
+export { default as ARscreen } from './ARscreen';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';

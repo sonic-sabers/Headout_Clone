@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     lineHeight: 14,
     flex: 1,
     alignSelf: 'center',
-    marginTop: 3,
+    marginTop: 9,
   },
   explorebutton: {
     flex: 1,
@@ -35,6 +35,6 @@ export const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     lineHeight: 14,
     alignSelf: 'center',
-    marginTop: 5,
+    marginTop: 7,
   },
 });
