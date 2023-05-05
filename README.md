@@ -1,3 +1,5 @@
+## Virtual Reality(VR) view is on the way!!
+
 ## About
 A clone of the Headout app that I created using React Native, took reference from [this](https://github.com/sonic-sabers/Headout_Clone) version of Headout clone.
 
