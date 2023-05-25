@@ -11,16 +11,22 @@ import {
   ViroBox,
   ViroMaterials,
   ViroAnimations,
+  Viro3DObject,
 } from '@viro-community/react-viro';
 import { ViroTrackingStateConstants } from '@viro-community/react-viro/components/ViroConstants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Text } from 'react-native';
 
-const mainimageURl =
-  'https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80';
-const HelloWorldSceneAR = () => {
+const HelloWorldSceneAR = props => {
+  let data = props.sceneNavigator.viroAppProps.object;
   const [text, setText] = useState('Initializing AR...');
   const [Tracked, setTracked] = useState(false);
+  // console.log('data', data);
+
+  const [carPosition, setcarPosition] = useState([1, -1.4, -2]);
+  const [carRotation, setcarRotation] = useState([0, 0, 180]);
+  const [skullPosition, setskullPosition] = useState([0, 0, -0.5]);
+  const [skullRotation, setskullRotation] = useState([0, 0, 0]);
 
   const onTrackingUpdated = (state, _reason) => {
     if (state === ViroTrackingStateConstants.TRACKING_UNAVAILABLE) {
@@ -37,6 +43,12 @@ const HelloWorldSceneAR = () => {
     wood: {
       diffuseTexture: require('../assets/Image/Wood.jpeg'),
     },
+    skull: {
+      diffuseTexture: require('../assets/skull-downloadable/difuso_flip_oscuro.jpg'),
+    },
+    car: {
+      diffuseTexture: require('../assets/Car/carPimpMobile_base_color.png'),
+    },
   });
 
   ViroAnimations.registerAnimations({
@@ -47,23 +59,63 @@ const HelloWorldSceneAR = () => {
       },
     },
   });
+
+  const moveObjectSkull = newposition => {
+    setskullPosition(newposition)
+    console.log('newposition', newposition);
+  };
+  const moveObjectCar = newposition => {
+    setcarPosition(newposition)
+    // console.log('newposition', newposition);
+  };
+  const onRotateObjectSkull = newposition => {
+    setcarPosition(newposition)
+    // console.log('newposition', newposition);
+  };
   return (
     <ViroARScene onTrackingUpdated={onTrackingUpdated}>
-      <ViroText
+      <ViroAmbientLight color="#fff" />
+      {/* <ViroText
         text={text}
         scale={[0.5, 0.5, 0.5]}
         position={[0, 0, -3]}
         style={styles.helloWorldTextStyle}
       />
-      <ViroBox
-        height={2}
-        length={2}
-        width={2}
-        position={[0, -0.5, -1]}
-        scale={[0.3, 0.3, 0.3]}
-        materials={['wood']}
-        animation={{ name: 'rotate', loop: true, run: true }}
-      />
+  */}
+      {!Tracked ? (
+        <ViroText
+          text={text}
+          scale={[0.5, 0.5, 0.5]}
+          position={[0, 0, -3]}
+          style={styles.helloWorldTextStyle}
+        />
+      ) : data === 'Skull' ? (
+        <Viro3DObject
+          source={require('../assets/skull-downloadable/source/craneo.OBJ')}
+          scale={[0.3, 0.3, 0.3]}
+          position={skullPosition}
+          type="OBJ"
+          materials={['skull']}
+          // animation={{ name: 'rotate', loop: true, run: true }}
+          // onDrag={moveObject}
+          // rotation={skullRotation}
+          onRotate={onRotateObjectSkull}
+          onDrag={moveObjectSkull}
+        />
+      ) : (
+        <Viro3DObject
+          source={require('../assets/Car/carPimpMobile.obj')}
+          scale={[0.00006, 0.00006, 0.00006]}
+          position={carPosition}
+          type="OBJ"
+          materials={['car']}
+          rotation={carRotation}
+          // onRotate={rotate => setcarRotation(rotate)}
+          onDrag={moveObjectCar}
+
+        // animation={{ name: 'rotate', loop: true, run: true }}
+        />
+      )}
       {/* {Tracked ? <Viro360Image source={{ uri: mainimageURl }} /> : null} */}
     </ViroARScene>
   );
@@ -79,10 +131,13 @@ export default function ARscreen() {
         initialScene={{
           scene: HelloWorldSceneAR,
         }}
+        viroAppProps={{ object: object }}
         style={styles.f1}
       />
       <View style={styles.controlView}>
-        <TouchableOpacity onPress={() => setObject('Car')} style={styles.switch}>
+        <TouchableOpacity
+          onPress={() => setObject('Car')}
+          style={styles.switch}>
           <Text
             style={{
               fontSize: 20,
@@ -93,7 +148,9 @@ export default function ARscreen() {
             Display Car
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setObject('Police')} style={styles.switch}>
+        <TouchableOpacity
+          onPress={() => setObject('Skull')}
+          style={styles.switch}>
           <Text
             style={{
               fontSize: 20,
@@ -101,7 +158,7 @@ export default function ARscreen() {
               fontFamily: 'Roboto',
               color: '#000',
             }}>
-            Display Police
+            Display Skull
           </Text>
         </TouchableOpacity>
       </View>
@@ -131,5 +188,5 @@ var styles = StyleSheet.create({
     margin: 20,
     backgroundColor: '#9a9a9a',
     borderRadius: 5,
-  }
+  },
 });
