@@ -21,13 +21,13 @@ const HelloWorldSceneAR = props => {
   let data = props.sceneNavigator.viroAppProps.object;
   const [text, setText] = useState('Initializing AR...');
   const [Tracked, setTracked] = useState(false);
-  // console.log('data', data);
-
+  console.log('data', data);
+  
   const [carPosition, setcarPosition] = useState([1, -1.4, -2]);
   const [carRotation, setcarRotation] = useState([0, 0, 180]);
   const [skullPosition, setskullPosition] = useState([0, 0, -0.5]);
   const [skullRotation, setskullRotation] = useState([0, 0, 0]);
-
+  
   const onTrackingUpdated = (state, _reason) => {
     if (state === ViroTrackingStateConstants.TRACKING_UNAVAILABLE) {
       setTracked(false);
@@ -92,7 +92,7 @@ const HelloWorldSceneAR = props => {
       ) : data === 'Skull' ? (
         <Viro3DObject
           source={require('../assets/skull-downloadable/source/craneo.OBJ')}
-          scale={[0.3, 0.3, 0.3]}
+          scale={[0.9, 0.9, 0.9]}
           position={skullPosition}
           type="OBJ"
           materials={['skull']}
