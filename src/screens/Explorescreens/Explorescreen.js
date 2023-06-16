@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   TouchableOpacity,
@@ -9,9 +9,10 @@ import {
   ScrollView,
   ImageBackground,
   Dimensions,
+  Pressable,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {colors} from '../../constants';
+import { useNavigation } from '@react-navigation/native';
+import { colors } from '../../constants';
 import {
   Customheader,
   ExperienceComponent,
@@ -20,7 +21,7 @@ import {
 } from '../../components';
 
 import Feather from 'react-native-vector-icons/Feather';
-import {innerText} from '../../assets/fontStyles';
+import { innerText } from '../../assets/fontStyles';
 
 let dimensions = Dimensions.get('window');
 let imageWidth = dimensions.width - 30;
@@ -83,13 +84,13 @@ export default function Explorescreen(route) {
                 borderRadius: 15,
               }}
               resizeMode="cover">
-              <Text style={[innerText, {color: colors.white}]}>
+              <Text style={[innerText, { color: colors.white }]}>
                 {City}'s best experiences are waiting for you
               </Text>
             </ImageBackground>
             {/* )} */}
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('Search')}>
+          <Pressable onPress={() => navigation.navigate('Search')}>
             <Hstack
               styles={{
                 height: 50,
@@ -112,7 +113,7 @@ export default function Explorescreen(route) {
               }}
               centered
               between>
-              <TextInput
+              {/* <TextInput
                 style={{
                   color: colors.black4,
                   fontSize: 13.5,
@@ -125,7 +126,18 @@ export default function Explorescreen(route) {
                 onChangeText={onChangeText}
                 value={text}
                 editable={false}
-              />
+              /> */}
+
+              <Text
+                   style={{
+                  color: colors.black4,
+                  fontSize: 13.5,
+                  flex: 1,
+                  marginLeft: 8,
+                  fontFamily: 'Inter-Regular',
+                }}>
+                Where you are heading?
+              </Text>
               <TouchableOpacity
                 onPress={() => navigation.navigate('Search')}
                 style={{
@@ -139,7 +151,7 @@ export default function Explorescreen(route) {
                 <Feather name="search" size={20} color={colors.white} />
               </TouchableOpacity>
             </Hstack>
-          </TouchableOpacity>
+          </Pressable>
         </View>
         <Customheader title="Top Experience in" City={City} />
         <ScrollView
@@ -231,7 +243,7 @@ export default function Explorescreen(route) {
               img={Helicopter}
               title="Broadway Tickets"
               price="46.5"
-              // img={Glass}
+            // img={Glass}
             />
             <Topattractions
               img={Museum2}

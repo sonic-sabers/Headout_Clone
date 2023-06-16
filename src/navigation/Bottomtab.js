@@ -1,8 +1,8 @@
 /* eslint-disable no-sparse-arrays */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useRef} from 'react';
-import {Animated, TouchableOpacity, View, Text, Pressable} from 'react-native';
-import {CurvedBottomBar} from 'react-native-curved-bottom-bar';
+import React, { useRef } from 'react';
+import { Animated, TouchableOpacity, View, Text, Pressable } from 'react-native';
+import { CurvedBottomBar } from 'react-native-curved-bottom-bar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -11,15 +11,16 @@ import {
   getFocusedRouteNameFromRoute,
   NavigationContainer,
 } from '@react-navigation/native';
-import {h1Regular} from '../assets/fontStyles';
-import {colors} from '../constants';
+import { h1Regular } from '../assets/fontStyles';
+import { colors } from '../constants';
 import {
   Explorestack,
   Searchscreen,
   Profilescreen,
   Categoriesstack,
 } from '../screens';
-import {styles} from './navigationStyles';
+import { styles } from './navigationStyles';
+// import { useNavigation } from '@react-navigation/native';
 
 export default function Bottomtab() {
   const tabBarRef = useRef(null);
@@ -69,14 +70,14 @@ export default function Bottomtab() {
               <Ionicons
                 name={icon}
                 size={18}
-                style={{marginTop: 5}}
+                style={{ marginTop: 5 }}
                 color={routeName === selectedTab ? colors.black : colors.black2}
               />
             ) : (
               <Ionicons
                 name={inactiveicon}
                 size={18}
-                style={{marginTop: 5}}
+                style={{ marginTop: 5 }}
                 color={routeName === selectedTab ? colors.black : colors.black2}
               />
             )}
@@ -86,14 +87,14 @@ export default function Bottomtab() {
           <>
             {routeName === selectedTab ? (
               <AntDesign
-                style={{marginTop: 4, marginBottom: 4}}
+                style={{ marginTop: 4, marginBottom: 4 }}
                 name={icon}
                 size={17}
                 color={routeName === selectedTab ? colors.black : colors.black2}
               />
             ) : (
               <AntDesign
-                style={{marginTop: 4, marginBottom: 4}}
+                style={{ marginTop: 4, marginBottom: 4 }}
                 name={inactiveicon}
                 size={17}
                 color={routeName === selectedTab ? colors.black : colors.black2}
@@ -131,8 +132,8 @@ export default function Bottomtab() {
             h1Regular,
             styles.routeNameText,
             routeName === selectedTab
-              ? {color: colors.black}
-              : {color: colors.black2},
+              ? { color: colors.black }
+              : { color: colors.black2 },
             ,
           ]}>
           {routeName}
@@ -141,7 +142,7 @@ export default function Bottomtab() {
     );
   };
 
-  const renderTabBar = ({routeName, selectedTab, navigate}) => {
+  const renderTabBar = ({ routeName, selectedTab, navigate }) => {
     return (
       <Pressable
         onPress={() => navigate(routeName)}
@@ -154,20 +155,22 @@ export default function Bottomtab() {
       </Pressable>
     );
   };
+  // const navigation = useNavigation();
+
 
   return (
     <NavigationContainer independent>
       <CurvedBottomBar.Navigator
-        type="UP"
+        type="DOWN"
         ref={tabBarRef}
         // style={styles.bottomBar}
-        strokeWidth={1}
+        strokeWidth={2}
         strokeColor="#DDDDDD"
         height={55}
-        circleWidth={40}
+        circleWidth={35}
         bgColor="white"
         initialRouteName="Explore"
-        screenOptions={({route}) => ({
+        screenOptions={({ route }) => ({
           tabBarActiveTintColor: colors.black,
           headerShown: false,
           tabBarHideOnKeyboard: true,
@@ -175,16 +178,28 @@ export default function Bottomtab() {
         })}
         setVisible={false}
         // borderTopLeftRight
-        renderCircle={({selectedTab, navigate}) => (
+        renderCircle={({ selectedTab, navigate }) => (
           <Animated.View
             style={[
               {
-                bottom: 20,
+                bottom: 14,
                 alignItems: 'center',
-                marginHorizontal: 15,
+                marginHorizontal: 15, 
+                shadowColor: "#000",
+                shadowOffset: {
+                  width: 0,
+                  height: 9,
+                },
+                shadowOpacity: 0.48,
+                shadowRadius: 11.95,
+
+                elevation: 18,
               },
             ]}>
-            <TouchableOpacity style={styles.explorebutton}>
+            <TouchableOpacity
+              onPress={() => navigate('ARscreen')}
+              // onPress={() => console.log('navigation', navigation)}
+              style={styles.explorebutton}>
               <FontAwesome
                 name={'location-arrow'}
                 color={colors.primary}
@@ -194,7 +209,7 @@ export default function Bottomtab() {
             <Text
               style={[
                 styles.exploreText,
-                {color: colors.black1, marginTop: 5},
+                { color: colors.black1, },
               ]}>
               Experience
             </Text>
@@ -204,7 +219,7 @@ export default function Bottomtab() {
         <CurvedBottomBar.Screen
           name="Explore"
           position="LEFT"
-          options={({route}) => ({
+          options={({ route }) => ({
             tabBarStyle: (route => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? '';
               if (route.name === 'Explore') {
@@ -214,6 +229,7 @@ export default function Bottomtab() {
                   routeName === 'Exploredetails' ||
                   routeName === 'ExploreAll' ||
                   routeName === 'Seeall' ||
+                  routeName === 'ARscreen' ||
                   routeName === 'Alertscreen'
                 ) {
                   return hideTabBar(true);
@@ -223,12 +239,12 @@ export default function Bottomtab() {
             })(route),
           })}
           component={Explorestack}
-          initialParams={{City: 'New York'}}
+          initialParams={{ City: 'New York' }}
         />
         <CurvedBottomBar.Screen
           name="Categories"
           position="LEFT"
-          options={({route}) => ({
+          options={({ route }) => ({
             tabBarStyle: (route => {
               const routeName2 = getFocusedRouteNameFromRoute(route) ?? '';
               if (route.name === 'Explore') {
@@ -238,6 +254,7 @@ export default function Bottomtab() {
                   routeName2 === 'Exploredetails' ||
                   routeName2 === 'ExploreAll' ||
                   routeName2 === 'Seeall' ||
+                  routeName2 === 'ARscreen' ||
                   routeName2 === 'Alertscreen'
                 ) {
                   return hideTabBar(true);
@@ -251,6 +268,7 @@ export default function Bottomtab() {
                   routeName2 === 'Exploredetails' ||
                   routeName2 === 'ExploreAll' ||
                   routeName2 === 'Seeall' ||
+                  routeName2 === 'ARscreen' ||
                   routeName2 === 'Alertscreen'
                 ) {
                   return hideTabBar(true);

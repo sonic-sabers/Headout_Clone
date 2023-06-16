@@ -15,6 +15,7 @@
     "@react-navigation/bottom-tabs": "^6.3.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/stack": "^6.2.2",
+    "@viro-community/react-viro": "npm:react-viro-sw@^2.23.6",
     "deprecated-react-native-prop-types": "^2.3.0",
     "i": "^0.3.7",
     "npm": "^8.19.2",

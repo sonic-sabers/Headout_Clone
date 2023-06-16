@@ -1,20 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {Image, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 // import StackN from './src/navigator/Navigation';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   Explorescreen,
   ExploreAll,
   Alertscreen,
   Exploredetails,
   Seeall,
+  ARscreen,
 } from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {colors} from '../constants';
-import {StackActions} from '@react-navigation/native';
+import { colors } from '../constants';
+import { StackActions } from '@react-navigation/native';
 const Stack = createStackNavigator();
 
 let Logo1 = 105;
@@ -30,7 +31,7 @@ export const Myheaderleft = () => {
     </TouchableOpacity>
   );
 };
-export const MyheaderRight = ({nested}) => {
+export const MyheaderRight = ({ nested }) => {
   const navigation = useNavigation();
   // const HeadLeft = () => {
   //   return (
@@ -53,9 +54,9 @@ export const MyheaderRight = ({nested}) => {
       onPress={() =>
         nested
           ? navigation.navigate('Explore', {
-              screen: 'Alertscreen',
-              from: nested,
-            })
+            screen: 'Alertscreen',
+            from: nested,
+          })
           : navigation.navigate('Alertscreen')
       }>
       <Ionicons
@@ -70,7 +71,7 @@ export const MyheaderRight = ({nested}) => {
   );
 };
 
-export default function Explorestack({}) {
+export default function Explorestack({ }) {
   const popAction = StackActions.pop(1);
   const navigation = useNavigation();
 
@@ -147,6 +148,28 @@ export default function Explorestack({}) {
           ),
         }}
         component={ExploreAll}
+      />
+      <Stack.Screen
+        name="ARscreen"
+        options={{
+          headerShown: true,
+          headerTitle: () => '',
+          headerStyle: styles.HeaderStyle,
+          // headerLeft: () => (
+          //   <Pressable onPress={() => navigation.navigate('Explorescreen')}>
+          //     <Entypo
+          //       name="chevron-thin-left"
+          //       size={16.5}
+          //       color={colors.black}
+          //       style={{
+          //         opacity: 0.6,
+          //         marginLeft: 15,
+          //       }}
+          //     />
+          //   </Pressable>
+          // ),
+        }}
+        component={ARscreen}
       />
       <Stack.Screen
         name="Seeall"
