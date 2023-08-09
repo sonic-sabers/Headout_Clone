@@ -113,21 +113,6 @@ export default function Explorescreen(route) {
               }}
               centered
               between>
-              {/* <TextInput
-                style={{
-                  color: colors.black4,
-                  fontSize: 13.5,
-                  flex: 1,
-                  marginLeft: 8,
-                  fontFamily: 'Inter-Regular',
-                }}
-                placeholderTextColor={colors.black4}
-                placeholder="Where you are heading?"
-                onChangeText={onChangeText}
-                value={text}
-                editable={false}
-              /> */}
-
               <Text
                    style={{
                   color: colors.black4,

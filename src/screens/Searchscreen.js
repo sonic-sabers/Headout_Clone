@@ -202,7 +202,6 @@ export default function Searchscreen() {
           flex: 1,
         }}>
         <View
-          showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             // flex: 1,
             paddingBottom: 50,
@@ -213,6 +212,7 @@ export default function Searchscreen() {
           {!Loading ? (
             <FlatList
               // initialNumToRender={4}
+              showsVerticalScrollIndicator={false}
               data={filteredDataSource}
               ListHeaderComponent={ListHeader}
               keyExtractor={(item, index) => index.toString()}

@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
-import {Text, View, ScrollView, Dimensions, Pressable} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {Customheader, Loadingscreen, Topattractions} from '../../components';
+import React, { useEffect, useState } from 'react';
+import { Text, View, ScrollView, Dimensions, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { Customheader, Loadingscreen, Topattractions } from '../../components';
 
-import {colors} from '../../constants';
+import { colors } from '../../constants';
 import {
   Helicopter,
   Museum1,
@@ -17,26 +17,26 @@ let dimensions = Dimensions.get('window');
 let categoriesWidth = dimensions.width / 2 - 35;
 
 export const Categoriesdata = [
-  {title: 'Tickets', key: '1'},
-  {title: 'Tours', key: '2'},
-  {title: 'Transportation', key: '3'},
-  {title: 'Travel Services', key: '4'},
-  {title: 'Cruises', key: '5'},
-  {title: 'Food & Drink', key: '6'},
-  {title: 'Day Trips', key: '7'},
-  {title: 'Entertainment', key: '8'},
-  {title: 'Adventure', key: '9'},
-  {title: 'Areial Sightseeing', key: '10'},
-  {title: 'Water Sports', key: '11'},
-  {title: 'Nature & Wildlife', key: '12'},
-  {title: 'Wellness', key: '13'},
-  {title: 'Classes', key: '14'},
-  {title: 'Specials', key: '15'},
-  {title: 'Staycations', key: '16'},
-  {title: 'Sports', key: '17'},
+  { title: 'Tickets', key: '1' },
+  { title: 'Tours', key: '2' },
+  { title: 'Transportation', key: '3' },
+  { title: 'Travel Services', key: '4' },
+  { title: 'Cruises', key: '5' },
+  { title: 'Food & Drink', key: '6' },
+  { title: 'Day Trips', key: '7' },
+  { title: 'Entertainment', key: '8' },
+  { title: 'Adventure', key: '9' },
+  { title: 'Areial Sightseeing', key: '10' },
+  { title: 'Water Sports', key: '11' },
+  { title: 'Nature & Wildlife', key: '12' },
+  { title: 'Wellness', key: '13' },
+  { title: 'Classes', key: '14' },
+  { title: 'Specials', key: '15' },
+  { title: 'Staycations', key: '16' },
+  { title: 'Sports', key: '17' },
 ];
 
-const Datacomponent = ({data}) => {
+const Datacomponent = ({ data }) => {
   const navigation = useNavigation();
 
   return (
@@ -130,6 +130,7 @@ export default function Categoriesscreen() {
                   Categoriesdetails
                   nested
                   img={Helicopter}
+                  MediumSize
                 />
                 <Topattractions
                   title="Empire State Building Tickets"
@@ -137,6 +138,7 @@ export default function Categoriesscreen() {
                   Categoriesdetails
                   nested
                   img={Museum1}
+                  MediumSize
                 />
                 <Topattractions
                   title="One World Observatory Tickets"
@@ -144,6 +146,7 @@ export default function Categoriesscreen() {
                   Categoriesdetails
                   nested
                   img={Museum2}
+                  MediumSize
                 />
                 <Topattractions
                   title="Top of the Rock Tickets"
@@ -151,6 +154,7 @@ export default function Categoriesscreen() {
                   Categoriesdetails
                   nested
                   img={Museum3}
+                  MediumSize
                 />
                 <Topattractions
                   title="Statue Of Liberty Tickets"
@@ -158,6 +162,7 @@ export default function Categoriesscreen() {
                   Categoriesdetails
                   nested
                   img={NewYork}
+                  MediumSize
                 />
               </ScrollView>
             </View>

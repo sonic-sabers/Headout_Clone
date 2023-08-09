@@ -1,11 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {StyleSheet, Image, Text, Pressable} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {colors} from '../constants';
-import {h1} from '../assets/fontStyles';
+import { StyleSheet, Image, Text, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { colors } from '../constants';
+import { h1 } from '../assets/fontStyles';
 import Hstack from './Hstack';
-import {NewYork} from './ExperienceComponent';
+import { NewYork } from './ExperienceComponent';
 
 const Topattractions = props => {
   const navigation = useNavigation();
@@ -17,8 +17,11 @@ const Topattractions = props => {
     price,
     data,
     style,
+    Location,
     imageStyle,
     img,
+    MediumSize,
+    SmallSize
   } = props;
   let imgSource = NewYork;
 
@@ -31,15 +34,15 @@ const Topattractions = props => {
       onPress={() =>
         Categoriesdetails
           ? navigation.navigate('Categoriesall', {
-              otherParam: 'anything you want here',
-              details,
-            })
+            otherParam: 'anything you want here',
+            details,
+          })
           : nested
-          ? navigation.navigate('Explore', {
+            ? navigation.navigate('Explore', {
               screen: 'ExploreAll',
-              params: {itemId: 120, details},
+              params: { itemId: 120, details },
             })
-          : navigation.push('ExploreAll', {
+            : navigation.push('ExploreAll', {
               itemId: 86,
               otherParam: 'anything you want here',
               details,
@@ -54,17 +57,28 @@ const Topattractions = props => {
             borderRadius: 3,
             marginRight: 15,
           },
+          MediumSize && {
+            width: 130,
+            height: 180,
+          },
+          SmallSize && {
+            width: 120,
+            height: 120,
+          },
           imageStyle,
         ]}
       />
-      <Text style={[h1, styles.titleText]}>
+      <Text style={[h1, styles.titleText, SmallSize && { maxWidth: 120, fontSize: 13 }]}>
         {title ? title : 'One World Observatory Tickets'}
       </Text>
-      <Hstack>
+      {Location && <Text style={[h1, styles.fromText]}>
+        {Location ? Location : 'One World Observatory Tickets'}
+      </Text>}
+      {!SmallSize && <Hstack>
         <Text style={styles.fromText}>From</Text>
         <Text style={styles.Dollor}>$</Text>
         <Text style={styles.PriceText}>{price ? price : 94}</Text>
-      </Hstack>
+      </Hstack>}
     </Pressable>
   );
 };
