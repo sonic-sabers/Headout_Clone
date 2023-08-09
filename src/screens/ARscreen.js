@@ -92,7 +92,7 @@ const HelloWorldSceneAR = props => {
       ) : data === 'Skull' ? (
         <Viro3DObject
           source={require('../assets/skull-downloadable/source/craneo.OBJ')}
-          scale={[0.9, 0.9, 0.9]}
+          scale={[0.3, 0.3, 0.3]}
           position={skullPosition}
           type="OBJ"
           materials={['skull']}

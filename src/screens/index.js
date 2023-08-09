@@ -10,5 +10,7 @@ export { default as Profilescreen } from './Profilescreen';
 export { default as Alertscreen } from './Alertscreen';
 export { default as Exploredetails } from './Explorescreens/Exploredetails';
 export { default as ARscreen } from './ARscreen';
+export { default as NewHomescreen } from './NewHomescreen';
+// export { default as colors } from './colors';
 // export { default as colors } from './colors';
 // export { default as colors } from './colors';

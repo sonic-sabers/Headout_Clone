@@ -11,6 +11,7 @@ import {
   Exploredetails,
   Seeall,
   ARscreen,
+  NewHomescreen,
 } from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -20,18 +21,19 @@ const Stack = createStackNavigator();
 
 let Logo1 = 105;
 
-export const Myheaderleft = () => {
+export const Myheaderleft = (props) => {
   const Navigation = useNavigation();
+  const imageSource = props?.white ? require('./../assets/Image/Logo2.png') : require('./../assets/Image/Logo.png')
   return (
     <TouchableOpacity onPress={() => Navigation.navigate('Explore')}>
       <Image
-        source={require('./../assets/Image/Logo.png')}
+        source={imageSource}
         style={styles.logoStyle}
       />
     </TouchableOpacity>
   );
 };
-export const MyheaderRight = ({ nested }) => {
+export const MyheaderRight = ({ nested, color, style }) => {
   const navigation = useNavigation();
   // const HeadLeft = () => {
   //   return (
@@ -51,6 +53,7 @@ export const MyheaderRight = ({ nested }) => {
   // };
   return (
     <Pressable
+      style={style}
       onPress={() =>
         nested
           ? navigation.navigate('Explore', {
@@ -62,10 +65,11 @@ export const MyheaderRight = ({ nested }) => {
       <Ionicons
         name="help-circle-outline"
         style={{
+          zIndex: 300,
           marginRight: 20,
         }}
         size={22}
-        color={colors.black1}
+        color={color ? color : colors.black1}
       />
     </Pressable>
   );
@@ -93,7 +97,17 @@ export default function Explorestack({ }) {
     );
   };
   return (
-    <Stack.Navigator screenOptions={{}}>
+    <Stack.Navigator screenOptions={{}}
+      // initialRouteName='Explorescreen'
+      initialRouteName='NewHomescreen'
+    >
+      <Stack.Screen
+        name="NewHomescreen"
+        options={{
+          headerShown: false
+        }}
+        component={NewHomescreen}
+      />
       <Stack.Screen
         name="Explorescreen"
         options={{

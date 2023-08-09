@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import {
   StyleSheet,
   Image,
@@ -12,8 +12,11 @@ import {
   Platform,
   Pressable,
   Animated,
+  StatusBar,
+  FlatList,
+  // FlatList,
 } from 'react-native';
-import Bottomsheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import Bottomsheet, { BottomSheetScrollView, SCREEN_WIDTH } from '@gorhom/bottom-sheet';
 import { ScrollView } from 'react-native-gesture-handler';
 import { colors } from '../../constants';
 import {
@@ -27,7 +30,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import { useHeaderHeight } from '@react-navigation/elements';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   // Customheader,
   // ExperienceComponent,
@@ -40,6 +45,8 @@ import { Hline } from '../Profilescreen';
 import MapView, { Marker } from 'react-native-maps';
 import { Cayntext } from '../Alertscreen';
 import { innerText, h2, h1, topText } from '../../assets/fontStyles';
+import { StackActions, useNavigation } from '@react-navigation/native';
+import { MyheaderRight } from '../../navigation/Explorestack';
 
 let dimensions = Dimensions.get('window');
 let imageWidth = dimensions.width - 20;
@@ -59,7 +66,7 @@ const tokyoRegion = {
   longitudeDelta: 0.01,
 };
 
-const Accordion = ({ title, children, Opened }) => {
+export const Accordion = ({ title, children, Opened, withLine }) => {
   const [isOpen, setIsOpen] = useState(Opened ? true : false);
 
   const toggleOpen = () => {
@@ -69,11 +76,12 @@ const Accordion = ({ title, children, Opened }) => {
 
   return (
     <View
-      style={{
+      style={[{
         // backgroundColor: colors.white,
         marginHorizontal: 15,
         marginVertical: 15,
-      }}>
+
+      }, withLine && { borderBottomWidth: 1, borderColor: colors.black6, marginBottom: 16, paddingBottom: 16 }]}>
       <Pressable onPress={toggleOpen}>
         <Hstack centered between styles={{}}>
           <Text style={[innerText, { color: colors.black, opacity: 0.8 }]}>
@@ -204,7 +212,7 @@ const STATUS_BAR_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 44 : 20) : 0;
 const HEADER_HEIGHT = Platform.OS === 'ios' ? (IS_IPHONE_X ? 88 : 64) : 64;
 const NAV_BAR_HEIGHT = HEADER_HEIGHT - STATUS_BAR_HEIGHT;
 
-const Points = ({ text, nodot }) => {
+export const Points = ({ text, nodot }) => {
   return (
     <Hstack
       styles={{
@@ -282,10 +290,13 @@ const Renderitem = ({ title, Costings, Reviewcount }) => {
   return (
     <View
       style={{
-        backgroundColor: colors.white3,
+        backgroundColor: colors.white,
         position: 'relative',
         flex: 1,
         // maxWidth: '90%',
+        borderTopRightRadius: 16,
+        borderTopLeftRadius: 16,
+        marginTop: -12
       }}>
       <View style={{ padding: 15 }}>
         <Detailsheader
@@ -651,12 +662,13 @@ const images = [Glass, Museum1, Museum2, Museum3];
 const DOT_SPACING = 8;
 const DOT_SIZE = 8;
 const DOT_INDICATOR_SIZE = DOT_SIZE + DOT_SPACING;
-
+const CONTENT_OFFSET_THRESHOLD = ITEM_HEIGHT;
 export default function Exploredetails({ route }) {
   const { title, Reviewcount, Costings } = route?.params;
 
   const [show, setShow] = React.useState(false);
-  const delay = 1;
+  const [header, setheader] = React.useState(false);
+  const delay = 2;
   React.useEffect(() => {
     let timer1 = setTimeout(() => setShow(true), delay * 1000);
     return () => {
@@ -666,9 +678,74 @@ export default function Exploredetails({ route }) {
   const scrollX = useRef(new Animated.Value(0)).current;
   let rating = '4k';
   const snapPoints = useMemo(
-    () => [height - ITEM_HEIGHT - 100, '75%', '80%', '85%', '90%', height],
+    () => [height - ITEM_HEIGHT - StatusBar.currentHeight, '75%', '85%', '90%', height],
     [],
   );
+  const navigation = useNavigation();
+
+
+  navigation.setOptions({ headerShown: header })
+  // const headerHeight = useHeaderHeight();
+
+  useEffect(() => {
+    console.log('contentVerticalOffset', contentVerticalOffset)
+  }, [contentVerticalOffset])
+  const translateY = useRef(new Animated.Value(-120)).current;
+
+  const [contentVerticalOffset, setContentVerticalOffset] = useState(false);
+  const ShowHeader = () => {
+    Animated.timing(translateY, {
+      toValue: 0,
+      // delay: 5000,
+      duration: 120, // Adjust the duration as needed
+      useNativeDriver: true,
+    }).start(
+      setContentVerticalOffset(true));
+  }
+
+  const HideHeader = () => {
+    Animated.timing(translateY, {
+      toValue: -120,
+      // delay: 12000,
+      duration: 50, // Adjust the duration as needed
+      useNativeDriver: true,
+    }).start(
+      setContentVerticalOffset(false)
+    );
+  }
+
+  const scale = useRef(new Animated.Value(1)).current;
+  const onChangeScroll = (InscrollX) => {
+    console.log('ITEM_HEIGHT', ITEM_HEIGHT)
+    if (InscrollX > ITEM_HEIGHT - 120) {
+      ShowHeader()
+      setContentVerticalOffset(true);
+    } else {
+      HideHeader()
+      setContentVerticalOffset(false);
+    }
+  }
+
+  const handleScroll = event => {
+    const yOffset = event.nativeEvent.contentOffset.y;
+    const scaleOffset = Math.max(0, yOffset) / 50; // Adjust the zoom level as needed
+    console.log('scaleOffset', scaleOffset)
+    console.log('yOffset', yOffset)
+    onChangeScroll(yOffset)
+    if (scaleOffset < 1) {
+      Animated.spring(scale, {
+        toValue: 1.2,
+        useNativeDriver: true,
+      }).start();
+    } if(scaleOffset > 2) {
+      Animated.spring(scale, {
+        toValue: 2,
+        useNativeDriver: true,
+      }).start();
+    }
+
+  };
+
   return (
     <>
       {!show ? (
@@ -681,58 +758,163 @@ export default function Exploredetails({ route }) {
             // paddingHorizontal: 10,
             paddingBottom: 0,
           }}>
-          <View
-            style={{
-              height: ITEM_HEIGHT,
-              width: ITEM_WIDTH,
-              overflow: 'hidden',
-            }}>
-            <Animated.FlatList
-              data={images}
-              keyExtractor={(_, index) => index.toString()}
-              snapToInterval={ITEM_WIDTH}
-              decelerationRate="fast"
-              showVerticalIndicator={false}
-              bounces={false}
-              onScroll={Animated.event(
-                [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                { useNativeDriver: true },
-              )}
-              showHorizontalIndicator={false}
-              horizontal
-              renderItem={({ item }) => {
-                return (
-                  <View>
-                    <Image source={item} style={styles.image} />
-                  </View>
-                );
-              }}
-            />
-            <View style={styles.pagination}>
-              {images.map((_, index) => {
-                return <View key={index} style={styles.dot} />;
-              })}
-              <Animated.View
-                style={[
-                  styles.dotIndicator,
-                  {
-                    transform: [
-                      {
-                        translateX: Animated.divide(
-                          scrollX,
-                          ITEM_WIDTH,
-                        ).interpolate({
-                          inputRange: [0, 1],
-                          outputRange: [0, DOT_INDICATOR_SIZE],
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-              />
+          <StatusBar translucent={true} backgroundColor={contentVerticalOffset ? 'white' : "transparent"} />
+          <Animated.View style={{ transform: [{ translateY: translateY }], position: 'absolute', top: 0, left: 0, zIndex: 100, backgroundColor: "red" }}>
+            <View style={{ backgroundColor: colors.white, height: 100, width: SCREEN_WIDTH, flexDirection: 'row', paddingTop: 50, justifyContent: 'space-between', borderBottomWidth: 1, borderColor: colors.black6 }} >
+            </View>
+          </Animated.View>
+          {/* {!contentVerticalOffset ? */}
+          <View style={{ flex: 1, position: 'absolute', paddingTop: 35, height: 100, top: 0, left: 0, zIndex: 100, }}>
+            <View style={{
+              width: SCREEN_WIDTH, flexDirection: 'row', justifyContent: 'space-between',
+              height: 30,
+            }} >
+              <Pressable style={{
+                backgroundColor: colors.white, justifyContent: "center", alignItems: 'center', borderRadius: 40, height: 35,
+                width: 35,
+                marginLeft: 20,
+                marginTop: 16
+              }} onPress={() => navigation.navigate('Explorescreen')}>
+                <AntDesign
+                  onPress={() => navigation.dispatch(StackActions.pop(1))}
+                  name="arrowleft"
+                  size={22}
+                  color={colors.black}
+                  style={{
+                    opacity: 0.6,
+                  }}
+                />
+              </Pressable>
+              <View style={{ flexDirection: "row" }}>
+                <Pressable style={{
+                  backgroundColor: colors.white,
+                  justifyContent: "center", alignItems: 'center',
+                  borderRadius: 40,
+                  height: 32,
+                  width: 32,
+                  marginRight: 10,
+                  marginTop: 12,
+                  padding: 2,
+                  zIndex: 10
+                }}
+
+                  onPress={() =>
+                    navigation.navigate('Explore', {
+                      screen: 'Alertscreen',
+                      from: nested,
+                    })
+                  }>
+                  <Feather
+                    name="share"
+                    style={{
+                      zIndex: 300,
+                      fontWeight: '900',
+                      fontStyle: 'italic'
+                    }}
+                    size={19}
+                    color={colors.black1}
+                  />
+                </Pressable>
+                <Pressable style={{
+                  backgroundColor: colors.white,
+                  justifyContent: "center", alignItems: 'center',
+                  borderRadius: 40,
+                  height: 32,
+                  width: 32,
+                  marginRight: 20,
+                  marginTop: 12,
+                  padding: 2,
+                  zIndex: 10
+                }}
+
+                  onPress={() =>
+                    navigation.navigate('Explore', {
+                      screen: 'Alertscreen',
+                      from: nested,
+                    })
+                  }>
+                  <Ionicons
+                    name="help-circle-outline"
+                    style={{
+                      zIndex: 300,
+                    }}
+                    size={20}
+                    color={colors.black1}
+                  />
+                </Pressable>
+              </View>
             </View>
           </View>
-          <Bottomsheet
+          {/*  null} */}
+
+          <FlatList
+            onScroll={handleScroll}
+            onChange={onChangeScroll}
+
+            data={[]}
+            ListHeaderComponent={<View
+              style={{
+                height: ITEM_HEIGHT,
+                width: ITEM_WIDTH,
+                overflow: 'hidden',
+              }}>
+              <Animated.FlatList
+                data={images}
+                showsHorizontalScrollIndicator={false}
+                keyExtractor={(_, index) => index.toString()}
+                snapToInterval={ITEM_WIDTH}
+                decelerationRate="fast"
+                showVerticalIndicator={false}
+                bounces={false}
+                onScroll={Animated.event(
+                  [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                  { useNativeDriver: true },
+                )}
+                showHorizontalIndicator={false}
+                horizontal
+                renderItem={({ item }) => {
+                  return (
+                    <Animated.Image source={item} style={[styles.image, { transform: [{ scale: scale }], }]} />
+                  );
+                }}
+              />
+              <View style={styles.pagination}>
+                {images.map((_, index) => {
+                  return <View key={index} style={styles.dot} />;
+                })}
+                <Animated.View
+                  style={[
+                    styles.dotIndicator,
+                    {
+                      transform: [
+                        {
+                          translateX: Animated.divide(
+                            scrollX,
+                            ITEM_WIDTH,
+                          ).interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, DOT_INDICATOR_SIZE],
+                          }),
+                        },
+                      ],
+                    },
+                  ]}
+                />
+              </View>
+            </View>}
+            style={{ flex: 1, }}
+            // contentContainerStyle={{ backgroundColor: "red" }}
+            // renderItem={({ item }) => <Item title={item.title} />}
+            // keyExtractor={item => item.id}
+            ListFooterComponent={<Renderitem
+              rating={rating}
+              title={title}
+              Costings={Costings}
+              Reviewcount={Reviewcount}
+            />}
+          />
+
+          {/* <Bottomsheet
             initialSnapIndex={0}
             showVerticalIndicator={false}
             // showVerticalIndicator={false}
@@ -740,6 +922,9 @@ export default function Exploredetails({ route }) {
             enablePanDownToClose={false}
             overDragResistanceFactor={100}
             snapPoints={snapPoints}
+            onChange={onChangeScroll}
+
+            style={{ position: 'relative', zIndex: 700 }}
             // snapPoints={[height - ITEM_HEIGHT - 100, height]}
             enableOverDrag={false}
             handleIndicatorStyle={{
@@ -753,10 +938,13 @@ export default function Exploredetails({ route }) {
               marginTop: -20,
             }}>
             <BottomSheetScrollView
+              contentContainerStyle={{ zIndex: 800 }}
               showVerticalIndicator={false}
               enableOverDrag={false}
+              onScroll={handleScroll}
+              decelerationRate="fast"
               enablePanDownToClose={false}
-              overDragResistanceFactor={100}
+            // overDragResistanceFactor={100}
             // animateOnMount
             >
               <Renderitem
@@ -766,7 +954,8 @@ export default function Exploredetails({ route }) {
                 Reviewcount={Reviewcount}
               />
             </BottomSheetScrollView>
-          </Bottomsheet>
+          </Bottomsheet> */}
+
           <View
             style={{
               padding: 10,
@@ -794,7 +983,7 @@ export default function Exploredetails({ route }) {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: 10,
-                margin: 10,
+                // margin: 10,
               }}>
               <Text
                 style={[
@@ -824,7 +1013,7 @@ export const styles = StyleSheet.create({
   },
   pagination: {
     position: 'absolute',
-    top: ITEM_HEIGHT - 80,
+    top: ITEM_HEIGHT - 40,
     left: ITEM_WIDTH / 2,
     flexDirection: 'row',
     marginLeft: -30,

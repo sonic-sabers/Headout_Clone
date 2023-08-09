@@ -19,6 +19,8 @@ import { Customheader, Hstack } from '../components';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Entypo from 'react-native-vector-icons/Entypo';
+import Feather from 'react-native-vector-icons/Feather';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { innerText } from '../assets/fontStyles';
 // import { Customheader, ExperienceComponent, Glass, Museum3 } from './Explorescreens/Explorescreen';
@@ -84,7 +86,7 @@ const AuthButton = props => {
     </TouchableOpacity>
   );
 };
-export const Endalign = ({ title, text, icon, size, dollor, light }) => {
+export const Endalign = ({ title, text, icon, size, dollor, light, children }) => {
   return (
     <Hstack
       centered
@@ -94,34 +96,37 @@ export const Endalign = ({ title, text, icon, size, dollor, light }) => {
         marginTop: 15,
       }}>
       <TouchableOpacity>
-        <Text
-          style={[
-            {
-              fontSize: 13.5,
-              // fontWeight: '500',
-              fontFamily: 'Inter-Regular',
-              color: colors.black,
-              opacity: 0.75,
-            },
-            size && {
-              fontSize: 18,
-            },
-            light && {
-              fontSize: 15,
-              // fontWeight: '500',
-              color: colors.black,
-              fontFamily: 'Inter-Light',
-              opacity: 0.6,
-            },
-          ]}>
-          {title ? title : 'Title'}
-        </Text>
+        <Hstack centered>
+          {children}
+          <Text
+            style={[
+              {
+                fontSize: 12,
+                // fontWeight: '500',
+                fontFamily: 'Inter-Regular',
+                color: colors.black,
+                opacity: 0.75,
+              },
+              size && {
+                fontSize: 18,
+              },
+              light && {
+                fontSize: 15,
+                // fontWeight: '500',
+                color: colors.black,
+                fontFamily: 'Inter-Light',
+                opacity: 0.6,
+              },
+            ]}>
+            {title ? title : 'Title'}
+          </Text>
+        </Hstack>
       </TouchableOpacity>
       <TouchableOpacity>
         <Hstack centered>
           <Text
             style={{
-              fontSize: 12.5,
+              fontSize: 11,
               fontFamily: 'Inter-Regular',
               color: colors.black,
               opacity: 0.75,
@@ -132,7 +137,7 @@ export const Endalign = ({ title, text, icon, size, dollor, light }) => {
           {dollor && (
             <Text
               style={{
-                fontSize: 14,
+                fontSize: 12,
                 fontFamily: 'Roboto-Regular',
                 color: colors.black,
                 opacity: 0.6,
@@ -141,7 +146,7 @@ export const Endalign = ({ title, text, icon, size, dollor, light }) => {
             </Text>
           )}
           {icon ? (
-            <Entypo name="chevron-thin-right" size={13} color={colors.black2} />
+            <Entypo name="chevron-thin-right" size={11} color={colors.black2} />
           ) : null}
         </Hstack>
       </TouchableOpacity>
@@ -168,6 +173,7 @@ export default function Profilescreen() {
         backdropOpacity={0.3}
         onRequestClose={() => {
           setModalVisible(!modalVisible);
+          onChangeemail('')
         }}>
         <Pressable
           onPress={() => setModalVisible(false)}
@@ -252,7 +258,7 @@ export default function Profilescreen() {
                     // fontWeight: '400',
                     fontFamily: 'Inter-Regular',
                     opacity: 0.95,
-                    color: colors.black4,
+                    color: colors.black1,
                   }}
                   placeholderTextColor={colors.black4}
                   placeholder="Enter your email address"
@@ -267,7 +273,7 @@ export default function Profilescreen() {
                   returnKeyType="done"
                   onSubmitEditing={() => setModalVisible(!modalVisible)}
                 />
-                {!sendLink && email.length > 0 && (
+                {!sendLink && (
                   <Text
                     style={{
                       fontSize: 10,
@@ -279,27 +285,25 @@ export default function Profilescreen() {
                   </Text>
                 )}
               </View>
-              {email.length > 0 && (
-                <Pressable
-                  style={[
-                    {
-                      height: 46,
-                      // flex: 1,
-                      margin: 10,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      borderRadius: 10,
-                      marginBottom: 20,
-                    },
-                    sendLink
-                      ? { backgroundColor: colors.primary }
-                      : { backgroundColor: colors.black4 },
-                    ,
-                  ]}
-                  onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={styles.textStyle}>Send Link</Text>
-                </Pressable>
-              )}
+              <Pressable
+                style={[
+                  {
+                    height: 46,
+                    // flex: 1,
+                    margin: 10,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                    marginBottom: 20,
+                  },
+                  sendLink
+                    ? { backgroundColor: colors.primary }
+                    : { backgroundColor: colors.black4 },
+                  ,
+                ]}
+                onPress={() => (setModalVisible(!modalVisible), onChangeemail(''))}>
+                <Text style={styles.textStyle}>Send Link</Text>
+              </Pressable>
             </View>
           </View>
         </Pressable>
@@ -360,8 +364,15 @@ export default function Profilescreen() {
           paddingBottom: 130,
         }}>
         <Customheader account title="Settings" />
-        <Endalign title="City" text="New York" icon />
-        <Endalign title="Currency" text="USD" dollor icon />
+        <Endalign title="City" text="New York" icon >
+          <MaterialCommunityIcons name='city-variant-outline' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
+        <Endalign title="Currency" text="USD" dollor icon>
+          <MaterialIcons name='published-with-changes' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
+        <Endalign title="Language" text="English" icon >
+          <MaterialCommunityIcons name='translate' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
 
         <Hline />
         <Customheader
@@ -372,8 +383,12 @@ export default function Profilescreen() {
           nested
           title="Help"
         />
-        <Endalign title="Chat with us" icon />
-        <Endalign title="FAQs" icon />
+        <Endalign title="Manage booking" icon>
+          <MaterialCommunityIcons name='ticket-outline' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
+        <Endalign title="Chat with us" icon >
+          <MaterialIcons name='chat-bubble-outline' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
 
         <Hline />
         <Customheader
@@ -384,8 +399,12 @@ export default function Profilescreen() {
           nested
           title="Legal"
         />
-        <Endalign title="Privacy Policy" icon />
-        <Endalign title="Terms of Usage" icon />
+        <Endalign title="Privacy Policy" icon >
+          <Feather name='book' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
+        <Endalign title="Terms of Usage" icon >
+          <Feather name='shield' size={16} color={colors.black2} style={{ marginRight: 4 }} />
+        </Endalign>
 
         <Hline />
         <View
