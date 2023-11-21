@@ -15,7 +15,7 @@ const colors = {
   color2: '#FF470B',
   color3: '#FA4A0C',
   mytext: '#333',
-  background: '#003049',
+  background: '#003049',  
   inputs: '#f1faee',
   black1: '#00000095',
   black2: '#00000090',

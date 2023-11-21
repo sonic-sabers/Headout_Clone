@@ -21,17 +21,19 @@ const Topattractions = props => {
     imageStyle,
     img,
     MediumSize,
-    SmallSize
+    SmallSize,
+    customPress
   } = props;
   let imgSource = NewYork;
 
   if (img) {
     imgSource = img;
   }
+
   return (
     <Pressable
       style={style}
-      onPress={() =>
+      onPress={() => customPress ? customPress() :
         Categoriesdetails
           ? navigation.navigate('Categoriesall', {
             otherParam: 'anything you want here',

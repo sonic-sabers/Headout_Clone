@@ -17,6 +17,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { colors } from '../constants';
 import { StackActions } from '@react-navigation/native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+
 const Stack = createStackNavigator();
 
 let Logo1 = 105;
@@ -99,7 +102,7 @@ export default function Explorestack({ }) {
   return (
     <Stack.Navigator screenOptions={{}}
       // initialRouteName='Explorescreen'
-      initialRouteName='NewHomescreen'
+    initialRouteName='NewHomescreen'
     >
       <Stack.Screen
         name="NewHomescreen"
@@ -113,7 +116,21 @@ export default function Explorestack({ }) {
         options={{
           headerTitle: () => '',
           headerStyle: styles.HeaderStyle,
-          headerLeft: props => <Myheaderleft {...props} />,
+          // headerLeft: props => <Myheaderleft {...props} />,
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.navigate('NewHomescreen')}>
+              <Entypo
+                // onPress={() => navigation.dispatch(popAction)}
+                name="chevron-thin-left"
+                size={16.5}
+                color={colors.black}
+                style={{
+                  opacity: 0.6,
+                  marginLeft: 15,
+                }}
+              />
+            </Pressable>
+          ),
           headerRight: () => <MyheaderRight />,
         }}
         component={Explorescreen}
@@ -166,7 +183,7 @@ export default function Explorestack({ }) {
       <Stack.Screen
         name="ARscreen"
         options={{
-          headerShown: true,
+          headerShown: false,
           headerTitle: () => '',
           headerStyle: styles.HeaderStyle,
           // headerLeft: () => (

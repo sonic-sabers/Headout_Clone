@@ -535,7 +535,7 @@ export default function Alertscreen() {
         <SubItem title='vds9' />
         <SubItem title='vds9' />
       </Accordion>
-      <View style={{ paddingHorizontal: 16 }}>
+      <View style={{ paddingHorizontal: 16, marginBottom: 120 }}>
         <Text
           style={[{
             fontSize: 24,

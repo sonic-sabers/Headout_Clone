@@ -11,6 +11,7 @@ import {
   Image,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import Video from 'react-native-video';
 import {
@@ -33,6 +34,7 @@ import { innerText } from '../assets/fontStyles';
 import AnimatedLottieView from 'lottie-react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const ratio = 720 / 1280;
 let deviceWidth = Dimensions.get('window').width;
@@ -112,18 +114,27 @@ export default function NewHomescreen(route) {
 
   const HelpIcon = () => {
     return (
-      <MyheaderRight
-        style={{
-          height: 40,
-          marginLeft: -50,
-          marginTop: 16,
-        }}
-        color={
-          contentVerticalOffset > CONTENT_OFFSET_THRESHOLD
-            ? colors.black1
-            : colors.white2
-        }
-      />
+      <Hstack centered={true}>
+        <AntDesign
+          style={{ marginTop: 4, marginLeft: -40,marginBottom: 4 }}
+          name={'search1'}
+          size={17}
+          color={colors.white2}
+        />
+        <MyheaderRight
+          style={{
+            height: 40,
+            marginLeft: -50,
+            marginTop: 16,
+          }}
+          color={
+            contentVerticalOffset > CONTENT_OFFSET_THRESHOLD
+              ? colors.black1
+              : colors.white2
+          }
+        />
+
+      </Hstack>
     )
   }
   const [showComponentA, setShowComponentA] = React.useState(true);
@@ -275,6 +286,8 @@ export default function NewHomescreen(route) {
       </View>
     )
   }
+  const navigation = useNavigation();
+
   return (
     <>
       <View
@@ -337,8 +350,8 @@ export default function NewHomescreen(route) {
         <HelpIcon />
       </View>
       <ScrollView
-        style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 700 }}
+        // style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 1100 }}
         onScroll={handleScroll}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}
@@ -493,6 +506,12 @@ export default function NewHomescreen(route) {
                 title="Things to do in New York"
                 Location='United States'
                 SmallSize
+                customPress={() =>
+                  navigation.navigate('Explore', {
+                    screen: 'Explorescreen',
+                    params: { City: 'United States', Country: 'New York' },
+                  })
+                }
               />
               <Topattractions
                 SmallSize
@@ -518,7 +537,7 @@ export default function NewHomescreen(route) {
             </ScrollView>
           </View>
           <View>
-            <Customheader title="Headout’s Top Recommendations" />
+            <Customheader title="Explore Newyork's Top Destinations" />
             <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -557,6 +576,49 @@ export default function NewHomescreen(route) {
                 rate="540"
                 rating="New"
                 noRating
+              />
+            </ScrollView>
+          </View>
+          <View>
+            <Customheader title="Headout’s Top Recommendations" />
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{
+                paddingHorizontal: 25,
+
+                marginBottom: 25,
+              }}>
+              <ExperienceComponent
+                free
+                title="Helicopter 1-on-1 Flying Lession"
+                Category="Aerial Sightseeing"
+                rate="540"
+                rating="New"
+                noRating
+              />
+              <ExperienceComponent
+                free
+                title="Skip-the-Line Tickets to Athens Acropolis & Parthenon with Optional"
+                Category="Athens"
+                rate="1994"
+                reviewcount="13k"
+                rating="4.53"
+                discount="18"
+                from='2248'
+                noInstant
+                img={Helicopter}
+              />
+              <ExperienceComponent
+                free
+                title="East Bali Small-Group Tour: Traditional Salt Making, Tenganan Ancient Village and Taman Ujung"
+                Category="Bali"
+                rate="98.94"
+                reviewcount="78"
+                rating="4.51"
+                noInstant
+                // discount="5"
+                img={Museum2}
               />
             </ScrollView>
           </View>

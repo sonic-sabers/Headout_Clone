@@ -852,7 +852,8 @@ export default function Exploredetails({ route }) {
             onChange={onChangeScroll}
 
             data={[]}
-            ListHeaderComponent={<View
+            ListHeaderComponent={
+            <View
               style={{
                 height: ITEM_HEIGHT,
                 width: ITEM_WIDTH,
